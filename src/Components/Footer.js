@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <div>
-      <p>Some future kickass footer content goes here! </p>
-    </div>
+    <footer>
+      <p>Jason made this.</p>
+    </footer>
   );
 };
 
