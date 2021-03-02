@@ -17,6 +17,12 @@ nav {
   margin: auto;
 }
 
+nav > ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
 h1 {
   text-align: center;
 }
