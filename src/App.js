@@ -1,12 +1,12 @@
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from "react-router-dom";
 
-import NavBar from './Components/NavBar'
+import NavBar from "./Components/NavBar";
 
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
 import NextActions from "./Components/NextActions";
-import About from './Components/About';
-import Error from './Components/Error';
+import About from "./Components/About";
+import Error from "./Components/Error";
 import Footer from "./Components/Footer";
 
 function App() {
