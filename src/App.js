@@ -1,10 +1,8 @@
 import { Switch, Route } from "react-router-dom";
 
 import NavBar from "./Components/NavBar";
-
 import Header from "./Components/Header";
-import Sidebar from "./Components/Sidebar";
-import NextActions from "./Components/NextActions";
+import Main from './Components/Main'
 import About from "./Components/About";
 import Error from "./Components/Error";
 import Footer from "./Components/Footer";
@@ -19,8 +17,7 @@ function App() {
           <About />
         </Route>
         <Route exact path="/">
-          <NextActions />
-          <Sidebar />
+          <Main />
         </Route>
         <Route path="/">
           <Error />
