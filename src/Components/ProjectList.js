@@ -1,14 +1,4 @@
-import { useState, useEffect } from "react";
-
-const Projects = () => {
-  const [projects, setProjects] = useState([]);
-
-  const getProjects = () => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(data));
-  };
-
+const ProjectList = ({ projects }) => {
   const renderProjects = () => {
     return projects.map((project) => {
       const createdAt = new Date();
@@ -30,16 +20,14 @@ const Projects = () => {
     });
   };
 
-  useEffect(() => getProjects(), []);
-
   return (
     <div className="container">
       <header>
         <h2>Project List</h2>
       </header>
-      <main>{renderProjects()}</main>
+      <main>{projects && renderProjects()}</main>
     </div>
   );
 };
 
-export default Projects;
+export default ProjectList;
