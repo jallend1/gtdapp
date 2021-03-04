@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 const ProjectList = ({ projects }) => {
   const renderProjects = () => {
     return projects.map((project) => {
@@ -22,8 +24,11 @@ const ProjectList = ({ projects }) => {
 
   return (
     <div className="container">
-      <header>
+      <header id="projectList" className="space-around">
         <h2>Project List</h2>
+        <Link to="/projects/new">
+        <h2><span className="material-icons">add_task</span> Add New Project</h2>
+        </Link>
       </header>
       <main>{projects && renderProjects()}</main>
     </div>

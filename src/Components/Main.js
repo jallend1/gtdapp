@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 
 const Main = () => {
     return (
-        <div id="main" className="container">
+        <div className="container space-around">
             <NextActions />
             <Sidebar />
         </div>
