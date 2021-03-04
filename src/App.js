@@ -36,6 +36,9 @@ function App() {
         <Route path="/projects">
           <ProjectList projects={projects} />
         </Route>
+        <Route path="/archive">
+          <ProjectList projects={projects && projects.filter(project => project.archived)} />
+        </Route>
         <Route path="/about">
           <About />
         </Route>
