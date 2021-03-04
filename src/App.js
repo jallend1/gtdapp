@@ -4,8 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import Main from './Components/Main';
-import NewProject from './Components/NewProject';
+import Project from './Components/Project';
 import ProjectList from './Components/ProjectList';
+import NewProject from './Components/NewProject';
 import About from "./Components/About";
 import Error from "./Components/Error";
 import Footer from "./Components/Footer";
@@ -27,6 +28,9 @@ function App() {
       <Switch>
         <Route path="/projects/new">
           <NewProject />
+        </Route>
+        <Route path="/projects/:id" children={<Project projects={projects} />}>
+          <Project />
         </Route>
         <Route path="/projects">
           <ProjectList projects = { projects } />
