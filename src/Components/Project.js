@@ -1,6 +1,9 @@
 const Project = (props) => {
-  if (props.projects.length > 0) {
-    const id = parseInt(props.match.params.id);
+  const id = parseInt(props.match.params.id);
+  if(props.projects && !props.projects[id]){
+    return <h3>Sorry, we weren't able to find that project.</h3>
+  }
+  else if (props.projects) {
     const project = props.projects.filter((project) => project.id === id)[0];
     const createdAt = new Date();
     return (
@@ -20,7 +23,8 @@ const Project = (props) => {
         </div>
       </div>
     );
-  } else {
+  } 
+  else {
     return <h3>Loading</h3>;
   }
 };

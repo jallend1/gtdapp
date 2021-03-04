@@ -12,7 +12,7 @@ import Error from "./Components/Error";
 import Footer from "./Components/Footer";
 
 function App() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(null);
   const getProjects = () => {
     fetch("../data.json")
       .then((res) => res.json())
