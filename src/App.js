@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
-import Main from './Components/Main';
-import Project from './Components/Project';
-import ProjectList from './Components/ProjectList';
-import NewProject from './Components/NewProject';
+import Main from "./Components/Main";
+import Project from "./Components/Project";
+import ProjectList from "./Components/ProjectList";
+import NewProject from "./Components/NewProject";
 import About from "./Components/About";
 import Error from "./Components/Error";
 import Footer from "./Components/Footer";
 
 function App() {
-    const [projects, setProjects] = useState([]);  
-    const getProjects = () => {
-      fetch("../data.json")
-        .then((res) => res.json())
-        .then((data) => setProjects(data));
-    };
+  const [projects, setProjects] = useState([]);
+  const getProjects = () => {
+    fetch("../data.json")
+      .then((res) => res.json())
+      .then((data) => setProjects(data));
+  };
 
-    useEffect(() => getProjects(), []);
-  
+  useEffect(() => getProjects(), []);
+
   return (
     <div className="App">
       <NavBar />
@@ -29,11 +29,12 @@ function App() {
         <Route path="/projects/new">
           <NewProject />
         </Route>
-        <Route path="/projects/:id" children={<Project projects={projects} />}>
-          <Project />
-        </Route>
+        <Route
+          path="/projects/:id"
+          render={(props) => <Project {...props} projects={projects} />}
+        />
         <Route path="/projects">
-          <ProjectList projects = { projects } />
+          <ProjectList projects={projects} />
         </Route>
         <Route path="/about">
           <About />

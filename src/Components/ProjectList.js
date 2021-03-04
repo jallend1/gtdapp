@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ProjectList = ({ projects }) => {
   const renderProjects = () => {
@@ -27,7 +27,9 @@ const ProjectList = ({ projects }) => {
       <header id="projectList" className="space-around">
         <h2>Project List</h2>
         <Link to="/projects/new">
-        <h2><span className="material-icons">add_task</span> Add New Project</h2>
+          <h2>
+            <span className="material-icons">add_task</span> Add New Project
+          </h2>
         </Link>
       </header>
       <main>{projects && renderProjects()}</main>
