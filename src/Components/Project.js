@@ -2,14 +2,11 @@ const Project = (props) => {
   // If no ID passed, means Component is being loaded from URL and takes ID from that
   const id = props.id || parseInt(props.match.params.id);
   // If projects are loaded, but none match ID, throw an error
-  console.log(props.projects)
-  if(props.projects && props.projects.filter(project => project[id] === id).length === 0){
+  if(props.projects && !props.projects.find(project => project.id === id)){
     return <h3>Sorry, we weren't able to find that project.</h3>
   }
   else if (props.projects) {
-    console.log(props.projects.filter((project) => project.id === id));
-    console.log(id)
-    const project = props.projects.filter((project) => project.id === id)[0];
+    const project = props.projects.find((project => project.id === id));
     const createdAt = new Date();
     return (
       <div className="container">
@@ -35,7 +32,7 @@ const Project = (props) => {
   } 
   // Loading screen while projects are retrieved
   else {
-    return <h3>Loading</h3>;
+    return <h3>Loading...</h3>;
   }
 };
 
