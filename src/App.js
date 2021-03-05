@@ -34,7 +34,7 @@ function App() {
           render={(props) => <Project {...props} projects={projects} />}
         />
         <Route path="/projects">
-          <ProjectList projects={projects} />
+          <ProjectList projects={projects && projects.filter(project => !project.archived)} />
         </Route>
         <Route path="/archive">
           <ProjectList projects={projects && projects.filter(project => project.archived)} />
@@ -43,7 +43,7 @@ function App() {
           <About />
         </Route>
         <Route exact path="/">
-          <Main />
+          <Main projects={projects}/>
         </Route>
         <Route path="/">
           <Error />

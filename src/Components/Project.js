@@ -32,6 +32,7 @@ const Project = (props) => {
   } 
   // Loading screen while projects are retrieved
   else {
+    console.log('we are loading')
     return <h3>Loading...</h3>;
   }
 };

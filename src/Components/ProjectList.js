@@ -4,11 +4,10 @@ import Project from './Project';
 const ProjectList = ({ projects }) => {
   const renderProjects = () => {
     return projects.map((project) => {
-       return <Project id={project.id} projects={projects} key={project.id} />
+         return <Project id={project.id} projects={projects} key={project.id} />
     });
   };
-
-  return (
+return (
     <div className="container">
       <header id="projectList" className="space-around">
         <h2>Project List</h2>

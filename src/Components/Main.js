@@ -1,11 +1,11 @@
 import NextActions from "./NextActions";
 import Sidebar from "./Sidebar";
 
-const Main = () => {
+const Main = ({projects}) => {
   return (
     <div className="container space-around">
       <NextActions />
-      <Sidebar />
+      <Sidebar projects={projects} />
     </div>
   );
 };

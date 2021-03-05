@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const Sidebar = () => {
+const Sidebar = ({projects}) => {
   return (
     <div>
       <h2>Projects Sidebar</h2>
@@ -9,7 +9,12 @@ const Sidebar = () => {
         </h3>
       </Link>
       <div>
-        <h4>Existing Projects</h4>
+        <h4>Active Projects</h4>
+        <div>
+          <ul>
+            {projects && projects.map(project => <li key={project.id}>{project.title}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   );
