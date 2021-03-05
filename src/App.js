@@ -34,16 +34,24 @@ function App() {
           render={(props) => <Project {...props} projects={projects} />}
         />
         <Route path="/projects">
-          <ProjectList projects={projects && projects.filter(project => !project.archived)} />
+          <ProjectList
+            projects={
+              projects && projects.filter((project) => !project.archived)
+            }
+          />
         </Route>
         <Route path="/archive">
-          <ProjectList projects={projects && projects.filter(project => project.archived)} />
+          <ProjectList
+            projects={
+              projects && projects.filter((project) => project.archived)
+            }
+          />
         </Route>
         <Route path="/about">
           <About />
         </Route>
         <Route exact path="/">
-          <Main projects={projects}/>
+          <Main projects={projects} />
         </Route>
         <Route path="/">
           <Error />
