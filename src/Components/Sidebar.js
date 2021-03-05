@@ -14,8 +14,8 @@ const Sidebar = ({ projects }) => {
           <ul>
             {projects &&
               projects.map((project) => (
-                <Link to={`/projects/${project.id}`}>
-                  <li key={project.id}>{project.title}</li>
+                <Link to={`/projects/${project.id}`} key={project.id}>
+                  <li>{project.title}</li>
                 </Link>
               ))}
           </ul>

@@ -28,10 +28,14 @@ nav > ul {
 
 h1 {
   text-align: center;
-  font-family: "Montserrat", sans-serif;
+  font-size: 3em;
 }
 
-h2,
+h2 {
+  font-family: "Lora", serif;
+}
+
+h1,
 h3,
 h4,
 h5,
