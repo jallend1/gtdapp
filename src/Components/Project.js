@@ -1,10 +1,21 @@
 const Project = (props) => {
+  const renderActions = (action) => {
+    console.log(action)
+    return (
+      <li>
+        {action.action}
+        {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
+      </li>
+    )
+  }
+  
   // If no ID passed, means Component is being loaded from URL and takes ID from that
   const id = props.id || parseFloat(props.match.params.id);
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
   } else if (props.projects) {
+    console.log(props.projects)
     const project = props.projects.find((project) => project.id === id);
     const createdAt = new Date();
     return (
@@ -16,12 +27,13 @@ const Project = (props) => {
             <div>
             <span className="material-icons">
             delete_outline
-            </span>
-              
+            </span>  
             </div>
           </div>
           <div className="project-body">
-            <p>{project.body}</p>
+            <ol>
+            {project.nextActions.map(nextAction => renderActions(nextAction))}
+            </ol>
           </div>
           <div className="project-footer">
             <span className="material-icons">archive</span>
