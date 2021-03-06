@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: "Maitree", serif;
+  font-family: 'Maitree', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -32,7 +32,7 @@ h1 {
 }
 
 h2 {
-  font-family: "Lora", serif;
+  font-family: 'Lora', serif;
 }
 
 h1,
@@ -40,7 +40,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .space-around {
@@ -51,6 +51,7 @@ h6 {
 .project {
   border: solid 3px black;
   margin-bottom: 1.25em;
+  padding: 0 1.25em;
 }
 
 .project-head {

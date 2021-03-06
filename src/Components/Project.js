@@ -11,15 +11,20 @@ const Project = (props) => {
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-            <h3>{project.title}</h3>
+          <span className="material-icons">star_border</span>
+            <h3>{project.title} </h3>
             <div>
-              <span className="material-icons">star_border</span>
+            <span className="material-icons">
+            delete_outline
+            </span>
+              
             </div>
           </div>
           <div className="project-body">
             <p>{project.body}</p>
           </div>
           <div className="project-footer">
+            <span className="material-icons">archive</span>
             <p>Created at: {createdAt.toDateString()}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>
