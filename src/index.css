@@ -67,6 +67,15 @@ h6 {
   max-width: 80%;
 }
 
+.action {
+  display: flex;
+}
+
+.action > .material-icons {
+  padding: 0 1em;
+  color: red;
+}
+
 .project-footer {
   display: flex;
   justify-content: flex-end;

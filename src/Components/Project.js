@@ -1,11 +1,16 @@
 const Project = (props) => {
-  const renderActions = (action) => {
-    console.log(action)
+  // Renders the individual actions
+  const renderActions = (action, id) => {
     return (
-      <li>
-        {action.action}
-        {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
-      </li>
+      <div key={id + (action.step * .1)} className="action">
+        <div className="material-icons">
+            delete_outline
+        </div>  
+        <li>
+          {action.action}
+          {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
+        </li>
+      </div>
     )
   }
   
@@ -15,7 +20,6 @@ const Project = (props) => {
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
   } else if (props.projects) {
-    console.log(props.projects)
     const project = props.projects.find((project) => project.id === id);
     const createdAt = new Date();
     return (
@@ -32,7 +36,7 @@ const Project = (props) => {
           </div>
           <div className="project-body">
             <ol>
-            {project.nextActions.map(nextAction => renderActions(nextAction))}
+            {project.nextActions.map(nextAction => renderActions(nextAction, project.id))}
             </ol>
           </div>
           <div className="project-footer">
