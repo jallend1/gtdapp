@@ -1,27 +1,43 @@
-const NewProject = () => {
+import {useState} from 'react';
+import AddAction from './AddAction';
+
+const NewProject = ({projects, addProject}) => {
+  const [projectTitle, setProjectTitle] = useState('')
+  const [nextActions, setNextActions] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newProject = {
+      title: projectTitle,
+      nextActions: [],
+      archived: false,
+      starred: false,
+      id: Math.random()
+    }
+    addProject(newProject);
+  }
   return (
     <div className="new-project">
       <header>
         <h2>New Project</h2>
       </header>
       <section>
-        <form>
+        <form onSubmit= {handleSubmit}>
           <div>
-            <label htmlFor="title">Project Name</label>
             <input
               type="text"
               name="title"
               id="title"
               placeholder="Name your project"
-            ></input>
+              onChange = {(e) => {
+                setProjectTitle(e.target.value);
+              }}
+              onSubmit = {e => {
+                
+              }}
+            />
           </div>
-          <label htmlFor="nextAction1">Add a next action:</label>
-          <input
-            type="text"
-            name="nextAction1"
-            id="nextAction1"
-            placeholder="The very next action"
-          ></input>
+          <AddAction nextActions = {nextActions} />
+        <button type="submit">Submit</button>
         </form>
       </section>
     </div>

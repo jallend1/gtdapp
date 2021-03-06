@@ -1,6 +1,6 @@
 const Project = (props) => {
   // If no ID passed, means Component is being loaded from URL and takes ID from that
-  const id = props.id || parseInt(props.match.params.id);
+  const id = props.id || parseFloat(props.match.params.id);
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
