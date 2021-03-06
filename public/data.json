@@ -1450,12 +1450,12 @@
     "nextActions": [
       {
         "action": "Wash all Clothes",
-        "isComplete": false,
+        "isComplete": true,
         "step": 1
       },
       {
         "action": "Lay all clothes out",
-        "isComplete": false,
+        "isComplete": true,
         "step": 2
       }
     ],
@@ -1469,12 +1469,12 @@
     "nextActions": [
       {
         "action": "Wash all Clothes",
-        "isComplete": false,
+        "isComplete": true,
         "step": 1
       },
       {
         "action": "Lay all clothes out",
-        "isComplete": false,
+        "isComplete": true,
         "step": 2
       }
     ],
