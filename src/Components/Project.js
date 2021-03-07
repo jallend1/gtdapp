@@ -25,6 +25,7 @@ const Project = (props) => {
                 <RenderAction
                   action={action}
                   key={project.id + action.step * 0.1}
+                  completeAction = {props.completeAction}
                 />
               ))}
             </ol>

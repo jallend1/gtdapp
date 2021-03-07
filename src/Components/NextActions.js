@@ -1,6 +1,6 @@
 import RenderAction from "./RenderAction";
 
-const NextActions = ({ projects }) => {
+const NextActions = ({ projects, completeAction }) => {
   const determineNextAction = (project) => {
     const actionList = project.nextActions.filter(
       (action) => action.isComplete === false
@@ -11,6 +11,7 @@ const NextActions = ({ projects }) => {
           action={actionList[0]}
           project={project}
           key={project.id + actionList[0].step * 0.1}
+          completeAction = {completeAction}
         />
       );
     } else {

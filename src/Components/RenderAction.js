@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-const RenderAction = ({ action, project }) => {
+const RenderAction = ({ action, project, completeAction }) => {
   return (
     <div className="action">
       <div className="material-icons">delete_outline</div>
       <li>
-        <div>
+        <div onClick = {completeAction} data-id={project.id} data-step={action.step}>
           {action.action}
           {action.isComplete ? (
             <input type="checkbox" checked />
