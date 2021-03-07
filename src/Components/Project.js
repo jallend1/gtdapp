@@ -1,18 +1,20 @@
+import RenderAction from './RenderAction';
+
 const Project = (props) => {
   // Renders the individual actions
-  const renderActions = (action, id) => {
-    return (
-      <div key={id + (action.step * .1)} className="action">
-        <div className="material-icons">
-            delete_outline
-        </div>  
-        <li>
-          {action.action}
-          {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
-        </li>
-      </div>
-    )
-  }
+  // const renderActions = (action, id) => {
+  //   return (
+  //     <div key={id + (action.step * .1)} className="action">
+  //       <div className="material-icons">
+  //           delete_outline
+  //       </div>  
+  //       <li>
+  //         {action.action}
+  //         {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
+  //       </li>
+  //     </div>
+  //   )
+  // }
   
   // If no ID passed, means Component is being loaded from URL and takes ID from that
   const id = props.id || parseFloat(props.match.params.id);
@@ -36,7 +38,7 @@ const Project = (props) => {
           </div>
           <div className="project-body">
             <ol>
-            {project.nextActions.map(nextAction => renderActions(nextAction, project.id))}
+            {project.nextActions.map(action => <RenderAction action={action}  key={project.id + (action.step * .1)}/>)}
             </ol>
           </div>
           <div className="project-footer">

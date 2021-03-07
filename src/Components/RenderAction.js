@@ -11,9 +11,12 @@ const RenderAction = ({action, project}) => {
                 {action.action}
                 {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
             </div>
-            <div className="subtitle">
-                From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
-            </div>
+                {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
+                {project ? 
+                    (<div className="subtitle">
+                    From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
+                </div>) : null
+                }
           </li>
         </div>
     )
