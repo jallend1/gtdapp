@@ -1,5 +1,5 @@
 import RenderAction from "./RenderAction";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Project = (props) => {
   // If no ID passed, means Component is being loaded from URL and takes ID from that
@@ -16,12 +16,13 @@ const Project = (props) => {
           <div className="project-head">
             <span className="material-icons">star_border</span>
             {/* Displays header as link to project page IF not _on_ project page currently */}
-            {props.match ? <h3>{project.title}</h3> :
-              (
-                <Link to={`/projects/${project.id}`}>
-                  <h3>{project.title} </h3>
-                </Link>)
-            }
+            {props.match ? (
+              <h3>{project.title}</h3>
+            ) : (
+              <Link to={`/projects/${project.id}`}>
+                <h3>{project.title} </h3>
+              </Link>
+            )}
             <div>
               <span className="material-icons">delete_outline</span>
             </div>
@@ -32,9 +33,9 @@ const Project = (props) => {
                 <RenderAction
                   action={action}
                   key={project.id + action.step * 0.1}
-                  project = {project}
-                  completeAction = {props.completeAction}
-                  needsURL = {false}
+                  project={project}
+                  completeAction={props.completeAction}
+                  needsURL={false}
                 />
               ))}
             </ol>

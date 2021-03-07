@@ -31,11 +31,15 @@ function App() {
     const actionStep = parseFloat(e.target.dataset.step);
     const targetProjectId = parseFloat(e.target.dataset.id);
     // Locates specified Project and its corresponding action
-    const targetProject = projectsCopy.find(project => project.id === targetProjectId);
-    const targetAction = targetProject.nextActions.find(action => action.step === actionStep);
+    const targetProject = projectsCopy.find(
+      (project) => project.id === targetProjectId
+    );
+    const targetAction = targetProject.nextActions.find(
+      (action) => action.step === actionStep
+    );
     targetAction.isComplete = !targetAction.isComplete;
     setProjects(projectsCopy);
-  }
+  };
 
   useEffect(() => getProjects(), []);
 
@@ -49,14 +53,20 @@ function App() {
         </Route>
         <Route
           path="/projects/:id"
-          render={(props) => <Project {...props} projects={projects} completeAction = {completeAction}/>}
+          render={(props) => (
+            <Project
+              {...props}
+              projects={projects}
+              completeAction={completeAction}
+            />
+          )}
         />
         <Route path="/projects">
           <ProjectList
             projects={
               projects && projects.filter((project) => !project.archived)
             }
-            completeAction = {completeAction}
+            completeAction={completeAction}
           />
         </Route>
         <Route path="/archive">
@@ -64,14 +74,14 @@ function App() {
             projects={
               projects && projects.filter((project) => project.archived)
             }
-            completeAction = {completeAction}
+            completeAction={completeAction}
           />
         </Route>
         <Route path="/about">
           <About />
         </Route>
         <Route exact path="/">
-          <Main projects={projects} completeAction = {completeAction} />
+          <Main projects={projects} completeAction={completeAction} />
         </Route>
         <Route path="/">
           <Error />
