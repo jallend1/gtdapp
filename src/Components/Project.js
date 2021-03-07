@@ -1,4 +1,4 @@
-import RenderAction from './RenderAction';
+import RenderAction from "./RenderAction";
 
 const Project = (props) => {
   // If no ID passed, means Component is being loaded from URL and takes ID from that
@@ -13,17 +13,20 @@ const Project = (props) => {
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-          <span className="material-icons">star_border</span>
+            <span className="material-icons">star_border</span>
             <h3>{project.title} </h3>
             <div>
-            <span className="material-icons">
-            delete_outline
-            </span>  
+              <span className="material-icons">delete_outline</span>
             </div>
           </div>
           <div className="project-body">
             <ol>
-            {project.nextActions.map(action => <RenderAction action={action}  key={project.id + (action.step * .1)}/>)}
+              {project.nextActions.map((action) => (
+                <RenderAction
+                  action={action}
+                  key={project.id + action.step * 0.1}
+                />
+              ))}
             </ol>
           </div>
           <div className="project-footer">

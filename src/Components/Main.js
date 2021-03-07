@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 const Main = ({ projects }) => {
   return (
     <div className="container space-around">
-      <NextActions projects={projects}/>
+      <NextActions projects={projects} />
       <Sidebar projects={projects} />
     </div>
   );

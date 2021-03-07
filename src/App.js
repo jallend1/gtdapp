@@ -23,7 +23,7 @@ function App() {
     const currentProjects = projects.slice();
     currentProjects.push(project);
     setProjects(currentProjects);
-  }
+  };
 
   useEffect(() => getProjects(), []);
 
@@ -33,7 +33,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/projects/new">
-          <NewProject addProject = {addProject} projects={projects} />
+          <NewProject addProject={addProject} projects={projects} />
         </Route>
         <Route
           path="/projects/:id"

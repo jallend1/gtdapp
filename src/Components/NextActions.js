@@ -1,22 +1,27 @@
-import RenderAction from './RenderAction'
+import RenderAction from "./RenderAction";
 
-const NextActions = ({projects}) => {
-  const determineNextAction = project => {
-    const actionList = project.nextActions.filter(action => action.isComplete === false);
-    if(actionList[0]){
+const NextActions = ({ projects }) => {
+  const determineNextAction = (project) => {
+    const actionList = project.nextActions.filter(
+      (action) => action.isComplete === false
+    );
+    if (actionList[0]) {
       return (
-        <RenderAction action = {actionList[0]} project = {project} key={project.id + (actionList[0].step * .1)} />
-      )
-    }
-    else{
+        <RenderAction
+          action={actionList[0]}
+          project={project}
+          key={project.id + actionList[0].step * 0.1}
+        />
+      );
+    } else {
       return null;
     }
-  }
+  };
   return (
     <div>
       <h2>List of Next Action From Each Project</h2>
       <ul>
-      {projects && projects.map(project => determineNextAction(project))}
+        {projects && projects.map((project) => determineNextAction(project))}
       </ul>
     </div>
   );
