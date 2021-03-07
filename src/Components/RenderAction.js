@@ -5,13 +5,13 @@ const RenderAction = ({ action, project, completeAction }) => {
     <div className="action">
       <div className="material-icons">delete_outline</div>
       <li>
-        <div onClick = {completeAction} data-id={project.id} data-step={action.step}>
+        <div onClick = {completeAction} data-id={project.id} data-step={action.step} className= {action.isComplete ? 'action-complete' : null}>
           {action.action}
-          {action.isComplete ? (
+          {/* {action.isComplete ? (
             <input type="checkbox" checked />
           ) : (
             <input type="checkbox" />
-          )}
+          )} */}
         </div>
         {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
         {project ? (

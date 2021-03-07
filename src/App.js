@@ -26,9 +26,12 @@ function App() {
   };
 
   const completeAction = (e) => {
+    console.log(e.target)
     const projectsCopy = projects.slice();
+    // Extracts step number and project ID from DIV
     const actionStep = parseFloat(e.target.dataset.step);
     const targetProjectId = parseFloat(e.target.dataset.id);
+    // Locates specified Project and its corresponding action
     const targetProject = projectsCopy.find(project => project.id === targetProjectId);
     const targetAction = targetProject.nextActions.find(action => action.step === actionStep);
     targetAction.isComplete = !targetAction.isComplete;
