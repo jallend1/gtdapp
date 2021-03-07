@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Project from "./Project";
 
-const ProjectList = ({ projects, completeAction }) => {
+const ProjectList = ({ projects, completeAction}) => {
   const renderProjects = () => {
     return projects.map((project) => {
       return <Project id={project.id} projects={projects} key={project.id} completeAction={completeAction} />;

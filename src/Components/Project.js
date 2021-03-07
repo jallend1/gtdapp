@@ -27,6 +27,7 @@ const Project = (props) => {
                   key={project.id + action.step * 0.1}
                   project = {project}
                   completeAction = {props.completeAction}
+                  needsURL = {false}
                 />
               ))}
             </ol>

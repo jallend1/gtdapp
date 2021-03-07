@@ -26,7 +26,6 @@ function App() {
   };
 
   const completeAction = (e) => {
-    console.log(e.target)
     const projectsCopy = projects.slice();
     // Extracts step number and project ID from DIV
     const actionStep = parseFloat(e.target.dataset.step);
@@ -50,7 +49,7 @@ function App() {
         </Route>
         <Route
           path="/projects/:id"
-          render={(props) => <Project {...props} projects={projects} />}
+          render={(props) => <Project {...props} projects={projects} completeAction = {completeAction}/>}
         />
         <Route path="/projects">
           <ProjectList

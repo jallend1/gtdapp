@@ -12,6 +12,7 @@ const NextActions = ({ projects, completeAction }) => {
           project={project}
           key={project.id + actionList[0].step * 0.1}
           completeAction = {completeAction}
+          needsURL = {true}
         />
       );
     } else {
