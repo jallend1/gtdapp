@@ -1,21 +1,6 @@
 import RenderAction from './RenderAction';
 
 const Project = (props) => {
-  // Renders the individual actions
-  // const renderActions = (action, id) => {
-  //   return (
-  //     <div key={id + (action.step * .1)} className="action">
-  //       <div className="material-icons">
-  //           delete_outline
-  //       </div>  
-  //       <li>
-  //         {action.action}
-  //         {action.isComplete ? <input type="checkbox" checked /> : <input type="checkbox" />}
-  //       </li>
-  //     </div>
-  //   )
-  // }
-  
   // If no ID passed, means Component is being loaded from URL and takes ID from that
   const id = props.id || parseFloat(props.match.params.id);
   // If projects are loaded, but none match ID, throw an error
@@ -52,7 +37,6 @@ const Project = (props) => {
   }
   // Loading screen while projects are retrieved
   else {
-    console.log("we are loading");
     return <h3>Loading...</h3>;
   }
 };

@@ -43,6 +43,10 @@ h6 {
   font-family: 'Montserrat', sans-serif;
 }
 
+.subtitle {
+  font-size: 0.75em;
+}
+
 .space-around {
   display: flex;
   justify-content: space-around;
@@ -74,6 +78,10 @@ h6 {
 .action > .material-icons {
   padding: 0 1em;
   color: red;
+}
+
+.action > li {
+  list-style: none;
 }
 
 .project-footer {
