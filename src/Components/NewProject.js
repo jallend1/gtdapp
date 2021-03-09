@@ -1,14 +1,23 @@
 import { useState } from "react";
-import AddAction from "./AddAction";
+import AddActionForm from "./AddActionForm";
 
 const NewProject = ({ projects, addProject }) => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
+  
+  const addAction = e => {
+    const actions = nextActions;
+    actions.push(e);
+    setNextActions(actions);
+    console.log(nextActions);
+  }
+
   const handleSubmit = (e) => {
+    console.log(e.target)
     e.preventDefault();
     const newProject = {
       title: projectTitle,
-      nextActions: [],
+      nextActions: nextActions,
       archived: false,
       starred: false,
       id: Math.random(),
@@ -21,7 +30,7 @@ const NewProject = ({ projects, addProject }) => {
         <h2>New Project</h2>
       </header>
       <section>
-        <form onSubmit={handleSubmit}>
+        
           <div>
             <input
               type="text"
@@ -31,12 +40,13 @@ const NewProject = ({ projects, addProject }) => {
               onChange={(e) => {
                 setProjectTitle(e.target.value);
               }}
-              onSubmit={(e) => {}}
+              
             />
           </div>
-          <AddAction nextActions={nextActions} />
-          <button type="submit">Submit</button>
-        </form>
+        
+          <AddActionForm addAction = {addAction} />
+          <button type="submit" onSubmit = {handleSubmit}>Submit</button>
+        
       </section>
     </div>
   );
