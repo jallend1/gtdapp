@@ -7,7 +7,7 @@ const AddActionForm = ({addAction}) => {
   }
 
   return (
-    <form onSubmit = {() => addAction(nextAction)}>
+    <form onSubmit = {(e) => addAction(e, nextAction)}>
       <label htmlFor="nextAction1">Add a next action:</label>
       <input
         type="text"
