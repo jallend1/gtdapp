@@ -48,7 +48,6 @@ const NewProject = ({ projects, addProject }) => {
           </div>   
           {projectTitle ? <AddActionForm addAction = {addAction} /> : null}
           <button onClick = {handleSubmit}>Submit</button>
-        
       </section>
     </div>
   );
