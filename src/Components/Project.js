@@ -2,8 +2,8 @@ import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 
 const Project = (props) => {
-  const id = useParams().id;
-  
+  // If id property comes back from Params, uses that, otherwise takes the id passed in
+  const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
