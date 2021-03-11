@@ -33,16 +33,18 @@ function App() {
 
   const completeAction = (e) => {
     const projectsCopy = projects.slice();
+
     // Extracts step number and project ID from DIV
-    const actionStep = parseFloat(e.target.dataset.step);
-    const targetProjectId = parseFloat(e.target.dataset.id);
+    const actionStep = parseInt(e.target.dataset.step);
+    const targetProjectId =e.target.dataset.id;
+
     // Locates specified Project and its corresponding action
     const targetProject = projectsCopy.find(
-      (project) => project.id === targetProjectId
-    );
+      (project) => project.id === targetProjectId);
     const targetAction = targetProject.nextActions.find(
-      (action) => action.step === actionStep
-    );
+      (action) => action.step === actionStep);
+    
+    // Flips it to complete and updates state
     targetAction.isComplete = !targetAction.isComplete;
     setProjects(projectsCopy);
   };

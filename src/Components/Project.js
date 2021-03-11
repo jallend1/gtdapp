@@ -2,12 +2,14 @@ import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 
 const Project = (props) => {
-  // If no ID passed, means Component is being loaded from URL and takes ID from that
   const id = useParams().id;
+  
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
-  } else if (props.projects) {
+  } 
+  // If projects are loaded, displays it
+  else if (props.projects) {
     const project = props.projects.find((project) => project.id === id);
     const createdAt = new Date();
     return (
@@ -32,7 +34,7 @@ const Project = (props) => {
               {project.nextActions.map((action) => (
                 <RenderAction
                   action={action}
-                  key={project.id + action.step * 0.1}
+                  key={project.id + action.step}
                   project={project}
                   completeAction={props.completeAction}
                   needsURL={false}
