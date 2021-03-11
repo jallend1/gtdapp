@@ -7,11 +7,7 @@ const NewProject = ({ projects, addProject }) => {
   
   const addAction = (e, newAction) => {
     e.preventDefault();
-    console.log(e, newAction)
-    const actions = nextActions;
-    actions.push(newAction);
-    setNextActions(actions);
-    console.log(nextActions);
+    setNextActions([...nextActions, newAction]);
   }
 
   const handleSubmit = (e) => {
@@ -43,11 +39,13 @@ const NewProject = ({ projects, addProject }) => {
               onChange={(e) => {
                 setProjectTitle(e.target.value);
               }}
-              
             />
           </div>   
+          <ol>
+            {nextActions.map(nextAction => <li>{nextAction}</li>)}
+            </ol>
           {projectTitle ? <AddActionForm addAction = {addAction} /> : null}
-          <button onClick = {handleSubmit}>Submit</button>
+          <button onClick = {handleSubmit}>Create New Project</button>
       </section>
     </div>
   );
