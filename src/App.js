@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { db } from './firebaseConfig';
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -13,11 +14,16 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [projects, setProjects] = useState(null);
-  const getProjects = () => {
-    fetch("../data.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(data));
-  };
+  const fetchProjects = () => {
+    const fetchedProjects = [];
+    db.collection('projects').onSnapshot(snapShot => {
+      snapShot.forEach(project => {
+        fetchedProjects.push(project.data())
+        fetchedProjects[fetchedProjects.length - 1].id = project.id;
+      });
+      setProjects(fetchedProjects);
+    });
+  }
 
   const addProject = (project) => {
     const currentProjects = projects.slice();
@@ -41,7 +47,7 @@ function App() {
     setProjects(projectsCopy);
   };
 
-  useEffect(() => getProjects(), []);
+  useEffect(() => fetchProjects(), []);
 
   return (
     <div className="App">

@@ -1,9 +1,13 @@
 import RenderAction from "./RenderAction";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Project = (props) => {
   // If no ID passed, means Component is being loaded from URL and takes ID from that
-  const id = props.id || parseFloat(props.match.params.id);
+  console.log(props);
+  console.log(props.match.params.id);
+  console.log(useParams())
+  const id = useParams();
+  console.log(props.projects)
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;

@@ -2,6 +2,7 @@ import RenderAction from "./RenderAction";
 
 const NextActions = ({ projects, completeAction }) => {
   const determineNextAction = (project) => {
+    console.log(project)
     const actionList = project.nextActions.filter(
       (action) => action.isComplete === false
     );
