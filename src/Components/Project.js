@@ -7,7 +7,7 @@ const Project = (props) => {
   // If projects are loaded, but none match ID, throw an error
   if (props.projects && !props.projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
-  } 
+  }
   // If projects are loaded, displays it
   else if (props.projects) {
     const project = props.projects.find((project) => project.id === id);

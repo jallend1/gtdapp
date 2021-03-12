@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import { db } from './firebaseConfig';
+import { db } from "./firebaseConfig";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -16,14 +16,14 @@ function App() {
   const [projects, setProjects] = useState(null);
   const fetchProjects = () => {
     const fetchedProjects = [];
-    db.collection('projects').onSnapshot(snapShot => {
-      snapShot.forEach(project => {
-        fetchedProjects.push(project.data())
+    db.collection("projects").onSnapshot((snapShot) => {
+      snapShot.forEach((project) => {
+        fetchedProjects.push(project.data());
         fetchedProjects[fetchedProjects.length - 1].id = project.id;
       });
       setProjects(fetchedProjects);
     });
-  }
+  };
 
   const addProject = (project) => {
     const currentProjects = projects.slice();
@@ -36,14 +36,16 @@ function App() {
 
     // Extracts step number and project ID from DIV
     const actionStep = parseInt(e.target.dataset.step);
-    const targetProjectId =e.target.dataset.id;
+    const targetProjectId = e.target.dataset.id;
 
     // Locates specified Project and its corresponding action
     const targetProject = projectsCopy.find(
-      (project) => project.id === targetProjectId);
+      (project) => project.id === targetProjectId
+    );
     const targetAction = targetProject.nextActions.find(
-      (action) => action.step === actionStep);
-    
+      (action) => action.step === actionStep
+    );
+
     // Flips it to complete and updates state
     targetAction.isComplete = !targetAction.isComplete;
     setProjects(projectsCopy);

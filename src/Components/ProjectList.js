@@ -3,7 +3,7 @@ import Project from "./Project";
 
 const ProjectList = ({ projects, completeAction }) => {
   const renderProjects = () => {
-    return projects.map((project) => {      
+    return projects.map((project) => {
       return (
         <Project
           id={project.id}
