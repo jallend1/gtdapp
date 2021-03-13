@@ -11,7 +11,6 @@ const NewProject = ({ projects, addProject }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(e.target);
     e.preventDefault();
     const newProject = {
       title: projectTitle,
