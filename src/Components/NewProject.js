@@ -41,8 +41,8 @@ const NewProject = ({ projects, addProject }) => {
           />
         </div>
         <ol>
-          {nextActions.map((nextAction) => (
-            <li>{nextAction}</li>
+          {nextActions.map((nextAction, index) => (
+            <li key={index}>{nextAction}</li>
           ))}
         </ol>
         {projectTitle ? <AddActionForm addAction={addAction} /> : null}
