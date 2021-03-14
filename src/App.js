@@ -19,16 +19,24 @@ function App() {
     db.collection("projects").onSnapshot((snapShot) => {
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
-        fetchedProjects[fetchedProjects.length - 1].id = project.id;
+        console.log(project.data())
+        console.log(project.id)
+        // fetchedProjects[fetchedProjects.length - 1].id = project.id;
+        console.log(project.id);
+        console.log(fetchedProjects)
       });
       setProjects(fetchedProjects);
     });
   };
 
   const addProject = (project) => {
-    const currentProjects = projects.slice();
-    currentProjects.push(project);
-    setProjects(currentProjects);
+    db.collection('projects').add({
+      title: project.title,
+      archived: project.archived,
+      nextActions: project.nextActions,
+      starred: project.starred,
+      id: project.id
+    })
   };
 
   const completeAction = (e) => {
@@ -59,7 +67,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/projects/new">
-          <NewProject addProject={addProject} projects={projects} />
+          <NewProject addProject={addProject} />
         </Route>
         <Route
           path="/projects/:id"

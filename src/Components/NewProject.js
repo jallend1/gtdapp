@@ -1,17 +1,23 @@
 import { useState } from "react";
 import AddActionForm from "./AddActionForm";
 
-const NewProject = ({ projects, addProject }) => {
+const NewProject = ({ addProject }) => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
 
-  const addAction = (e, newAction) => {
+  const addAction = (e, incomingAction) => {
     e.preventDefault();
+    const newAction = {
+      action: incomingAction,
+      isComplete: false,
+      step: nextActions.length + 1
+    }
     setNextActions([...nextActions, newAction]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(nextActions)
     const newProject = {
       title: projectTitle,
       nextActions: nextActions,
@@ -21,6 +27,7 @@ const NewProject = ({ projects, addProject }) => {
     };
     addProject(newProject);
   };
+
   return (
     <div className="new-project">
       <header>
@@ -41,7 +48,7 @@ const NewProject = ({ projects, addProject }) => {
         </div>
         <ol>
           {nextActions.map((nextAction, index) => (
-            <li key={index}>{nextAction}</li>
+            <li key={index}>{nextAction.action}</li>
           ))}
         </ol>
         {projectTitle ? <AddActionForm addAction={addAction} /> : null}
