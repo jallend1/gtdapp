@@ -10,7 +10,7 @@ const NextActions = ({ projects, completeAction }) => {
         <RenderAction
           action={actionList[0]}
           project={project}
-          key={parseFloat(project.id) + actionList[0].step}
+          key={project.id + actionList[0].step}
           completeAction={completeAction}
           needsURL={true}
         />

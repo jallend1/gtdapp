@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { db } from "./firebaseConfig";
 
@@ -14,16 +14,12 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [projects, setProjects] = useState(null);
+  const ProjectContext = createContext(projects);
   const fetchProjects = () => {
     const fetchedProjects = [];
     db.collection("projects").onSnapshot((snapShot) => {
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
-        console.log(project.data())
-        console.log(project.id)
-        // fetchedProjects[fetchedProjects.length - 1].id = project.id;
-        console.log(project.id);
-        console.log(fetchedProjects)
       });
       setProjects(fetchedProjects);
     });
@@ -65,46 +61,48 @@ function App() {
     <div className="App">
       <NavBar />
       <Header />
-      <Switch>
-        <Route path="/projects/new">
-          <NewProject addProject={addProject} />
-        </Route>
-        <Route
-          path="/projects/:id"
-          render={(props) => (
-            <Project
-              {...props}
-              projects={projects}
+      <ProjectContext.Provider value={[]}>
+        <Switch>
+          <Route path="/projects/new">
+            <NewProject addProject={addProject} />
+          </Route>
+          <Route
+            path="/projects/:id"
+            render={(props) => (
+              <Project
+                {...props}
+                projects={projects}
+                completeAction={completeAction}
+              />
+            )}
+          />
+          <Route path="/projects">
+            <ProjectList
+              projects={
+                projects && projects.filter((project) => !project.archived)
+              }
               completeAction={completeAction}
             />
-          )}
-        />
-        <Route path="/projects">
-          <ProjectList
-            projects={
-              projects && projects.filter((project) => !project.archived)
-            }
-            completeAction={completeAction}
-          />
-        </Route>
-        <Route path="/archive">
-          <ProjectList
-            projects={
-              projects && projects.filter((project) => project.archived)
-            }
-            completeAction={completeAction}
-          />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route exact path="/">
-          <Main projects={projects} completeAction={completeAction} />
-        </Route>
-        <Route path="/">
-          <Error />
-        </Route>
-      </Switch>
+          </Route>
+          <Route path="/archive">
+            <ProjectList
+              projects={
+                projects && projects.filter((project) => project.archived)
+              }
+              completeAction={completeAction}
+            />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route exact path="/">
+            <Main projects={projects} completeAction={completeAction} />
+          </Route>
+          <Route path="/">
+            <Error />
+          </Route>
+        </Switch>
+      </ProjectContext.Provider>
       <Footer />
     </div>
   );
