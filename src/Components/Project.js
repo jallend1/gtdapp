@@ -14,7 +14,7 @@ const Project = (props) => {
   // If projects are loaded, displays it
   else if (projects) {
     const project = projects.find((project) => project.id === id);
-    const createdAt = new Date();
+    const jsDate = new Date(project.createdAt).toUTCString()
     return (
       <div className="container">
         <div className="project" key={project.id}>
@@ -47,7 +47,7 @@ const Project = (props) => {
           </div>
           <div className="project-footer">
             <span className="material-icons">archive</span>
-            <p>Created at: {createdAt.toDateString()}</p>
+            <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>
         </div>
