@@ -10,14 +10,14 @@ const NewProject = ({ addProject }) => {
     const newAction = {
       action: incomingAction,
       isComplete: false,
-      step: nextActions.length + 1
-    }
+      step: nextActions.length + 1,
+    };
     setNextActions([...nextActions, newAction]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(nextActions)
+    console.log(nextActions);
     const newProject = {
       title: projectTitle,
       nextActions: nextActions,

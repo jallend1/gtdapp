@@ -1,6 +1,8 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { db } from "./firebaseConfig";
+
+import ProjectContext from "./Contexts/ProjectContext";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -14,7 +16,6 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [projects, setProjects] = useState(null);
-  const ProjectContext = createContext(projects);
   const fetchProjects = () => {
     const fetchedProjects = [];
     db.collection("projects").onSnapshot((snapShot) => {
@@ -26,13 +27,13 @@ function App() {
   };
 
   const addProject = (project) => {
-    db.collection('projects').add({
+    db.collection("projects").add({
       title: project.title,
       archived: project.archived,
       nextActions: project.nextActions,
       starred: project.starred,
-      id: project.id
-    })
+      id: project.id,
+    });
   };
 
   const completeAction = (e) => {
@@ -61,7 +62,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Header />
-      <ProjectContext.Provider value={[]}>
+      <ProjectContext.Provider value={projects}>
         <Switch>
           <Route path="/projects/new">
             <NewProject addProject={addProject} />

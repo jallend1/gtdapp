@@ -1,7 +1,10 @@
 import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
+import { useContext } from "react";
 
 const Project = (props) => {
+  const doesItWork = useContext("projects");
+  console.log(doesItWork);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
