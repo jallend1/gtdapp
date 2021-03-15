@@ -78,26 +78,16 @@ function App() {
             )}
           />
           <Route path="/projects">
-            <ProjectList
-              projects={
-                projects && projects.filter((project) => !project.archived)
-              }
-              completeAction={completeAction}
-            />
+            <ProjectList completeAction={completeAction} />
           </Route>
           <Route path="/archive">
-            <ProjectList
-              projects={
-                projects && projects.filter((project) => project.archived)
-              }
-              completeAction={completeAction}
-            />
+            <ProjectList completeAction={completeAction} />
           </Route>
           <Route path="/about">
             <About />
           </Route>
           <Route exact path="/">
-            <Main projects={projects} completeAction={completeAction} />
+            <Main completeAction={completeAction} />
           </Route>
           <Route path="/">
             <Error />

@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import ProjectContext from "../Contexts/ProjectContext";
 import Project from "./Project";
 
-const ProjectList = ({ projects, completeAction }) => {
+const ProjectList = ({ completeAction }) => {
+  const projects = useContext(ProjectContext);
   const renderProjects = () => {
     return projects.map((project) => {
       return (

@@ -1,11 +1,11 @@
 import NextActions from "./NextActions";
 import Sidebar from "./Sidebar";
 
-const Main = ({ projects, completeAction }) => {
+const Main = ({ completeAction }) => {
   return (
     <div className="container space-around">
-      <NextActions projects={projects} completeAction={completeAction} />
-      <Sidebar projects={projects} />
+      <NextActions completeAction={completeAction} />
+      <Sidebar />
     </div>
   );
 };

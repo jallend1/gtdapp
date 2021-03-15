@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import RenderAction from "./RenderAction";
+import ProjectContext from "../Contexts/ProjectContext";
 
-const NextActions = ({ projects, completeAction }) => {
+const NextActions = ({ completeAction }) => {
+  const projects = useContext(ProjectContext);
   const determineNextAction = (project) => {
     const actionList = project.nextActions.filter(
       (action) => action.isComplete === false

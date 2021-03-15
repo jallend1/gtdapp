@@ -1,19 +1,19 @@
 import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
+import ProjectContext from "../Contexts/ProjectContext";
 
 const Project = (props) => {
-  const doesItWork = useContext("projects");
-  console.log(doesItWork);
+  const projects = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
-  if (props.projects && !props.projects.find((project) => project.id === id)) {
+  if (projects && !projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
   }
   // If projects are loaded, displays it
-  else if (props.projects) {
-    const project = props.projects.find((project) => project.id === id);
+  else if (projects) {
+    const project = projects.find((project) => project.id === id);
     const createdAt = new Date();
     return (
       <div className="container">
