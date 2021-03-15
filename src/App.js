@@ -62,7 +62,6 @@ function App() {
             render={(props) => (
               <Project
                 {...props}
-                projects={projects}
                 completeAction={completeAction}
               />
             )}

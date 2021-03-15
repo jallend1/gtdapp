@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { db } from "../firebaseConfig";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import AddActionForm from "./AddActionForm";
 
 const NewProject = () => {
@@ -24,7 +26,8 @@ const NewProject = () => {
       nextActions: nextActions,
       archived: false,
       starred: false,
-      id: newProjectRef.id
+      id: newProjectRef.id,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
   };
 
