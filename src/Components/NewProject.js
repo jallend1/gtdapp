@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { db } from "../firebaseConfig";
 import AddActionForm from "./AddActionForm";
 
-const NewProject = ({ addProject }) => {
+const NewProject = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
 
@@ -17,15 +18,13 @@ const NewProject = ({ addProject }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(nextActions);
-    const newProject = {
+    db.collection('projects').add({
       title: projectTitle,
       nextActions: nextActions,
       archived: false,
       starred: false,
-      id: Math.random(),
-    };
-    addProject(newProject);
+      id: Math.random()
+    });
   };
 
   return (
