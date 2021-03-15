@@ -26,16 +26,6 @@ function App() {
     });
   };
 
-  const addProject = (project) => {
-    db.collection("projects").add({
-      title: project.title,
-      archived: project.archived,
-      nextActions: project.nextActions,
-      starred: project.starred,
-      id: project.id,
-    });
-  };
-
   const completeAction = (e) => {
     const projectsCopy = projects.slice();
 
@@ -65,7 +55,7 @@ function App() {
       <ProjectContext.Provider value={projects}>
         <Switch>
           <Route path="/projects/new">
-            <NewProject addProject={addProject} />
+            <NewProject />
           </Route>
           <Route
             path="/projects/:id"

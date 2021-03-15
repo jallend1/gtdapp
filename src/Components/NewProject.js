@@ -18,12 +18,13 @@ const NewProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    db.collection('projects').add({
+    const newProjectRef = db.collection('projects').doc();
+    newProjectRef.set({
       title: projectTitle,
       nextActions: nextActions,
       archived: false,
       starred: false,
-      id: Math.random()
+      id: newProjectRef.id
     });
   };
 
