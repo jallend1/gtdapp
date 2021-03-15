@@ -1,7 +1,7 @@
 import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
-import ProjectContext from "../Contexts/ProjectContext";
+import ProjectContext from "../../Contexts/ProjectContext";
 
 const Project = (props) => {
   const projects = useContext(ProjectContext);

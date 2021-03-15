@@ -1,4 +1,4 @@
-import NextActions from "./NextActions";
+import NextActions from "./Projects/NextActions";
 import Sidebar from "./Sidebar";
 
 const Main = ({ completeAction }) => {

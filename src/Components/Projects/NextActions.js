@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import RenderAction from "./RenderAction";
-import ProjectContext from "../Contexts/ProjectContext";
+import ProjectContext from "../../Contexts/ProjectContext";
 
 const NextActions = ({ completeAction }) => {
   const projects = useContext(ProjectContext);
