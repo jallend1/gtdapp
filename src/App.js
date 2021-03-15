@@ -28,22 +28,23 @@ function App() {
 
   const completeAction = (e) => {
     const projectsCopy = projects.slice();
-
     // Extracts step number and project ID from DIV
     const actionStep = parseInt(e.target.dataset.step);
     const targetProjectId = e.target.dataset.id;
-
-    // Locates specified Project and its corresponding action
+    // Locates specified Project 
     const targetProject = projectsCopy.find(
       (project) => project.id === targetProjectId
-    );
+      );
+    // Takes nextActions and locates the one to change
+    const nextActions = targetProject.nextActions;
     const targetAction = targetProject.nextActions.find(
       (action) => action.step === actionStep
-    );
-
-    // Flips it to complete and updates state
+      );  
+    // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
-    setProjects(projectsCopy);
+    db.collection('projects').doc(targetProjectId).update({
+      nextActions: nextActions
+    })
   };
 
   useEffect(() => fetchProjects(), []);
