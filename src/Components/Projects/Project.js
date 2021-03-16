@@ -14,7 +14,7 @@ const Project = (props) => {
   // If projects are loaded, displays it
   else if (projects) {
     const project = projects.find((project) => project.id === id);
-    const jsDate = new Date(project.createdAt).toUTCString()
+    const jsDate = new Date(project.createdAt).toUTCString();
     return (
       <div className="container">
         <div className="project" key={project.id}>

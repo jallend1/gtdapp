@@ -31,20 +31,20 @@ function App() {
     // Extracts step number and project ID from DIV
     const actionStep = parseInt(e.target.dataset.step);
     const targetProjectId = e.target.dataset.id;
-    // Locates specified Project 
+    // Locates specified Project
     const targetProject = projectsCopy.find(
       (project) => project.id === targetProjectId
-      );
+    );
     // Takes nextActions and locates the one to change
     const nextActions = targetProject.nextActions;
     const targetAction = targetProject.nextActions.find(
       (action) => action.step === actionStep
-      );  
+    );
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
-    db.collection('projects').doc(targetProjectId).update({
-      nextActions: nextActions
-    })
+    db.collection("projects").doc(targetProjectId).update({
+      nextActions: nextActions,
+    });
   };
 
   useEffect(() => fetchProjects(), []);
@@ -61,10 +61,7 @@ function App() {
           <Route
             path="/projects/:id"
             render={(props) => (
-              <Project
-                {...props}
-                completeAction={completeAction}
-              />
+              <Project {...props} completeAction={completeAction} />
             )}
           />
           <Route path="/projects">

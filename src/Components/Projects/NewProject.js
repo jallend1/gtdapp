@@ -18,14 +18,14 @@ const NewProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProjectRef = db.collection('projects').doc();
+    const newProjectRef = db.collection("projects").doc();
     newProjectRef.set({
       title: projectTitle,
       nextActions: nextActions,
       archived: false,
       starred: false,
       id: newProjectRef.id,
-      createdAt: Date.now()
+      createdAt: Date.now(),
     });
   };
 
