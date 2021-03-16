@@ -3,7 +3,7 @@ import { useContext } from "react";
 import {ProjectContext} from "../../Contexts/ProjectContext";
 import Project from "./Project";
 
-const ProjectList = ({ completeAction }) => {
+const ProjectList = () => {
   const projects = useContext(ProjectContext);
   const renderProjects = () => {
     return projects.map((project) => {
@@ -12,7 +12,6 @@ const ProjectList = ({ completeAction }) => {
           id={project.id}
           projects={projects}
           key={project.id}
-          completeAction={completeAction}
         />
       );
     });

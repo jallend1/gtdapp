@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 import {ProjectContext} from "../Contexts/ProjectContext";
 const Sidebar = () => {
-  const projects = useContext(ProjectContext);
+  const {projects} = useContext(ProjectContext);
   return (
     <div>
       <h2>Projects Sidebar</h2>

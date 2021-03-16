@@ -13,28 +13,6 @@ import Error from "./Components/Error";
 import Footer from "./Components/Footer";
 
 function App() {
-
-  const completeAction = (e) => {
-    // const projectsCopy = projects.slice();
-    // // Extracts step number and project ID from DIV
-    // const actionStep = parseInt(e.target.dataset.step);
-    // const targetProjectId = e.target.dataset.id;
-    // // Locates specified Project
-    // const targetProject = projectsCopy.find(
-    //   (project) => project.id === targetProjectId
-    // );
-    // // Takes nextActions and locates the one to change
-    // const nextActions = targetProject.nextActions;
-    // const targetAction = targetProject.nextActions.find(
-    //   (action) => action.step === actionStep
-    // );
-    // // Flips it to complete and updates Firebase
-    // targetAction.isComplete = !targetAction.isComplete;
-    // db.collection("projects").doc(targetProjectId).update({
-    //   nextActions: nextActions,
-    // });
-  };
-
   return (
     <div className="App">
       <NavBar />
@@ -47,20 +25,20 @@ function App() {
           <Route
             path="/projects/:id"
             render={(props) => (
-              <Project {...props} completeAction={completeAction} />
+              <Project {...props} />
             )}
           />
           <Route path="/projects">
-            <ProjectList completeAction={completeAction} />
+            <ProjectList/>
           </Route>
           <Route path="/archive">
-            <ProjectList completeAction={completeAction} />
+            <ProjectList />
           </Route>
           <Route path="/about">
             <About />
           </Route>
           <Route exact path="/">
-            <Main completeAction={completeAction} />
+            <Main />
           </Route>
           <Route path="/">
             <Error />

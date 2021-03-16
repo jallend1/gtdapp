@@ -4,7 +4,7 @@ import { useContext } from "react";
 import {ProjectContext} from "../../Contexts/ProjectContext";
 
 const Project = (props) => {
-  const projects = useContext(ProjectContext);
+  const {projects} = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -39,7 +39,6 @@ const Project = (props) => {
                   action={action}
                   key={project.id + action.step}
                   project={project}
-                  completeAction={props.completeAction}
                   needsURL={false}
                 />
               ))}

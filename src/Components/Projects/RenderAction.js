@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { ProjectContext } from '../../Contexts/ProjectContext';
 
-const RenderAction = ({ action, project, completeAction, needsURL }) => {
+
+const RenderAction = ({ action, project, needsURL }) => {
+  const {completeAction} = useContext(ProjectContext);
   return (
     <div className="action">
       <div className="material-icons">delete_outline</div>

@@ -2,8 +2,8 @@ import { useContext } from "react";
 import RenderAction from "./RenderAction";
 import {ProjectContext} from "../../Contexts/ProjectContext";
 
-const NextActions = ({ completeAction }) => {
-  const projects = useContext(ProjectContext);
+const NextActions = () => {
+  const {projects} = useContext(ProjectContext);
   const determineNextAction = (project) => {
     const actionList = project.nextActions.filter(
       (action) => action.isComplete === false
@@ -14,7 +14,6 @@ const NextActions = ({ completeAction }) => {
           action={actionList[0]}
           project={project}
           key={project.id + actionList[0].step}
-          completeAction={completeAction}
           needsURL={true}
         />
       );
