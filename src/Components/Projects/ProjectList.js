@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import ProjectContext from "../../Contexts/ProjectContext";
+import {ProjectContext} from "../../Contexts/ProjectContext";
 import Project from "./Project";
 
 const ProjectList = ({ completeAction }) => {

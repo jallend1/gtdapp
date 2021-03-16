@@ -1,5 +1,26 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
+import { db } from "../firebaseConfig";
 
-const ProjectContext = createContext();
+export const ProjectContext = createContext();
 
-export default ProjectContext;
+const ProjectContextProvider = (props) => {
+    const [projects, setProjects] = useState(null);
+    const fetchProjects = () => {
+      const fetchedProjects = [];
+      db.collection("projects").onSnapshot((snapShot) => {
+        snapShot.forEach((project) => {
+          fetchedProjects.push(project.data());
+        });
+        setProjects(fetchedProjects);
+      });
+    };
+    useEffect(() => fetchProjects(), []);
+    // fetchProjects();
+  return(
+      <ProjectContext.Provider value={projects}>
+          {props.children}
+      </ProjectContext.Provider>
+  )
+}
+
+export default ProjectContextProvider;
