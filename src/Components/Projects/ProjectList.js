@@ -4,8 +4,8 @@ import {ProjectContext} from "../../Contexts/ProjectContext";
 import Project from "./Project";
 
 const ProjectList = () => {
-  const projects = useContext(ProjectContext);
-  const renderProjects = () => {
+  const {projects} = useContext(ProjectContext);
+    const renderProjects = () => {
     return projects.map((project) => {
       return (
         <Project
