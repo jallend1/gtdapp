@@ -26,12 +26,22 @@ class ProjectContextProvider extends React.Component {
       );
       // Flips it to complete and updates Firebase
       targetAction.isComplete = !targetAction.isComplete;
-      // this.setState({projects: projectsCopy});
       db.collection("projects").doc(targetProjectId).update({
         nextActions: nextActions,
       });
     };
 
+    deleteAction = (e) => {
+      // Extracts ID and action step number from target div
+      const { id, step } = e.target.dataset;
+      const updatedProjects = this.state.projects.slice();
+      // Retrieves associated project and individual action 
+      const project = updatedProjects.find(project => project.id === id);
+      const action = project.nextActions.findIndex(action => action.step === parseInt(step));
+      // Removes targeted action
+      project.nextActions.splice(action, 1);
+      db.collection("projects").doc(id).update({nextActions: project.nextActions})
+    }
     fetchProjects = () => {
       db.collection("projects").onSnapshot((snapShot) => {
         const fetchedProjects = [];
@@ -47,7 +57,7 @@ class ProjectContextProvider extends React.Component {
     }
   render(){
     return(
-      <ProjectContext.Provider value={{projects:[...this.state.projects], completeAction: this.completeAction }}>
+      <ProjectContext.Provider value={{projects:[...this.state.projects], completeAction: this.completeAction, deleteAction: this.deleteAction }}>
           {this.props.children}
       </ProjectContext.Provider>
   )
