@@ -1,6 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 
-import ProjectContextProvider from './Contexts/ProjectContext';
+import ProjectContextProvider from "./Contexts/ProjectContext";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -24,12 +24,10 @@ function App() {
           </Route>
           <Route
             path="/projects/:id"
-            render={(props) => (
-              <Project {...props} />
-            )}
+            render={(props) => <Project {...props} />}
           />
           <Route path="/projects">
-            <ProjectList/>
+            <ProjectList />
           </Route>
           <Route path="/archive">
             <ProjectList />

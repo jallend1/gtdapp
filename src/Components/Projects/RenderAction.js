@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
-import { useContext } from 'react';
-import { ProjectContext } from '../../Contexts/ProjectContext';
-
+import { useContext } from "react";
+import { ProjectContext } from "../../Contexts/ProjectContext";
 
 const RenderAction = ({ action, project, needsURL }) => {
-  const {completeAction, deleteAction} = useContext(ProjectContext);
+  const { completeAction, deleteAction } = useContext(ProjectContext);
   return (
     <div className="action">
-      <div className="material-icons" data-id={project.id}
-          data-step={action.step} onClick={deleteAction}>delete_outline</div>
+      <div
+        className="material-icons"
+        data-id={project.id}
+        data-step={action.step}
+        onClick={deleteAction}
+      >
+        delete_outline
+      </div>
       <li>
         <div
           onClick={completeAction}
