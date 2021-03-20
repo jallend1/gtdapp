@@ -56,6 +56,13 @@ class ProjectContextProvider extends React.Component {
     });
   };
 
+  toggleStar = (e) => {
+    const projectID = e.target.dataset.id;
+    const project = this.state.projects.find(project => project.id === projectID);
+    const starred = !project.starred;
+    db.collection("projects").doc(projectID).update({starred: starred})
+  }
+
   componentDidMount() {
     this.fetchProjects();
   }
@@ -66,6 +73,7 @@ class ProjectContextProvider extends React.Component {
           projects: [...this.state.projects],
           completeAction: this.completeAction,
           deleteAction: this.deleteAction,
+          toggleStar: this.toggleStar
         }}
       >
         {this.props.children}

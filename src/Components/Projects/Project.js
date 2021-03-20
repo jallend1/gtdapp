@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 
 const Project = (props) => {
-  const { projects } = useContext(ProjectContext);
+  const { projects, toggleStar } = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -19,7 +19,10 @@ const Project = (props) => {
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-            <span className="material-icons">star_border</span>
+          {project.starred 
+            ? <span className="material-icons" data-id={project.id} onClick={toggleStar}>star</span>
+            : <span className="material-icons" data-id={project.id} onClick={toggleStar}>star_border</span>
+          }
             {/* Displays header as link to project page IF not _on_ project page currently */}
             {props.match ? (
               <h3>{project.title}</h3>
