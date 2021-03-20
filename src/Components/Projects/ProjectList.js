@@ -3,10 +3,21 @@ import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import Project from "./Project";
 
-const ProjectList = () => {
+const ProjectList = (props) => {
+  console.log(props);
   const { projects } = useContext(ProjectContext);
   const renderProjects = () => {
-    return projects.map((project) => {
+    let projectsToShow
+    if(props.match.path === '/archive'){
+      projectsToShow = projects.filter(project => project.archived)
+    }
+    else if(props.match.path === '/active'){
+      projectsToShow = projects.filter(project => !project.archived)
+    }
+    else{
+      projectsToShow = projects.slice();
+    }
+    return projectsToShow.map((project) => {
       return <Project id={project.id} projects={projects} key={project.id} />;
     });
   };

@@ -26,12 +26,9 @@ function App() {
             path="/projects/:id"
             render={(props) => <Project {...props} />}
           />
-          <Route path="/projects">
-            <ProjectList />
-          </Route>
-          <Route path="/archive">
-            <ProjectList />
-          </Route>
+          <Route path="/projects" render={(props) => <ProjectList {...props} />} />
+          <Route path="/archive" render={(props) => <ProjectList {...props} />} />
+          <Route path="/active" render={(props) => <ProjectList {...props} />} />
           <Route path="/about">
             <About />
           </Route>
