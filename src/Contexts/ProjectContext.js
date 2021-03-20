@@ -56,6 +56,13 @@ class ProjectContextProvider extends React.Component {
     });
   };
 
+  toggleArchive = (e) => {
+    const projectID = e.target.dataset.id;
+    const project = this.state.projects.find(project => project.id === projectID);
+    const archived = !project.archived;
+    db.collection("projects").doc(projectID).update({archived: archived})
+  }
+
   toggleStar = (e) => {
     const projectID = e.target.dataset.id;
     const project = this.state.projects.find(project => project.id === projectID);
@@ -73,6 +80,7 @@ class ProjectContextProvider extends React.Component {
           projects: [...this.state.projects],
           completeAction: this.completeAction,
           deleteAction: this.deleteAction,
+          toggleArchive: this.toggleArchive,
           toggleStar: this.toggleStar
         }}
       >

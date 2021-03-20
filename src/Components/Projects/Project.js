@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 
 const Project = (props) => {
-  const { projects, toggleStar } = useContext(ProjectContext);
+  const { projects, toggleArchive, toggleStar } = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -48,7 +48,11 @@ const Project = (props) => {
             </ol>
           </div>
           <div className="project-footer">
-            <span className="material-icons">archive</span>
+            {project.archived 
+              ? <span className="material-icons" data-id={project.id} onClick={toggleArchive}>unarchive</span>
+              
+              : <span className="material-icons" data-id={project.id} onClick={toggleArchive}>archive</span>
+            }
             <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>
