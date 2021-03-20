@@ -6,6 +6,7 @@ const NewProject = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
   const [title, setTitle] = useState(false);
+  const [projectID, setProjectID] = useState('');
 
   const addAction = (e, incomingAction) => {
     e.preventDefault();
@@ -28,18 +29,14 @@ const NewProject = () => {
       id: newProjectRef.id,
       createdAt: Date.now(),
     });
+    setProjectID(newProjectRef.id);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProjectRef = db.collection("projects").doc();
-    newProjectRef.set({
-      title: projectTitle,
+    console.log(projectID)
+    db.collection('projects').doc(projectID).update({
       nextActions: nextActions,
-      archived: false,
-      starred: false,
-      id: newProjectRef.id,
-      createdAt: Date.now(),
     });
   };
 
@@ -50,7 +47,7 @@ const NewProject = () => {
       </header>
       <section>
         <div>
-        {title ? <h3>{projectTitle}</h3> : 
+        {title ? <h3 id={projectID}>{projectTitle}</h3> : 
           <input
             type="text"
             name="title"
