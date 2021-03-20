@@ -2,6 +2,7 @@ import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
+import AddActionForm from './AddActionForm'
 
 const Project = (props) => {
   const { projects, toggleArchive, toggleStar } = useContext(ProjectContext);
@@ -46,6 +47,7 @@ const Project = (props) => {
                 />
               ))}
             </ol>
+            <AddActionForm />
           </div>
           <div className="project-footer">
             {project.archived 

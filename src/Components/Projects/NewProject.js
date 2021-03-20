@@ -5,6 +5,7 @@ import AddActionForm from "./AddActionForm";
 const NewProject = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
+  const [title, setTitle] = useState(false);
 
   const addAction = (e, incomingAction) => {
     e.preventDefault();
@@ -15,6 +16,19 @@ const NewProject = () => {
     };
     setNextActions([...nextActions, newAction]);
   };
+
+  const createTitle = () => {
+    setTitle(true);
+    const newProjectRef = db.collection("projects").doc();
+    newProjectRef.set({
+      title: projectTitle,
+      nextActions: nextActions,
+      archived: false,
+      starred: false,
+      id: newProjectRef.id,
+      createdAt: Date.now(),
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +50,7 @@ const NewProject = () => {
       </header>
       <section>
         <div>
+        {title ? <h3>{projectTitle}</h3> : 
           <input
             type="text"
             name="title"
@@ -45,7 +60,9 @@ const NewProject = () => {
             onChange={(e) => {
               setProjectTitle(e.target.value);
             }}
+            onBlur={createTitle}
           />
+        }
         </div>
         <ol>
           {nextActions.map((nextAction, index) => (
