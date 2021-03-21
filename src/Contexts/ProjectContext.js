@@ -47,20 +47,26 @@ class ProjectContextProvider extends React.Component {
     });
   };
 
-  deleteAction = (e) => {
+  deleteAction = (e, entireProject = false) => {
     // Extracts ID and action step number from target div
-    const { id, step } = e.target.dataset;
+    const { id } = e.target.dataset;
     const updatedProjects = this.state.projects.slice();
     // Retrieves associated project and individual action
     const project = updatedProjects.find((project) => project.id === id);
-    const action = project.nextActions.findIndex(
-      (action) => action.step === parseInt(step)
-    );
-    // Removes targeted action
-    project.nextActions.splice(action, 1);
-    db.collection("projects")
-      .doc(id)
-      .update({ nextActions: project.nextActions });
+    if(entireProject){
+      db.collection('projects').doc(id).delete();
+    }
+    else{
+      const { step } = e.target.dataset;
+      const action = project.nextActions.findIndex(
+        (action) => action.step === parseInt(step)
+        );
+        // Removes targeted action
+        project.nextActions.splice(action, 1);
+        db.collection("projects")
+        .doc(id)
+        .update({ nextActions: project.nextActions });
+      }
   };
   fetchProjects = () => {
     db.collection("projects").onSnapshot((snapShot) => {

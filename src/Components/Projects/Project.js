@@ -5,7 +5,7 @@ import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
 
 const Project = (props) => {
-  const { projects, toggleArchive, toggleStar } = useContext(ProjectContext);
+  const { projects, toggleArchive, toggleStar, deleteAction } = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -46,7 +46,7 @@ const Project = (props) => {
               </Link>
             )}
             <div>
-              <span className="material-icons">delete_outline</span>
+              <span className="material-icons" data-id={project.id} onClick={(e) => deleteAction(e, true)}>delete_outline</span>
             </div>
           </div>
           <div className="project-body">
