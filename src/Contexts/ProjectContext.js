@@ -58,17 +58,21 @@ class ProjectContextProvider extends React.Component {
 
   toggleArchive = (e) => {
     const projectID = e.target.dataset.id;
-    const project = this.state.projects.find(project => project.id === projectID);
+    const project = this.state.projects.find(
+      (project) => project.id === projectID
+    );
     const archived = !project.archived;
-    db.collection("projects").doc(projectID).update({archived: archived})
-  }
+    db.collection("projects").doc(projectID).update({ archived: archived });
+  };
 
   toggleStar = (e) => {
     const projectID = e.target.dataset.id;
-    const project = this.state.projects.find(project => project.id === projectID);
+    const project = this.state.projects.find(
+      (project) => project.id === projectID
+    );
     const starred = !project.starred;
-    db.collection("projects").doc(projectID).update({starred: starred})
-  }
+    db.collection("projects").doc(projectID).update({ starred: starred });
+  };
 
   componentDidMount() {
     this.fetchProjects();
@@ -81,7 +85,7 @@ class ProjectContextProvider extends React.Component {
           completeAction: this.completeAction,
           deleteAction: this.deleteAction,
           toggleArchive: this.toggleArchive,
-          toggleStar: this.toggleStar
+          toggleStar: this.toggleStar,
         }}
       >
         {this.props.children}

@@ -2,7 +2,7 @@ import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
-import AddActionForm from './AddActionForm'
+import AddActionForm from "./AddActionForm";
 
 const Project = (props) => {
   const { projects, toggleArchive, toggleStar } = useContext(ProjectContext);
@@ -20,10 +20,23 @@ const Project = (props) => {
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-          {project.starred 
-            ? <span className="material-icons" data-id={project.id} onClick={toggleStar}>star</span>
-            : <span className="material-icons" data-id={project.id} onClick={toggleStar}>star_border</span>
-          }
+            {project.starred ? (
+              <span
+                className="material-icons"
+                data-id={project.id}
+                onClick={toggleStar}
+              >
+                star
+              </span>
+            ) : (
+              <span
+                className="material-icons"
+                data-id={project.id}
+                onClick={toggleStar}
+              >
+                star_border
+              </span>
+            )}
             {/* Displays header as link to project page IF not _on_ project page currently */}
             {props.match ? (
               <h3>{project.title}</h3>
@@ -50,11 +63,23 @@ const Project = (props) => {
             <AddActionForm />
           </div>
           <div className="project-footer">
-            {project.archived 
-              ? <span className="material-icons" data-id={project.id} onClick={toggleArchive}>unarchive</span>
-              
-              : <span className="material-icons" data-id={project.id} onClick={toggleArchive}>archive</span>
-            }
+            {project.archived ? (
+              <span
+                className="material-icons"
+                data-id={project.id}
+                onClick={toggleArchive}
+              >
+                unarchive
+              </span>
+            ) : (
+              <span
+                className="material-icons"
+                data-id={project.id}
+                onClick={toggleArchive}
+              >
+                archive
+              </span>
+            )}
             <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>

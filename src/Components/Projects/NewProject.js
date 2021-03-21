@@ -6,7 +6,7 @@ const NewProject = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [nextActions, setNextActions] = useState([]);
   const [title, setTitle] = useState(false);
-  const [projectID, setProjectID] = useState('');
+  const [projectID, setProjectID] = useState("");
 
   const addAction = (e, incomingAction) => {
     e.preventDefault();
@@ -30,12 +30,12 @@ const NewProject = () => {
       createdAt: Date.now(),
     });
     setProjectID(newProjectRef.id);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(projectID)
-    db.collection('projects').doc(projectID).update({
+    console.log(projectID);
+    db.collection("projects").doc(projectID).update({
       nextActions: nextActions,
     });
   };
@@ -47,19 +47,21 @@ const NewProject = () => {
       </header>
       <section>
         <div>
-        {title ? <h3 id={projectID}>{projectTitle}</h3> : 
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Name your project"
-            value={projectTitle}
-            onChange={(e) => {
-              setProjectTitle(e.target.value);
-            }}
-            onBlur={createTitle}
-          />
-        }
+          {title ? (
+            <h3 id={projectID}>{projectTitle}</h3>
+          ) : (
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Name your project"
+              value={projectTitle}
+              onChange={(e) => {
+                setProjectTitle(e.target.value);
+              }}
+              onBlur={createTitle}
+            />
+          )}
         </div>
         <ol>
           {nextActions.map((nextAction, index) => (

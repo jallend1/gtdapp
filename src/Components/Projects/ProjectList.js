@@ -7,14 +7,12 @@ const ProjectList = (props) => {
   console.log(props);
   const { projects } = useContext(ProjectContext);
   const renderProjects = () => {
-    let projectsToShow
-    if(props.match.path === '/archive'){
-      projectsToShow = projects.filter(project => project.archived)
-    }
-    else if(props.match.path === '/active'){
-      projectsToShow = projects.filter(project => !project.archived)
-    }
-    else{
+    let projectsToShow;
+    if (props.match.path === "/archive") {
+      projectsToShow = projects.filter((project) => project.archived);
+    } else if (props.match.path === "/active") {
+      projectsToShow = projects.filter((project) => !project.archived);
+    } else {
       projectsToShow = projects.slice();
     }
     return projectsToShow.map((project) => {
