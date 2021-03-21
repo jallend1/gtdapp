@@ -4,7 +4,6 @@ import { ProjectContext } from "../../Contexts/ProjectContext";
 import Project from "./Project";
 
 const ProjectList = (props) => {
-  console.log(props);
   const { projects } = useContext(ProjectContext);
   const renderProjects = () => {
     let projectsToShow;

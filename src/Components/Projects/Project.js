@@ -60,7 +60,7 @@ const Project = (props) => {
                 />
               ))}
             </ol>
-            <AddActionForm />
+            <AddActionForm projectId = {project.id}/>
           </div>
           <div className="project-footer">
             {project.archived ? (

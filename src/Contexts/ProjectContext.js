@@ -10,6 +10,22 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
+  
+  addAction = (e, projectId) => {
+    e.preventDefault();
+    const incomingAction = e.target[0].value; // Extracts value from incoming input field
+    const projects = this.state.projects.slice();
+    const currentProject = projects.find(project => project.id === projectId);
+    const newAction = {
+      action: incomingAction,
+      isComplete: false,
+      step: currentProject.nextActions.length + 1,
+    };
+    const updatedActions = [...currentProject.nextActions, newAction];
+    db.collection("projects").doc(projectId).update({
+      nextActions: updatedActions
+    });
+  };
   completeAction = (e) => {
     const projectsCopy = this.state.projects.slice();
     // Extracts step number and project ID from DIV
@@ -82,6 +98,7 @@ class ProjectContextProvider extends React.Component {
       <ProjectContext.Provider
         value={{
           projects: [...this.state.projects],
+          addAction: this.addAction,
           completeAction: this.completeAction,
           deleteAction: this.deleteAction,
           toggleArchive: this.toggleArchive,

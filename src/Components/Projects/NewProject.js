@@ -8,22 +8,12 @@ const NewProject = () => {
   const [title, setTitle] = useState(false);
   const [projectID, setProjectID] = useState("");
 
-  const addAction = (e, incomingAction) => {
-    e.preventDefault();
-    const newAction = {
-      action: incomingAction,
-      isComplete: false,
-      step: nextActions.length + 1,
-    };
-    setNextActions([...nextActions, newAction]);
-  };
-
   const createTitle = () => {
     setTitle(true);
     const newProjectRef = db.collection("projects").doc();
     newProjectRef.set({
       title: projectTitle,
-      nextActions: nextActions,
+      nextActions: [],
       archived: false,
       starred: false,
       id: newProjectRef.id,
@@ -34,7 +24,6 @@ const NewProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(projectID);
     db.collection("projects").doc(projectID).update({
       nextActions: nextActions,
     });
@@ -68,7 +57,7 @@ const NewProject = () => {
             <li key={index}>{nextAction.action}</li>
           ))}
         </ol>
-        {projectTitle ? <AddActionForm addAction={addAction} /> : null}
+        {projectTitle ? <AddActionForm projectId = {projectID} /> : null}
         <button onClick={handleSubmit}>Create New Project</button>
       </section>
     </div>
