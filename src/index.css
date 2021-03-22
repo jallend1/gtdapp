@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: "Maitree", serif;
+  font-family: 'Maitree', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -32,7 +32,7 @@ h1 {
 }
 
 h2 {
-  font-family: "Lora", serif;
+  font-family: 'Lora', serif;
 }
 
 h1,
@@ -40,7 +40,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .subtitle {
@@ -66,17 +66,18 @@ h6 {
 }
 
 .project-body {
-  font-size: 0.75em;
   margin: auto;
   max-width: 80%;
 }
 
 .action {
   display: flex;
+  padding: 0.5em;
+  margin-bottom: 0.25em;
 }
 
 .action > .material-icons {
-  padding: 0 1em;
+  padding: 0.5em 1em;
   color: red;
 }
 
