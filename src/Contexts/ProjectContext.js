@@ -16,10 +16,15 @@ class ProjectContextProvider extends React.Component {
     const incomingAction = e.target[0].value; // Extracts value from incoming input field
     const projects = this.state.projects.slice();
     const currentProject = projects.find(project => project.id === projectId);
+    // Finds the highest step number, and makes this action one higher than that
+    const stepNumber = currentProject.nextActions
+      .map(action => action.step)
+      .reduce((a, b) => Math.max(a, b)) + 1;
+    console.log(stepNumber);
     const newAction = {
       action: incomingAction,
       isComplete: false,
-      step: currentProject.nextActions.length + 1,
+      step: stepNumber
     };
     const updatedActions = [...currentProject.nextActions, newAction];
     db.collection("projects").doc(projectId).update({

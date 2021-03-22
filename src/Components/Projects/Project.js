@@ -16,6 +16,7 @@ const Project = (props) => {
   else if (projects) {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
+    console.log(project.nextActions)
     return (
       <div className="container">
         <div className="project" key={project.id}>
