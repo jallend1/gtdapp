@@ -17,7 +17,7 @@ const Sidebar = () => {
         <div>
           <ul>
             {projects &&
-              projects.map((project) => (
+              projects.filter(project => project.archived === false).map((project) => (
                 <Link to={`/projects/${project.id}`} key={project.id}>
                   <li>{project.title}</li>
                 </Link>
