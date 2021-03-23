@@ -16,7 +16,11 @@ const RenderAction = ({ action, project, needsURL }) => {
       </div>
       <li>
         <div
+          draggable="true"
           onClick={completeAction}
+          onDragStart={() => console.log('Starting dragging!')}
+          onDragEnd={() => console.log('Ending dragging!')}
+          onDrop={() => console.log('DROPPED')}
           data-id={project.id}
           data-step={action.step}
           className={action.isComplete ? "action-complete" : null}
