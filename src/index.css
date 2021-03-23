@@ -26,6 +26,10 @@ nav > ul {
   list-style: none;
 }
 
+li {
+  list-style: none;
+}
+
 h1 {
   text-align: center;
   font-size: 3em;
@@ -79,10 +83,6 @@ h6 {
 .action > .material-icons {
   padding: 0.5em 1em;
   color: red;
-}
-
-.action > li {
-  list-style: none;
 }
 
 .action-complete {

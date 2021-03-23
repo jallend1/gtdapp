@@ -5,22 +5,22 @@ import { ProjectContext } from "../../Contexts/ProjectContext";
 const RenderAction = ({ action, project, needsURL }) => {
   const { completeAction, deleteAction } = useContext(ProjectContext);
   return (
-    <div className="action">
-      <div
-        className="material-icons"
-        data-id={project.id}
-        data-step={action.step}
-        onClick={deleteAction}
-      >
-        delete_outline
-      </div>
-      <li>
+      <li 
+        draggable="true" 
+        onDragStart={() => console.log('Starting dragging!')}
+        onDragEnd={() => console.log('Ending dragging!')}
+        onDrop={() => console.log('DROPPED')}>
+      <div className="action">
         <div
-          draggable="true"
+          className="material-icons"
+          data-id={project.id}
+          data-step={action.step}
+          onClick={deleteAction}
+        >
+          delete_outline
+        </div>
+        <div
           onClick={completeAction}
-          onDragStart={() => console.log('Starting dragging!')}
-          onDragEnd={() => console.log('Ending dragging!')}
-          onDrop={() => console.log('DROPPED')}
           data-id={project.id}
           data-step={action.step}
           className={action.isComplete ? "action-complete" : null}
@@ -33,8 +33,8 @@ const RenderAction = ({ action, project, needsURL }) => {
             From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
           </div>
         ) : null}
-      </li>
-    </div>
+      </div>
+    </li>
   );
 };
 
