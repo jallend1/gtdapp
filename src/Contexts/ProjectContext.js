@@ -17,13 +17,12 @@ class ProjectContextProvider extends React.Component {
     const projects = this.state.projects.slice();
     const currentProject = projects.find(project => project.id === projectId);
     const actionList = currentProject.nextActions.map((action, index) => action.step = index);
-    console.log(actionList)
     const newAction = {
       action: incomingAction,
       isComplete: false,
       step: currentProject.nextActions.length
     };
-    const updatedActions = [...currentProject.nextActions, newAction];
+    const updatedActions = [...actionList, newAction];
     db.collection("projects").doc(projectId).update({
       nextActions: updatedActions
     });

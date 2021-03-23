@@ -1,11 +1,15 @@
 import RenderAction from "./RenderAction";
 import { Link, useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
+import { db } from "../../firebaseConfig";
+
 
 const Project = (props) => {
   const { projects, toggleArchive, toggleStar, deleteAction } = useContext(ProjectContext);
+  const [movedTask, setMovedTask] = useState('{}');
+  
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -16,6 +20,45 @@ const Project = (props) => {
   else if (projects) {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
+    
+
+  const handleDragOver = e => {
+    e.preventDefault();
+  }
+
+  const handleDragStart = e => {
+    const taskToMove=e.target.dataset
+    setMovedTask(taskToMove)
+    console.log(typeof taskToMove.step)
+  }
+
+  const handleDrop = e => {
+    // Copy of the current nextActions
+    const nextActions = project.nextActions.slice();
+    //Finds the action that we're gonna move
+    const targetAction = nextActions.find(action => parseInt(action.step) === parseInt(movedTask.step));
+    // Makes a deep copy of that object
+    const newAction = JSON.parse(JSON.stringify(targetAction));
+    // Adds a status field to distinguish it from the original one we need to delete
+    newAction.wasJustMoved = true;
+    // Inserts the new action into the array before the item it was dropped on
+    nextActions.splice(e.target.dataset.step, 0, newAction)
+    // Retrieves the index of the original one we need to remove and does so
+    const toDelete = nextActions.findIndex(action => !action.wasJustMoved===true && parseInt(action.step) === parseInt(movedTask.step));
+    nextActions.splice(toDelete, 1);
+    // Maps over updated array to reorder the array to match the new order and reset attributes for further movement
+    const newActionOrder = nextActions.map((action, index) => {
+      action.wasJustMoved = false;
+      action.step = index;
+      return action
+    });
+    //Sends new action order to Firebase
+    db.collection('projects').doc(project.id).update({
+      nextActions: newActionOrder
+    });
+    //Clears the moved task from state
+    setMovedTask('');
+  }
     return (
       <div className="container">
         <div className="project" key={project.id}>
@@ -57,6 +100,9 @@ const Project = (props) => {
                   key={project.id + action.step}
                   project={project}
                   needsURL={false}
+                  handleDragOver={handleDragOver}
+                  handleDragStart={handleDragStart}
+                  handleDrop={handleDrop}
                 />
               ))}
             </ol>

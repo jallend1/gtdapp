@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext} from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 
-const RenderAction = ({ action, project, needsURL }) => {
+const RenderAction = ({ action, project, needsURL, handleDragOver, handleDragStart, handleDrop }) => {
   const { completeAction, deleteAction } = useContext(ProjectContext);
+
   return (
       <li 
+        data-id={project.id}
+        data-step={action.step}
         draggable="true" 
-        onDragStart={() => console.log('Starting dragging!')}
-        onDragEnd={() => console.log('Ending dragging!')}
-        onDrop={() => console.log('DROPPED')}>
+        onDragStart ={handleDragStart}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}>
       <div className="action">
         <div
           className="material-icons"
