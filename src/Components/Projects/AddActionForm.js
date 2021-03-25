@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import { ProjectContext } from '../../Contexts/ProjectContext';
-const AddActionForm = ({projectId }) => {
+import { ProjectContext } from "../../Contexts/ProjectContext";
+const AddActionForm = ({ projectId }) => {
   const [nextAction, setNextAction] = useState("");
-  const { addAction } = useContext(ProjectContext)
+  const { addAction } = useContext(ProjectContext);
 
   const handleChange = (e) => {
     setNextAction(e.target.value);

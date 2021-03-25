@@ -57,7 +57,7 @@ const NewProject = () => {
             <li key={index}>{nextAction.action}</li>
           ))}
         </ol>
-        {projectTitle ? <AddActionForm projectId = {projectID} /> : null}
+        {projectTitle ? <AddActionForm projectId={projectID} /> : null}
         <button onClick={handleSubmit}>Create New Project</button>
       </section>
     </div>

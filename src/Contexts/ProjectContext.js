@@ -10,21 +10,23 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
-  
+
   addAction = (e, projectId) => {
     e.preventDefault();
     const incomingAction = e.target[0].value; // Extracts value from incoming input field
     const projects = this.state.projects.slice();
-    const currentProject = projects.find(project => project.id === projectId);
-    const actionList = currentProject.nextActions.map((action, index) => action.step = index);
+    const currentProject = projects.find((project) => project.id === projectId);
+    const actionList = currentProject.nextActions.map(
+      (action, index) => (action.step = index)
+    );
     const newAction = {
       action: incomingAction,
       isComplete: false,
-      step: currentProject.nextActions.length
+      step: currentProject.nextActions.length,
     };
     const updatedActions = [...actionList, newAction];
     db.collection("projects").doc(projectId).update({
-      nextActions: updatedActions
+      nextActions: updatedActions,
     });
   };
   completeAction = (e) => {
@@ -54,20 +56,19 @@ class ProjectContextProvider extends React.Component {
     const updatedProjects = this.state.projects.slice();
     // Retrieves associated project and individual action
     const project = updatedProjects.find((project) => project.id === id);
-    if(entireProject){
-      db.collection('projects').doc(id).delete();
-    }
-    else{
+    if (entireProject) {
+      db.collection("projects").doc(id).delete();
+    } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
         (action) => action.step === parseInt(step)
-        );
-        // Removes targeted action
-        project.nextActions.splice(action, 1);
-        db.collection("projects")
+      );
+      // Removes targeted action
+      project.nextActions.splice(action, 1);
+      db.collection("projects")
         .doc(id)
         .update({ nextActions: project.nextActions });
-      }
+    }
   };
   fetchProjects = () => {
     db.collection("projects").onSnapshot((snapShot) => {
