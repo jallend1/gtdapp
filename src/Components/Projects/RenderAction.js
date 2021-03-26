@@ -23,7 +23,7 @@ const RenderAction = ({
     >
       <div className="action">
         <div
-          className="material-icons"
+          className="material-icons trash"
           data-id={project.id}
           data-step={action.step}
           onClick={deleteAction}
@@ -39,12 +39,12 @@ const RenderAction = ({
           {action.action}
         </div>
         {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
+      </div>
         {needsURL ? (
           <div className="subtitle">
             From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
           </div>
         ) : null}
-      </div>
     </li>
   );
 };
