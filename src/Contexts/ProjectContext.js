@@ -16,7 +16,7 @@ class ProjectContextProvider extends React.Component {
     const incomingAction = e.target[0].value; // Extracts value from incoming input field
     const projects = this.state.projects.slice();
     const currentProject = projects.find((project) => project.id === projectId);
-    const actionList = currentProject.nextActions.map(
+    currentProject.nextActions.forEach(
       (action, index) => (action.step = index)
     );
     const newAction = {
@@ -24,7 +24,7 @@ class ProjectContextProvider extends React.Component {
       isComplete: false,
       step: currentProject.nextActions.length,
     };
-    const updatedActions = [...actionList, newAction];
+    const updatedActions = [...currentProject.nextActions, newAction];
     db.collection("projects").doc(projectId).update({
       nextActions: updatedActions,
     });
