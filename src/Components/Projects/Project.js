@@ -22,6 +22,36 @@ const Project = (props) => {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
 
+    const archivedLogic = () => {
+      return project.archived ? (
+        <span
+          className="material-icons"
+          data-id={project.id}
+          onClick={toggleArchive}
+        >
+          unarchive
+        </span>
+      ) : (
+        <span
+          className="material-icons"
+          data-id={project.id}
+          onClick={toggleArchive}
+        >
+          archive
+        </span>
+      )
+    }
+
+    /* Displays header as link to project page IF not _on_ project page currently */
+    const displayLink = () => {
+      return props.match ? (
+        <h3>{project.title}</h3>
+      ) : (
+        <Link to={`/projects/${project.id}`}>
+          <h3>{project.title} </h3>
+        </Link>
+      )
+    }
     const handleDragOver = (e) => {
       e.preventDefault();
     };
@@ -29,13 +59,10 @@ const Project = (props) => {
     const handleDragStart = (e) => {
       const taskToMove = e.target.dataset;
       setMovedTask(taskToMove);
-      console.log(typeof taskToMove.step);
     };
 
     const handleDrop = (e) => {
-      // Copy of the current nextActions
       const nextActions = project.nextActions.slice();
-      //Finds the action that we're gonna move
       const targetAction = nextActions.find(
         (action) => parseInt(action.step) === parseInt(movedTask.step)
       );
@@ -65,35 +92,47 @@ const Project = (props) => {
       //Clears the moved task from state
       setMovedTask("");
     };
+
+    const renderProjects = () => {
+      return project.nextActions.map((action) => (
+        <RenderAction
+          action={action}
+          key={project.id + action.step}
+          project={project}
+          needsURL={false}
+          handleDragOver={handleDragOver}
+          handleDragStart={handleDragStart}
+          handleDrop={handleDrop}
+        />
+      ))
+    }
+
+    const starLogic = () => {
+      return project.starred ? (
+        <span
+          className="material-icons"
+          data-id={project.id}
+          onClick={toggleStar}
+        >
+          star
+        </span>
+      ) : (
+        <span
+          className="material-icons"
+          data-id={project.id}
+          onClick={toggleStar}
+        >
+          star_border
+        </span>
+      )
+    }
+    
     return (
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-            {project.starred ? (
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={toggleStar}
-              >
-                star
-              </span>
-            ) : (
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={toggleStar}
-              >
-                star_border
-              </span>
-            )}
-            {/* Displays header as link to project page IF not _on_ project page currently */}
-            {props.match ? (
-              <h3>{project.title}</h3>
-            ) : (
-              <Link to={`/projects/${project.id}`}>
-                <h3>{project.title} </h3>
-              </Link>
-            )}
+            {starLogic()}
+            {displayLink()}
             <div>
               <span
                 className="material-icons"
@@ -106,38 +145,12 @@ const Project = (props) => {
           </div>
           <div className="project-body">
             <ol>
-              {project.nextActions.map((action) => (
-                <RenderAction
-                  action={action}
-                  key={project.id + action.step}
-                  project={project}
-                  needsURL={false}
-                  handleDragOver={handleDragOver}
-                  handleDragStart={handleDragStart}
-                  handleDrop={handleDrop}
-                />
-              ))}
+              {renderProjects()}
             </ol>
             <AddActionForm projectId={project.id} />
           </div>
           <div className="project-footer">
-            {project.archived ? (
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={toggleArchive}
-              >
-                unarchive
-              </span>
-            ) : (
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={toggleArchive}
-              >
-                archive
-              </span>
-            )}
+            {archivedLogic()}
             <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>
