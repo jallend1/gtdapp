@@ -1,11 +1,11 @@
-import { useState, useContext} from "react";
+import { useState, useContext, useEffect} from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import { db } from "../../firebaseConfig";
 import AddActionForm from "./AddActionForm";
 import RenderAction from './RenderAction'
 
 const NewProject = () => {
-  const { projects, toggleArchive, toggleStar, deleteAction } = useContext(
+  const { projects } = useContext(
     ProjectContext
   );
 
@@ -14,20 +14,22 @@ const NewProject = () => {
   const [title, setTitle] = useState(false);
   const [projectID, setProjectID] = useState("");
   const [project, setProject] = useState("");
+  
 
-  const createTitle = () => {
+  async function createTitle() {
     setTitle(true);
-    const newProjectRef = db.collection("projects").doc()
-    newProjectRef.set({
+    const newProject = db.collection("projects").doc()
+    const newProjectRef = await newProject.get();
+    await db.collection('projects').doc(newProjectRef.id).set({
       title: projectTitle,
       nextActions: [],
       archived: false,
       starred: false,
       id: newProjectRef.id,
       createdAt: Date.now(),
-    });
-    setProjectID(newProjectRef.id);
-    
+    })
+    setProjectID(newProject.id);
+    setProject(db.collection('projects').doc().get().then(project => project.data()))
   };
 
   const handleSubmit = (e) => {
@@ -40,8 +42,8 @@ const NewProject = () => {
   
 
   const renderActions = () => {
-    if(project !== ""){
-      return project.nextActions.map((action) => (
+    
+      return nextActions.map((action) => (
         <RenderAction
         action={action}
         key={projectID + action.step}
@@ -50,11 +52,7 @@ const NewProject = () => {
       />
     ))
   }
-  else{
-    return 'Nothing'
-  }
-  }
-
+  
   return (
     <div className="new-project">
       <header>
