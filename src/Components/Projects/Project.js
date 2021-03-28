@@ -39,8 +39,8 @@ const Project = (props) => {
         >
           archive
         </span>
-      )
-    }
+      );
+    };
 
     /* Displays header as link to project page IF not _on_ project page currently */
     const displayLink = () => {
@@ -50,8 +50,8 @@ const Project = (props) => {
         <Link to={`/projects/${project.id}`}>
           <h3>{project.title} </h3>
         </Link>
-      )
-    }
+      );
+    };
     const handleDragOver = (e) => {
       e.preventDefault();
     };
@@ -104,8 +104,8 @@ const Project = (props) => {
           handleDragStart={handleDragStart}
           handleDrop={handleDrop}
         />
-      ))
-    }
+      ));
+    };
 
     const starLogic = () => {
       return project.starred ? (
@@ -124,9 +124,9 @@ const Project = (props) => {
         >
           star_border
         </span>
-      )
-    }
-    
+      );
+    };
+
     return (
       <div className="container">
         <div className="project" key={project.id}>
@@ -144,9 +144,7 @@ const Project = (props) => {
             </div>
           </div>
           <div className="project-body">
-            <ol>
-              {renderProjects()}
-            </ol>
+            <ol>{renderProjects()}</ol>
             <AddActionForm projectId={project.id} />
           </div>
           <div className="project-footer">
