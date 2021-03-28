@@ -1,5 +1,5 @@
 import RenderAction from "./RenderAction";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
@@ -9,6 +9,7 @@ const Project = (props) => {
   const { projects, toggleArchive, toggleStar, deleteAction } = useContext(
     ProjectContext
   );
+  const history = useHistory();
   const [movedTask, setMovedTask] = useState("{}");
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
@@ -42,6 +43,10 @@ const Project = (props) => {
       );
     };
 
+    const deleteProject = (e) => {
+      deleteAction(e, true);
+      history.push('/');
+    }
     /* Displays header as link to project page IF not _on_ project page currently */
     const displayLink = () => {
       return props.match ? (
@@ -137,7 +142,7 @@ const Project = (props) => {
               <span
                 className="material-icons"
                 data-id={project.id}
-                onClick={(e) => deleteAction(e, true)}
+                onClick={deleteProject}
               >
                 delete_outline
               </span>

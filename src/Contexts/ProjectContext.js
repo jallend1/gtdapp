@@ -2,7 +2,6 @@ import React, { createContext } from "react";
 import { db } from "../firebaseConfig";
 
 export const ProjectContext = createContext();
-
 class ProjectContextProvider extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +9,7 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
+  
 
   addAction = (e, projectId) => {
     e.preventDefault();
