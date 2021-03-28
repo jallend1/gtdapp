@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { db } from "../../firebaseConfig";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
@@ -28,10 +28,6 @@ const NewProject = () => {
     });
     setProjectID(newProject.id);
   }
-
-  const handleSubmit = (e) => {
-    history.push('/');
-  };
 
   const renderActions = () => {
     if(project){
@@ -79,9 +75,9 @@ const NewProject = () => {
             />
           )}
         </div>
-        <ol>{title ? renderActions() : "Nothing to display"}</ol>
+        <ol>{projectTitle ? renderActions() : "Nothing to display"}</ol>
         {projectTitle ? <AddActionForm projectId={projectID} /> : null}
-        <button onClick={handleSubmit}>Create New Project</button>
+        <button onClick={() => history.push('/')}>Create New Project</button>
       </section>
     </div>
   );
