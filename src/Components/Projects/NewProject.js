@@ -1,14 +1,15 @@
 import { useState, useContext, useEffect } from "react";
-import { ProjectContext } from "../../Contexts/ProjectContext";
+import { Redirect, useHistory } from 'react-router-dom';
 import { db } from "../../firebaseConfig";
+import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
 import RenderAction from "./RenderAction";
 
 const NewProject = () => {
   const { projects } = useContext(ProjectContext);
+  const history = useHistory();
 
   const [projectTitle, setProjectTitle] = useState("");
-  const [nextActions, setNextActions] = useState([]);
   const [title, setTitle] = useState(false);
   const [projectID, setProjectID] = useState("");
   const [project, setProject] = useState("");
@@ -26,32 +27,34 @@ const NewProject = () => {
       createdAt: Date.now(),
     });
     setProjectID(newProject.id);
-    setProject(
-      db
-        .collection("projects")
-        .doc()
-        .get()
-        .then((project) => project.data())
-    );
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    db.collection("projects").doc(projectID).update({
-      nextActions: nextActions,
-    });
+    history.push('/');
   };
 
   const renderActions = () => {
-    return nextActions.map((action) => (
-      <RenderAction
+    if(project){
+      return project.nextActions.map((action) => (
+        <RenderAction
         action={action}
         key={projectID + action.step}
         project={project}
         needsURL={false}
       />
     ));
+  }
+  else return null
   };
+
+  const retrieveProject = () => {
+    if(projectID !== ''){
+      const newProject = projects.find(project => projectID === project.id);
+      setProject(newProject);
+    }
+  }
+
+  useEffect(retrieveProject, [projects, projectID])
 
   return (
     <div className="new-project">
