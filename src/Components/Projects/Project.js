@@ -11,6 +11,7 @@ const Project = (props) => {
   );
   const history = useHistory();
   const [movedTask, setMovedTask] = useState("{}");
+  const [title, setTitle] = useState((''));
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
@@ -47,16 +48,35 @@ const Project = (props) => {
       deleteAction(e, true);
       history.push('/');
     }
+
     /* Displays header as link to project page IF not _on_ project page currently */
     const displayLink = () => {
       return props.match ? (
-        <h3>{project.title}</h3>
+        <div className="project-title">
+          <h3>{project.title}</h3>
+          <span
+          className="material-icons"
+          onClick={editTitle}
+        >
+          edit
+        </span>
+        </div>
       ) : (
         <Link to={`/projects/${project.id}`}>
           <h3>{project.title} </h3>
         </Link>
       );
     };
+
+    const editTitle = () => {
+      const title = document.getElementsByClassName('project-title')[0];
+      console.log(project.title)
+      console.log(title)
+      title.innerHTML = `
+        <input type="textbox" value="${project.title}"/>
+      `
+    }
+
     const handleDragOver = (e) => {
       e.preventDefault();
     };

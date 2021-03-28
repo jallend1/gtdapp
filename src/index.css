@@ -74,6 +74,18 @@ h6 {
   max-width: 80%;
 }
 
+.project-title {
+  display: flex;
+}
+
+.project-title > h3 {
+  padding-right: 1.25em;
+}
+
+.project-title > span {
+  padding-top: 0.5em;
+}
+
 .action {
   display: flex;
   padding: 0.5em;
@@ -124,6 +136,7 @@ h6 {
   margin: 0.75em 0;
   font-size: 0.8em;
 }
+
 footer {
   text-align: center;
   font-size: 0.75em;
