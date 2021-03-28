@@ -11,7 +11,6 @@ const Project = (props) => {
   );
   const history = useHistory();
   const [movedTask, setMovedTask] = useState("{}");
-  const [title, setTitle] = useState((''));
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
@@ -23,26 +22,6 @@ const Project = (props) => {
   else if (projects) {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
-
-    const archivedLogic = () => {
-      return project.archived ? (
-        <span
-          className="material-icons"
-          data-id={project.id}
-          onClick={toggleArchive}
-        >
-          unarchive
-        </span>
-      ) : (
-        <span
-          className="material-icons"
-          data-id={project.id}
-          onClick={toggleArchive}
-        >
-          archive
-        </span>
-      );
-    };
 
     const deleteProject = (e) => {
       deleteAction(e, true);
@@ -73,7 +52,9 @@ const Project = (props) => {
       console.log(project.title)
       console.log(title)
       title.innerHTML = `
+      <form>  
         <input type="textbox" value="${project.title}"/>
+      </form>
       `
     }
 
@@ -132,31 +113,17 @@ const Project = (props) => {
       ));
     };
 
-    const starLogic = () => {
-      return project.starred ? (
-        <span
-          className="material-icons"
-          data-id={project.id}
-          onClick={toggleStar}
-        >
-          star
-        </span>
-      ) : (
-        <span
-          className="material-icons"
-          data-id={project.id}
-          onClick={toggleStar}
-        >
-          star_border
-        </span>
-      );
-    };
-
     return (
       <div className="container">
         <div className="project" key={project.id}>
           <div className="project-head">
-            {starLogic()}
+            <span
+              className="material-icons"
+              data-id={project.id}
+              onClick={toggleStar}
+            >
+            {project.starred ? "star" : "star_border"}
+            </span>
             {displayLink()}
             <div>
               <span
@@ -173,7 +140,13 @@ const Project = (props) => {
             <AddActionForm projectId={project.id} />
           </div>
           <div className="project-footer">
-            {archivedLogic()}
+          <span
+          className="material-icons"
+          data-id={project.id}
+          onClick={toggleArchive}
+        >
+          {project.archived ? "unarchive" : "archive"}
+        </span>
             <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>
