@@ -66,10 +66,10 @@ const Project = (props) => {
     };
 
     const renderProjects = () => {
-      return project.nextActions.map((action) => (
+      return project.nextActions.map((action, index) => (
         <RenderAction
           action={action}
-          key={project.id + action.step}
+          key={index}
           project={project}
           needsURL={false}
           handleDragOver={handleDragOver}

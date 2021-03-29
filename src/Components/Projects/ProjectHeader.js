@@ -36,7 +36,7 @@ const ProjectHeader = ({project, match}) => {
       const editTitle = () => {
         return (
             <form onSubmit = {updateTitle}>
-            <input type="textbox" value={title} id="titleBox" onChange={e => setTitle(e.target.value)}/>
+                <input type="textbox" value={title} id="titleBox" onChange={e => setTitle(e.target.value)}/>
             </form>
             )
       }
