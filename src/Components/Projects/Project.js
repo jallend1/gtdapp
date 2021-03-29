@@ -1,15 +1,16 @@
 import RenderAction from "./RenderAction";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
 import { db } from "../../firebaseConfig";
 
+import ProjectHeader from './ProjectHeader';
+
 const Project = (props) => {
-  const { projects, toggleArchive, toggleStar, deleteAction } = useContext(
+  const { projects, toggleArchive } = useContext(
     ProjectContext
   );
-  const history = useHistory();
   const [movedTask, setMovedTask] = useState("{}");
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
@@ -22,41 +23,6 @@ const Project = (props) => {
   else if (projects) {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
-
-    const deleteProject = (e) => {
-      deleteAction(e, true);
-      history.push('/');
-    }
-
-    /* Displays header as link to project page IF not _on_ project page currently */
-    const displayLink = () => {
-      return props.match ? (
-        <div className="project-title">
-          <h3>{project.title}</h3>
-          <span
-          className="material-icons"
-          onClick={editTitle}
-        >
-          edit
-        </span>
-        </div>
-      ) : (
-        <Link to={`/projects/${project.id}`}>
-          <h3>{project.title} </h3>
-        </Link>
-      );
-    };
-
-    const editTitle = () => {
-      const title = document.getElementsByClassName('project-title')[0];
-      console.log(project.title)
-      console.log(title)
-      title.innerHTML = `
-      <form>  
-        <input type="textbox" value="${project.title}"/>
-      </form>
-      `
-    }
 
     const handleDragOver = (e) => {
       e.preventDefault();
@@ -116,25 +82,7 @@ const Project = (props) => {
     return (
       <div className="container">
         <div className="project" key={project.id}>
-          <div className="project-head">
-            <span
-              className="material-icons"
-              data-id={project.id}
-              onClick={toggleStar}
-            >
-            {project.starred ? "star" : "star_border"}
-            </span>
-            {displayLink()}
-            <div>
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={deleteProject}
-              >
-                delete_outline
-              </span>
-            </div>
-          </div>
+          <ProjectHeader project={project} match={props.match}/>
           <div className="project-body">
             <ol>{renderProjects()}</ol>
             <AddActionForm projectId={project.id} />
