@@ -11,7 +11,6 @@ const Project = (props) => {
   const { projects, toggleArchive } = useContext(
     ProjectContext
   );
-  const [movedTask, setMovedTask] = useState("{}");
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
@@ -29,14 +28,14 @@ const Project = (props) => {
     };
 
     const handleDragStart = (e) => {
-      const taskToMove = e.target.dataset;
-      setMovedTask(taskToMove);
+      e.dataTransfer.setData("step", e.target.dataset.step)
     };
 
     const handleDrop = (e) => {
+      const movedTask = parseInt(e.dataTransfer.getData('step'));
       const nextActions = project.nextActions.slice();
       const targetAction = nextActions.find(
-        (action) => parseInt(action.step) === parseInt(movedTask.step)
+        (action) => parseInt(action.step) === movedTask
       );
       // Makes a deep copy of that object
       const newAction = JSON.parse(JSON.stringify(targetAction));
@@ -48,7 +47,7 @@ const Project = (props) => {
       const toDelete = nextActions.findIndex(
         (action) =>
           !action.wasJustMoved === true &&
-          parseInt(action.step) === parseInt(movedTask.step)
+          parseInt(action.step) === movedTask
       );
       nextActions.splice(toDelete, 1);
       // Maps over updated array to reorder the array to match the new order and reset attributes for further movement
@@ -61,8 +60,6 @@ const Project = (props) => {
       db.collection("projects").doc(project.id).update({
         nextActions: newActionOrder,
       });
-      //Clears the moved task from state
-      setMovedTask("");
     };
 
     const renderProjects = () => {
