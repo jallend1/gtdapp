@@ -1,6 +1,6 @@
 import RenderAction from "./RenderAction";
 import { useParams } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
 import { db } from "../../firebaseConfig";
@@ -60,6 +60,7 @@ const Project = (props) => {
       db.collection("projects").doc(project.id).update({
         nextActions: newActionOrder,
       });
+      e.dataTransfer.clearData();
     };
 
     const renderProjects = () => {
