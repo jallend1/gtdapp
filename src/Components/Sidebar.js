@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 import { ProjectContext } from "../Contexts/ProjectContext";
+import UserInfo from './UserInfo';
 const Sidebar = () => {
   const { projects } = useContext(ProjectContext);
   return (
     <div>
-      <h2>Projects Sidebar</h2>
+      <UserInfo />
       <Link to="/projects/new">
         <h3>
           <span className="material-icons">add_task</span> Add a New Project
