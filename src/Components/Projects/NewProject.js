@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
@@ -30,27 +30,26 @@ const NewProject = () => {
   }
 
   const renderActions = () => {
-    if(project){
+    if (project) {
       return project.nextActions.map((action) => (
         <RenderAction
-        action={action}
-        key={projectID + action.step}
-        project={project}
-        needsURL={false}
-      />
-    ));
-  }
-  else return null
+          action={action}
+          key={projectID + action.step}
+          project={project}
+          needsURL={false}
+        />
+      ));
+    } else return null;
   };
 
   const retrieveProject = () => {
-    if(projectID !== ''){
-      const newProject = projects.find(project => projectID === project.id);
+    if (projectID !== "") {
+      const newProject = projects.find((project) => projectID === project.id);
       setProject(newProject);
     }
-  }
+  };
 
-  useEffect(retrieveProject, [projects, projectID])
+  useEffect(retrieveProject, [projects, projectID]);
 
   return (
     <div className="new-project">
@@ -77,7 +76,7 @@ const NewProject = () => {
         </div>
         <ol>{projectTitle ? renderActions() : "Nothing to display"}</ol>
         {projectTitle ? <AddActionForm projectId={projectID} /> : null}
-        <button onClick={() => history.push('/')}>Create New Project</button>
+        <button onClick={() => history.push("/")}>Create New Project</button>
       </section>
     </div>
   );

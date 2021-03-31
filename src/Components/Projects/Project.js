@@ -5,12 +5,10 @@ import { ProjectContext } from "../../Contexts/ProjectContext";
 import AddActionForm from "./AddActionForm";
 import { db } from "../../firebaseConfig";
 
-import ProjectHeader from './ProjectHeader';
+import ProjectHeader from "./ProjectHeader";
 
 const Project = (props) => {
-  const { projects, toggleArchive } = useContext(
-    ProjectContext
-  );
+  const { projects, toggleArchive } = useContext(ProjectContext);
 
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
@@ -28,11 +26,11 @@ const Project = (props) => {
     };
 
     const handleDragStart = (e) => {
-      e.dataTransfer.setData("step", e.target.dataset.step)
+      e.dataTransfer.setData("step", e.target.dataset.step);
     };
 
     const handleDrop = (e) => {
-      const movedTask = parseInt(e.dataTransfer.getData('step'));
+      const movedTask = parseInt(e.dataTransfer.getData("step"));
       const nextActions = project.nextActions.slice();
       const targetAction = nextActions.find(
         (action) => parseInt(action.step) === movedTask
@@ -46,8 +44,7 @@ const Project = (props) => {
       // Retrieves the index of the original one we need to remove and does so
       const toDelete = nextActions.findIndex(
         (action) =>
-          !action.wasJustMoved === true &&
-          parseInt(action.step) === movedTask
+          !action.wasJustMoved === true && parseInt(action.step) === movedTask
       );
       nextActions.splice(toDelete, 1);
       // Maps over updated array to reorder the array to match the new order and reset attributes for further movement
@@ -80,19 +77,19 @@ const Project = (props) => {
     return (
       <div className="container">
         <div className="project" key={project.id}>
-          <ProjectHeader project={project} match={props.match}/>
+          <ProjectHeader project={project} match={props.match} />
           <div className="project-body">
             <ol>{renderProjects()}</ol>
             <AddActionForm projectId={project.id} />
           </div>
           <div className="project-footer">
-          <span
-          className="material-icons"
-          data-id={project.id}
-          onClick={toggleArchive}
-        >
-          {project.archived ? "unarchive" : "archive"}
-        </span>
+            <span
+              className="material-icons"
+              data-id={project.id}
+              onClick={toggleArchive}
+            >
+              {project.archived ? "unarchive" : "archive"}
+            </span>
             <p>Created at: {jsDate}</p>
             <p>Posted by userID: {project.userId}</p>
           </div>

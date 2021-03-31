@@ -9,7 +9,6 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
-  
 
   addAction = (e, projectId) => {
     e.preventDefault();
