@@ -8,16 +8,16 @@ import { db } from "../../firebaseConfig";
 import ProjectHeader from "./ProjectHeader";
 
 const Project = (props) => {
+  
   const { projects, toggleArchive } = useContext(ProjectContext);
-
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
-  if (projects && !projects.find((project) => project.id === id)) {
+  if (projects.length > 0 && !projects.find((project) => project.id === id)) {
     return <h3>Sorry, we weren't able to find that project.</h3>;
   }
   // If projects are loaded, displays it
-  else if (projects) {
+  else if (projects.length > 0) {
     const project = projects.find((project) => project.id === id);
     const jsDate = new Date(project.createdAt).toUTCString();
 
