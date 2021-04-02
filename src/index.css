@@ -48,6 +48,7 @@ h6 {
 
 .subtitle {
   font-size: 0.75em;
+  text-align: right;
 }
 
 .space-around {
@@ -85,10 +86,13 @@ h6 {
   padding-top: 0.5em;
 }
 
-.action {
-  display: flex;
+.action-li {
   padding: 0.5em;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.75em;
+}
+
+.action-content {
+  display: flex;
 }
 
 .trash {

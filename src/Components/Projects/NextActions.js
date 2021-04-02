@@ -23,7 +23,7 @@ const NextActions = () => {
   };
   return (
     <div>
-      <h2>List of Next Action From Each Project</h2>
+      <h2>Next Actions</h2>
       <ul>
         {projects && projects.map((project) => determineNextAction(project))}
       </ul>

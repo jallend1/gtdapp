@@ -20,8 +20,10 @@ const RenderAction = ({
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      className="action-li"
+      
     >
-      <div className="action">
+      <div className="action-content">
         <div
           className="material-icons trash"
           data-id={project.id}
