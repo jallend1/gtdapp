@@ -51,6 +51,14 @@ h6 {
   text-align: right;
 }
 
+.details {
+  margin: 0 2em;
+  font-size: 0.75em;
+  padding: 1em 1.25em;
+  border: solid 1px gray;
+  text-align: center;
+}
+
 .space-around {
   display: flex;
   justify-content: space-around;

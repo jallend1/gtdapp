@@ -14,6 +14,11 @@ const RenderAction = ({
   const { completeAction, deleteAction } = useContext(ProjectContext);
   const [showDetails, setShowDetails] = useState(false);
 
+  const calculateDate = () => {
+    const date = new Date(project.createdAt);
+    return date.toDateString();
+  }
+
   const handleShowDetails = (e) => {
     e.stopPropagation();
     setShowDetails(!showDetails);
@@ -46,16 +51,19 @@ const RenderAction = ({
           className={action.isComplete ? "action-complete" : null}
         >
           {action.action}
-          <div onClick={handleShowDetails}>
+          <div className="subtitle" onClick={handleShowDetails}>
             More Details
           </div>
         </div>
-        {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
       </div>
       {showDetails ? (
-        <div id="details">
+        <div id="details" className="details">
+        {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
+          <div>
+            Created: {calculateDate()}
+          </div>
           {needsURL ? (
-            <div className="subtitle">
+            <div>
               From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
             </div>
           ) : null}
