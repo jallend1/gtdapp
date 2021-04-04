@@ -10,6 +10,7 @@ const NextActions = () => {
   const determineNextAction = () => {
     const newActionList = [];
     projects.forEach(project => { 
+      // Extracts all the incomplete items from the project
       const actionList = project.nextActions.filter(
         (action) => action.isComplete === false
       );
@@ -47,17 +48,15 @@ const NextActions = () => {
     setSortDate(!sortDate);
   }
 
-  
   useEffect(determineNextAction, [projects, sortDate])
 
   return (
     <div>
       <h2>Next Actions</h2>
-      <div onClick={toggleSort}>
-        <span className="material-icons">swap_vert</span>
-        Sort <span>{sortDate ? 'newest' : 'oldest'} </span> projects first
-
-      </div>
+      <button className="btn-small" onClick={toggleSort}>
+        <i className="material-icons left">swap_vert</i>
+        Sort by <span>{sortDate ? 'newest' : 'oldest'} </span>
+      </button>
       <ul>
         {projects && renderProjects()}
       </ul>
