@@ -52,7 +52,7 @@ const RenderAction = ({
         >
           {action.action}
           <div className="subtitle" onClick={handleShowDetails}>
-            More Details
+            {showDetails ? 'See Less' : 'See More'}
           </div>
         </div>
       </div>
