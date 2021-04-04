@@ -60,12 +60,20 @@ const RenderAction = ({
         <div id="details" className="details">
         {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
           <div>
-            Created: {calculateDate()}
+            Added: {calculateDate()}
           </div>
           {needsURL ? (
-            <div>
-              From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
-            </div>
+            <>
+              <div>
+                From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
+              </div>
+              <div>
+                Remaining Tasks: {project.nextActions.filter(project => project.isComplete === false).length}
+              </div>
+              <div>
+                Total Tasks: {project.nextActions.length}
+              </div>
+            </>
           ) : null}
         </div>
         ) : null
