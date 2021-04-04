@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 
 const RenderAction = ({
@@ -10,7 +10,14 @@ const RenderAction = ({
   handleDragStart,
   handleDrop,
 }) => {
+  
   const { completeAction, deleteAction } = useContext(ProjectContext);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleShowDetails = (e) => {
+    e.stopPropagation();
+    setShowDetails(!showDetails);
+  }
 
   return (
     <li
@@ -39,14 +46,22 @@ const RenderAction = ({
           className={action.isComplete ? "action-complete" : null}
         >
           {action.action}
+          <div onClick={handleShowDetails}>
+            More Details
+          </div>
         </div>
         {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
       </div>
-      {needsURL ? (
-        <div className="subtitle">
-          From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
+      {showDetails ? (
+        <div id="details">
+          {needsURL ? (
+            <div className="subtitle">
+              From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+        ) : null
+      }
     </li>
   );
 };
