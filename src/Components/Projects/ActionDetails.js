@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-const ActionDetails = (project) => {
+const ActionDetails = ({project}) => {
     const calculateDate = () => {
         const date = new Date(project.createdAt);
         return date.toDateString();

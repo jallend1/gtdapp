@@ -53,15 +53,10 @@ const RenderAction = ({
           </div>
         </div>
       </div>
-      {showDetails ? (
-        <div>
+      {showDetails ? (isNextActionPage ? <ActionDetails project={project} /> : null) : null}
         {/* If no project info is passed, it means it's on the project page itself, so no details to display on action*/}
-          {isNextActionPage ? (
-            <ActionDetails project={project} />
-          ) : null}
-        </div>
-        ) : null
-      }
+          
+      
     </li>
   );
 };
