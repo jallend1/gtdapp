@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
+
+import ActionDetails from './ActionDetails';
 
 const RenderAction = ({
   action,
@@ -13,11 +14,6 @@ const RenderAction = ({
   
   const { completeAction, deleteAction } = useContext(ProjectContext);
   const [showDetails, setShowDetails] = useState(false);
-
-  const calculateDate = () => {
-    const date = new Date(project.createdAt);
-    return date.toDateString();
-  }
 
   const handleShowDetails = (e) => {
     e.stopPropagation();
@@ -61,22 +57,7 @@ const RenderAction = ({
         <div>
         {/* If no project info is passed, it means it's on the project page itself, so no details to display on action*/}
           {isNextActionPage ? (
-            <>
-        <div id="details" className="details">
-          <div>
-            Added: {calculateDate()}
-          </div>
-              <div>
-                From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
-              </div>
-              <div>
-                Remaining Tasks: {project.nextActions.filter(project => project.isComplete === false).length}
-              </div>
-              <div>
-                Total Tasks: {project.nextActions.length}
-              </div>
-              </div>
-            </>
+            <ActionDetails project={project} />
           ) : null}
         </div>
         ) : null
