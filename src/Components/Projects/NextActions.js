@@ -20,7 +20,7 @@ const NextActions = () => {
           action: actionList[0],
           project: project,
           key: project.id + actionList[0].step,
-          needsURL: true,
+          isNextActionPage: true,
           created: project.createdAt
         }
         newActionList.push(nextAction)
@@ -39,7 +39,7 @@ const NextActions = () => {
       action={nextAction.action}
       project={nextAction.project}
       key={nextAction.key}
-      needsURL={nextAction.needsURL}
+      isNextActionPage={nextAction.isNextActionPage}
     />
     })
   }

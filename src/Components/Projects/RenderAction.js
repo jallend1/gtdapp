@@ -5,7 +5,7 @@ import { ProjectContext } from "../../Contexts/ProjectContext";
 const RenderAction = ({
   action,
   project,
-  needsURL,
+  isNextActionPage,
   handleDragOver,
   handleDragStart,
   handleDrop,
@@ -52,18 +52,20 @@ const RenderAction = ({
         >
           {action.action}
           <div className="subtitle" onClick={handleShowDetails}>
-            {showDetails ? 'See Less' : 'See More'}
+            {/* Only displays detail expansion on next actions page and not if on individual project page */}
+            {isNextActionPage ? (showDetails ? 'See Less' : 'See More') : null}
           </div>
         </div>
       </div>
       {showDetails ? (
+        <div>
+        {/* If no project info is passed, it means it's on the project page itself, so no details to display on action*/}
+          {isNextActionPage ? (
+            <>
         <div id="details" className="details">
-        {/* If no project info is passed, it means it's on the project page itself, so doesn't display link to it */}
           <div>
             Added: {calculateDate()}
           </div>
-          {needsURL ? (
-            <>
               <div>
                 From: <Link to={`/projects/${project.id}`}>{project.title}</Link>
               </div>
@@ -72,6 +74,7 @@ const RenderAction = ({
               </div>
               <div>
                 Total Tasks: {project.nextActions.length}
+              </div>
               </div>
             </>
           ) : null}

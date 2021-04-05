@@ -66,7 +66,7 @@ const Project = (props) => {
           action={action}
           key={index}
           project={project}
-          needsURL={false}
+          isNextActionPage={false}
           handleDragOver={handleDragOver}
           handleDragStart={handleDragStart}
           handleDrop={handleDrop}
