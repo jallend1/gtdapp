@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 import { ProjectContext } from "../Contexts/ProjectContext";
-import UserInfo from './UserInfo';
+import UserInfo from "./UserInfo";
 const Sidebar = () => {
   const { projects } = useContext(ProjectContext);
   return (

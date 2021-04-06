@@ -8,7 +8,6 @@ import { db } from "../../firebaseConfig";
 import ProjectHeader from "./ProjectHeader";
 
 const Project = (props) => {
-  
   const { projects, toggleArchive } = useContext(ProjectContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;

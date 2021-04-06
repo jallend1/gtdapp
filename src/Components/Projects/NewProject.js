@@ -76,7 +76,9 @@ const NewProject = () => {
         </div>
         <ol>{projectTitle ? renderActions() : "No actions added yet"}</ol>
         {projectTitle ? <AddActionForm projectId={projectID} /> : null}
-        <button className="btn-large" onClick={() => history.push("/")}>Create New Project</button>
+        <button className="btn-large" onClick={() => history.push("/")}>
+          Create New Project
+        </button>
       </section>
     </div>
   );
