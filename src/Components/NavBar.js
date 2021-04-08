@@ -23,6 +23,9 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
+        <div>
+          Login
+        </div>
       </nav>
     </>
   );
