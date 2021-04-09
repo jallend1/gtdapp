@@ -1,6 +1,9 @@
+import {useContext} from 'react';
 import { NavLink } from "react-router-dom";
+import { AuthContext } from '../Contexts/AuthContext';
 
 const NavBar = () => {
+  const { isLoggedIn } = useContext(AuthContext)
   return (
     <>
       <nav className="blue">
@@ -24,7 +27,7 @@ const NavBar = () => {
           </ul>
         </div>
         <div>
-          Login
+          {isLoggedIn ? 'Logout' : 'Login'}
         </div>
       </nav>
     </>
