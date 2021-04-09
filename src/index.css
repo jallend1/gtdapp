@@ -148,6 +148,11 @@ h6 {
   font-size: 0.8em;
 }
 
+.sign-up {
+  max-width: 80%;
+  margin: auto;
+}
+
 footer {
   position: fixed;
   width: 100%;

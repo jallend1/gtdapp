@@ -11,9 +11,14 @@ class AuthContextProvider extends React.Component{
     }
 
     signUp = (e) => {
-        // auth.createUserWithEmailAndPassword(login.user, login.pass);
         e.preventDefault();
-        console.log(e);
+        const userName = e.target.user.value;
+        const password = e.target.pass.value;
+        auth.createUserWithEmailAndPassword(userName, password).then((credentials) => {
+            console.log(credentials)
+            this.setState({isLoggedIn: true})
+        })
+        e.target.reset();
     }
 
     render() {
