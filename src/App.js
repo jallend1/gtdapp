@@ -44,6 +44,9 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
           <Route exact path="/">
             <Main />
           </Route>
@@ -53,7 +56,6 @@ function App() {
         </Switch>
       </ProjectContextProvider>
       <Footer />
-      <SignUp />
       </AuthContextProvider>
     </div>
   );

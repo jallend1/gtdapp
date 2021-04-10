@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from '../Contexts/AuthContext';
 
 const NavBar = () => {
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn, signOut } = useContext(AuthContext)
   return (
     <>
       <nav className="blue">
@@ -27,7 +27,19 @@ const NavBar = () => {
           </ul>
         </div>
         <div>
-          {isLoggedIn ? 'Logout' : 'Login'}
+          <ul>
+            {isLoggedIn ? (
+              <li onClick={signOut}>
+                Sign out
+              </li>
+              ) : (<li>'Login'</li>)
+            }
+            <li>
+              <NavLink to="/signup">
+                Create Account
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </nav>
     </>

@@ -3,16 +3,8 @@ import { auth, fb } from '../../firebaseConfig';
 import { AuthContext } from '../../Contexts/AuthContext';
 
 const SignUp = () => {
-    const { signUp, isLoggedIn } = useContext(AuthContext);
+    const { signUp, googleSignIn, isLoggedIn } = useContext(AuthContext);
     
-    const googleSignIn = () => {
-        console.log('happening')
-        const provider = new fb.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider)
-            .then((result) => console.log(result))
-        
-        
-    }
     const loginForm = () => {
         return (
             <div className="sign-up">
