@@ -23,20 +23,18 @@ class AuthContextProvider extends React.Component{
         this.setState({isLoggedIn: false})
     }
     
-    signUp = (e) => {
+    signIn = (e, isNewUser) => {
         e.preventDefault();
-        const userName = e.target.user.value;
+        const email = e.target.user.value;
         const password = e.target.pass.value;
-        // auth.createUserWithEmailAndPassword(userName, password).then((credentials) => {
-        //     console.log(credentials)
-        // })
+        isNewUser ? auth.createUserWithEmailAndPassword(email, password) : auth.signInWithEmailAndPassword(email, password);
         this.setState({isLoggedIn: true})
         e.target.reset();
     }
 
     render() {
         return (
-            <AuthContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, googleSignIn: this.googleSignIn, signOut: this.signOut, signUp: this.signUp}}>
+            <AuthContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, googleSignIn: this.googleSignIn, signOut: this.signOut, signIn: this.signIn}}>
                 {this.props.children}
             </AuthContext.Provider>
         )

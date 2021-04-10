@@ -12,7 +12,7 @@ import NewProject from "./Components/Projects/NewProject";
 import About from "./Components/About";
 import Error from "./Components/Error";
 import Footer from "./Components/Footer";
-import SignUp from './Components/Auth/SignUp';
+import Login from './Components/Auth/Login';
 
 function App() {
   return (
@@ -44,9 +44,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
+          <Route path="/signup" render={(props) => <Login {...props} />} />
+          <Route path="/login" render={(props) => <Login {...props} />} />
           <Route exact path="/">
             <Main />
           </Route>

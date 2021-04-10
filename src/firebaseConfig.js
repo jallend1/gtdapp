@@ -14,6 +14,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 export const auth = firebase.auth();
+
+// TODO: auth not working for Google sign in, but works with firebase exported, and then having .auth.GoogleProvider appended in AuthContext provider
 export const fb = firebase;
 
 firebase.firestore().settings({ timestampsinSnapshots: true });
