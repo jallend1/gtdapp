@@ -4,6 +4,7 @@ import { AuthContext } from '../Contexts/AuthContext';
 
 const NavBar = () => {
   const { isLoggedIn, signOut } = useContext(AuthContext)
+  console.log(isLoggedIn)
   return (
     <>
       <nav className="blue">
