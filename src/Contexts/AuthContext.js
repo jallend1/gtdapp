@@ -1,5 +1,3 @@
-// TODO: Navbar not updating to reflect current authentication status
-
 import React, { createContext } from 'react';
 import { auth, fb } from '../firebaseConfig'
 
@@ -21,20 +19,24 @@ class AuthContextProvider extends React.Component{
 
     authState = user => {
         // If user is returned, updates state with appropriate info
-        console.log(user)
         if(user){
             this.setState({user: user, loading: false, isLoggedIn: true});
+        }
+        else{
+            this.setState({user: null, isLoggedIn: false})
         }
     }
 
     googleSignIn = () => {
         const provider = new fb.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider);
+        
     }
 
     signOut = (e) => {
         e.preventDefault();
-        auth.signOut().then(() => console.log('logged out!'));
+        auth.signOut().then(() =>auth.onAuthStateChanged(this.authState));
+        
     }
     
     signIn = (e, isNewUser) => {
