@@ -1,6 +1,6 @@
-import {useContext} from 'react';
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AuthContext } from '../Contexts/AuthContext';
+import { AuthContext } from "../Contexts/AuthContext";
 
 const NavBar = () => {
   const { isLoggedIn, signOut } = useContext(AuthContext)
@@ -29,24 +29,17 @@ const NavBar = () => {
         <div>
           <ul>
             {isLoggedIn ? (
-              <li onClick={signOut}>
-                Sign out
-              </li>
-              ) : (
-                <>
-                  <li>
-                    <NavLink to="/login">
-                      Login
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/signup">
-                      Create Account
-                    </NavLink>
-                  </li>
-                </>
-              )
-            }
+              <li onClick={signOut}>Sign out</li>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/login">Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/signup">Create Account</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>

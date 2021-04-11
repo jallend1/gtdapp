@@ -30,13 +30,11 @@ class AuthContextProvider extends React.Component{
     googleSignIn = () => {
         const provider = new fb.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider);
-        
     }
 
     signOut = (e) => {
         e.preventDefault();
         auth.signOut().then(() =>auth.onAuthStateChanged(this.authState));
-        
     }
     
     signIn = (e, isNewUser) => {
