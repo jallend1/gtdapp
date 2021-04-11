@@ -47,7 +47,7 @@ class AuthContextProvider extends React.Component{
 
     render() {
         return (
-            <AuthContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, googleSignIn: this.googleSignIn, signOut: this.signOut, signIn: this.signIn}}>
+            <AuthContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, googleSignIn: this.googleSignIn, signOut: this.signOut, signIn: this.signIn, user: this.state.user}}>
                 {this.props.children}
             </AuthContext.Provider>
         )
