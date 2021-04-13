@@ -5,7 +5,8 @@ import AuthContextProvider from "./Contexts/AuthContext";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
-import Main from "./Components/Main";
+import NextActions from './Components/Projects/NextActions';
+import SideBar from './Components/Sidebar';
 import Project from "./Components/Projects/Project";
 import ProjectList from "./Components/Projects/ProjectList";
 import NewProject from "./Components/Projects/NewProject";
@@ -21,6 +22,7 @@ function App() {
         <NavBar />
         <Header />
         <ProjectContextProvider>
+          <SideBar />
           <Switch>
             <Route path="/projects/new">
               <NewProject />
@@ -47,7 +49,7 @@ function App() {
             <Route path="/signup" render={(props) => <Login {...props} />} />
             <Route path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/">
-              <Main />
+              <NextActions />
             </Route>
             <Route path="/">
               <Error />
