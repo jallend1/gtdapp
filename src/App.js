@@ -22,6 +22,7 @@ function App() {
         <NavBar />
         <Header />
         <ProjectContextProvider>
+          <div className="container">
           <SideBar />
           <Switch>
             <Route path="/projects/new">
@@ -55,6 +56,7 @@ function App() {
               <Error />
             </Route>
           </Switch>
+          </div>
         </ProjectContextProvider>
         <Footer />
       </AuthContextProvider>

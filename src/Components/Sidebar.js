@@ -2,14 +2,10 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 import { ProjectContext } from "../Contexts/ProjectContext";
-import UserInfo from "./UserInfo";
-import { AuthContext } from "../Contexts/AuthContext";
 const Sidebar = () => {
   const { projects } = useContext(ProjectContext);
-  const { user, isLoggedIn } = useContext(AuthContext);
   return (
     <div>
-      <UserInfo user={user} isLoggedIn={isLoggedIn} />
       <Link to="/projects/new">
         <h3>
           <span className="material-icons">add_task</span> Add a New Project
