@@ -4,6 +4,32 @@ import { AuthContext } from "../Contexts/AuthContext";
 
 const NavBar = () => {
   const { isLoggedIn, signOut, user } = useContext(AuthContext);
+  
+  const noUser = () => {
+    return (
+      <>
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+        <li>
+          <NavLink to="/signup">Create Account</NavLink>
+        </li>
+      </>
+    )
+  }
+
+  const userDetails = () => {
+    return (
+      <>
+        <li onClick={signOut}>Sign out</li>
+        <li>
+          {user.photoURL ? <img src={user.photoURL} alt="profile" className="profile-pic" />
+            : (user.displayName ? user.displayName : user.email)}
+        </li>
+      </>
+    )
+  }
+
   return (
     <>
       <nav className="blue">
@@ -28,21 +54,7 @@ const NavBar = () => {
         </div>
         <div>
           <ul className="right">
-            {isLoggedIn ? (
-              <>
-                <li onClick={signOut}>Sign out</li>
-                <li>{user.photoURL ? <img src={user.photoURL} alt="profile" className="profile"/> : user.displayName}</li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <NavLink to="/login">Login</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/signup">Create Account</NavLink>
-                </li>
-              </>
-            )}
+            {isLoggedIn ? userDetails() : noUser()}
           </ul>
         </div>
       </nav>
