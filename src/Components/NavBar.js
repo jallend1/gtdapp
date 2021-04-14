@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const NavBar = () => {
-  const { isLoggedIn, signOut } = useContext(AuthContext);
+  const { isLoggedIn, signOut, user } = useContext(AuthContext);
   return (
     <>
       <nav className="blue">
@@ -27,9 +27,12 @@ const NavBar = () => {
           </ul>
         </div>
         <div>
-          <ul>
+          <ul className="right">
             {isLoggedIn ? (
-              <li onClick={signOut}>Sign out</li>
+              <>
+                <li onClick={signOut}>Sign out</li>
+                <li>{user.photoURL ? <img src={user.photoURL} alt="profile" className="profile"/> : user.displayName}</li>
+              </>
             ) : (
               <>
                 <li>
