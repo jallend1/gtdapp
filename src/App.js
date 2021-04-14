@@ -5,8 +5,8 @@ import AuthContextProvider from "./Contexts/AuthContext";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
-import NextActions from './Components/Projects/NextActions';
-import SideBar from './Components/Sidebar';
+import NextActions from "./Components/Projects/NextActions";
+import SideBar from "./Components/Sidebar";
 import Project from "./Components/Projects/Project";
 import ProjectList from "./Components/Projects/ProjectList";
 import NewProject from "./Components/Projects/NewProject";

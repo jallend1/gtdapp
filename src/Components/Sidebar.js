@@ -6,7 +6,7 @@ import UserInfo from "./UserInfo";
 import { AuthContext } from "../Contexts/AuthContext";
 const Sidebar = () => {
   const { projects } = useContext(ProjectContext);
-  const { user, isLoggedIn } = useContext(AuthContext)
+  const { user, isLoggedIn } = useContext(AuthContext);
   return (
     <div>
       <UserInfo user={user} isLoggedIn={isLoggedIn} />
