@@ -22,40 +22,40 @@ function App() {
         <NavBar />
         <Header />
         <ProjectContextProvider>
-          <div className="container">
-          <SideBar />
-          <Switch>
-            <Route path="/projects/new">
-              <NewProject />
-            </Route>
-            <Route
-              path="/projects/:id"
-              render={(props) => <Project {...props} />}
-            />
-            <Route
-              path="/projects"
-              render={(props) => <ProjectList {...props} />}
-            />
-            <Route
-              path="/archive"
-              render={(props) => <ProjectList {...props} />}
-            />
-            <Route
-              path="/active"
-              render={(props) => <ProjectList {...props} />}
-            />
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/signup" render={(props) => <Login {...props} />} />
-            <Route path="/login" render={(props) => <Login {...props} />} />
-            <Route exact path="/">
-              <NextActions />
-            </Route>
-            <Route path="/">
-              <Error />
-            </Route>
-          </Switch>
+          <div className="main container">
+            <SideBar />
+            <Switch>
+              <Route path="/projects/new">
+                <NewProject />
+              </Route>
+              <Route
+                path="/projects/:id"
+                render={(props) => <Project {...props} />}
+              />
+              <Route
+                path="/projects"
+                render={(props) => <ProjectList {...props} />}
+              />
+              <Route
+                path="/archive"
+                render={(props) => <ProjectList {...props} />}
+              />
+              <Route
+                path="/active"
+                render={(props) => <ProjectList {...props} />}
+              />
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/signup" render={(props) => <Login {...props} />} />
+              <Route path="/login" render={(props) => <Login {...props} />} />
+              <Route exact path="/">
+                <NextActions />
+              </Route>
+              <Route path="/">
+                <Error />
+              </Route>
+            </Switch>
           </div>
         </ProjectContextProvider>
         <Footer />

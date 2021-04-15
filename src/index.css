@@ -10,6 +10,12 @@ code {
     monospace;
 }
 
+.main {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
 .container {
   width: 80%;
   margin: auto;
@@ -27,6 +33,10 @@ nav > ul {
 
 li {
   list-style: none;
+}
+
+.userDetails {
+  margin: 0 1em;
 }
 
 .profile-pic {

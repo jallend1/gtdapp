@@ -21,8 +21,8 @@ const NavBar = () => {
   const userDetails = () => {
     return (
       <>
-        <li onClick={signOut}>Sign out</li>
-        <li>
+        <li className="userDetails" onClick={signOut}>Sign out</li>
+        <li className="userDetails">
           {user.photoURL ? <img src={user.photoURL} alt="profile" className="profile-pic" />
             : (user.displayName ? user.displayName : user.email)}
         </li>
