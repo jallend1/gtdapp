@@ -20,15 +20,15 @@ const ProjectList = (props) => {
   };
   return (
     <div className="container">
-      <header id="projectList" className="space-around">
-        <h2>Project List</h2>
-        <Link to="/projects/new">
-          <h2>
-            <span className="material-icons">add_task</span> Add New Project
-          </h2>
-        </Link>
-      </header>
-      <main>{projects && renderProjects()}</main>
+        <header id="projectList" className="space-around">
+          <h2>Project List</h2>
+          <Link to="/projects/new">
+            <h2>
+              <span className="material-icons">add_task</span> Add New Project
+            </h2>
+          </Link>
+        </header>
+        <main>{projects && renderProjects()}</main>
     </div>
   );
 };

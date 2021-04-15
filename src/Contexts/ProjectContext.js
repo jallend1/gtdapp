@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import { db } from "../firebaseConfig";
+import { AuthContext } from "./AuthContext";
 
 export const ProjectContext = createContext();
 class ProjectContextProvider extends React.Component {
@@ -9,6 +10,10 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
+
+  static contextType = AuthContext;
+
+
 
   addAction = (e, projectId) => {
     e.preventDefault();
@@ -75,6 +80,7 @@ class ProjectContextProvider extends React.Component {
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
       });
+      console.log(AuthContext)
       this.setState({ projects: fetchedProjects });
     });
   };
