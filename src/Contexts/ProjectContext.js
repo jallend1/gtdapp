@@ -4,14 +4,15 @@ import { AuthContext } from "./AuthContext";
 
 export const ProjectContext = createContext();
 class ProjectContextProvider extends React.Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
     this.state = {
       projects: [],
+      isLoggedIn: null
     };
   }
 
-  static contextType = AuthContext;
 
 
 
@@ -80,7 +81,6 @@ class ProjectContextProvider extends React.Component {
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
       });
-      console.log(AuthContext)
       this.setState({ projects: fetchedProjects });
     });
   };
@@ -104,8 +104,12 @@ class ProjectContextProvider extends React.Component {
   };
 
   componentDidMount() {
+    // TODO: Playing with this as a strategy on whether or not to fetch projects? Maybe wait until projects tied to user ID to proceed
+    // const isLoggedIn = this.context.isLoggedIn;
+    // this.setState({isLoggedIn});    
     this.fetchProjects();
   }
+  
   render() {
     return (
       <ProjectContext.Provider
