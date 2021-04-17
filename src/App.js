@@ -9,14 +9,17 @@ import Login from "./Components/Auth/Login";
 import Footer from "./Components/Footer";
 
 function App() {
-  const {isLoggedIn} = useContext(AuthContext);
+  const {isLoggedIn, isLoading} = useContext(AuthContext);
   return (
     <div className="App">
         <NavBar />
         <Header />
-        {isLoggedIn ? (        
+        {isLoading ? <h3>Loading...</h3> : (
+
+        isLoggedIn ? (        
           <Main />
-        ) : <Login />}
+        ) : <Login />
+        )}
         <Footer />
     </div>
   )

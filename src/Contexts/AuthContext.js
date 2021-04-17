@@ -6,7 +6,7 @@ class AuthContextProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      isLoading: true,
       isLoggedIn: false,
       user: null,
     };
@@ -20,9 +20,9 @@ class AuthContextProvider extends React.Component {
   authState = (user) => {
     // If user is returned, updates state with appropriate info
     if (user) {
-      this.setState({ user: user, loading: false, isLoggedIn: true });
+      this.setState({ user: user, isLoading: false, isLoggedIn: true });
     } else {
-      this.setState({ user: null, isLoggedIn: false });
+      this.setState({ user: null, isLoggedIn: false, isLoading: false });
     }
   };
 
@@ -55,6 +55,7 @@ class AuthContextProvider extends React.Component {
           signOut: this.signOut,
           signIn: this.signIn,
           user: this.state.user,
+          isLoading: this.state.isLoading
         }}
       >
         {this.props.children}
