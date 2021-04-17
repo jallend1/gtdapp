@@ -6,7 +6,12 @@ const Login = (props) => {
     AuthContext
   );
   let newUser;
-  props.match.path === "/login" ? (newUser = false) : (newUser = true);
+  if(props.match){
+    props.match.path === "/login" ? (newUser = false) : (newUser = true);
+  }
+  else{
+    newUser = false;
+  }
 
   const loginForm = () => {
     return (

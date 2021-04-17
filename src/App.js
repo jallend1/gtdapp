@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import { useContext } from 'react';
 
 import ProjectContextProvider from "./Contexts/ProjectContext";
-import AuthContextProvider, { AuthContext } from "./Contexts/AuthContext";
+import { AuthContext } from "./Contexts/AuthContext";
 
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
@@ -17,12 +17,12 @@ import Footer from "./Components/Footer";
 import Login from "./Components/Auth/Login";
 
 function App() {
-  const isLoggedIn = useContext(AuthContext);
-  console.log(isLoggedIn)
+  const {isLoggedIn} = useContext(AuthContext);
   return (
     <div className="App">
         <NavBar />
         <Header />
+        {isLoggedIn ? (        
         <ProjectContextProvider>
           <div className="main container">
             <SideBar />
@@ -60,9 +60,10 @@ function App() {
             </Switch>
           </div>
         </ProjectContextProvider>
+        ) : <Login />}
         <Footer />
     </div>
-  );
+  )
 }
 
 export default App;
