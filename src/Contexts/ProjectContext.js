@@ -12,8 +12,16 @@ class ProjectContextProvider extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // Store project snapshot listener 
+    this.projectListener = this.fetchProjects();
+  }
 
-
+  componentWillUnmount(){
+    // Detaches project snapshot listener after authentication change
+    this.projectListener && this.projectListener();
+    this.projectListener = undefined;
+  }
 
   addAction = (e, projectId) => {
     e.preventDefault();
@@ -75,7 +83,7 @@ class ProjectContextProvider extends React.Component {
     }
   };
   fetchProjects = () => {
-    db.collection("projects").onSnapshot((snapShot) => {
+    return db.collection("projects").onSnapshot((snapShot) => {
       const fetchedProjects = [];
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
@@ -101,13 +109,6 @@ class ProjectContextProvider extends React.Component {
     const starred = !project.starred;
     db.collection("projects").doc(projectID).update({ starred: starred });
   };
-
-  componentDidMount() {
-    // TODO: Playing with this as a strategy on whether or not to fetch projects? Maybe wait until projects tied to user ID to proceed
-    // const isLoggedIn = this.context.isLoggedIn;
-    // this.setState({isLoggedIn});    
-    this.fetchProjects();
-  }
   
   render() {
     return (
