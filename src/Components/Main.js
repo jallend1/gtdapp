@@ -1,5 +1,7 @@
-import { Switch, Route } from "react-router-dom";
+import { useContext } from 'react';
+import { Switch, Route, Redirect } from "react-router-dom";
 import ProjectContextProvider from "../Contexts/ProjectContext";
+import {AuthContext } from '../Contexts/AuthContext';
 
 import NextActions from "./Projects/NextActions";
 import SideBar from "./Sidebar";
@@ -12,7 +14,8 @@ import Login from "./Auth/Login";
 import Profile from './Profile';
 
 const Main = () => {
-    return (
+  const { isLoggedIn } = useContext(AuthContext);
+  return (
     <ProjectContextProvider>
     <div className="main container">
       <SideBar />
@@ -39,8 +42,8 @@ const Main = () => {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/signup" render={(props) => <Login {...props} />} />
-        <Route path="/login" render={(props) => <Login {...props} />} />
+        <Route path="/signup" render={(props) => isLoggedIn ? <Redirect to="/profile" /> : <Login {...props} />} />
+        <Route path="/login" render={(props) => isLoggedIn ? <Redirect to="/profile" /> : <Login {...props} />} />
         <Route path="/profile">
           <Profile />
         </Route>
