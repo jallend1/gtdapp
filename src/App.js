@@ -7,7 +7,6 @@ import Header from "./Components/Header";
 import Main from './Components/Main';
 import Login from "./Components/Auth/Login";
 import Footer from "./Components/Footer";
-import Profile from './Components/Profile';
 
 function App() {
   const {isLoggedIn, isLoading} = useContext(AuthContext);

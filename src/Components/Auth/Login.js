@@ -1,8 +1,9 @@
 import { useContext } from "react";
+
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = (props) => {
-  const { signIn, googleSignIn, isLoggedIn, user, signOut } = useContext(
+  const { signIn, googleSignIn } = useContext(
     AuthContext
   );
   let newUser;
@@ -28,27 +29,10 @@ const Login = (props) => {
     );
   };
 
-  const logoutForm = () => {
-    let userDeets;
-    user.displayName
-      ? (userDeets = user.displayName)
-      : (userDeets = user.email);
-    return (
-      <>
-        <div>Currently logged in as {userDeets}</div>
-        <div>
-          <button className="btn" onClick={signOut}>
-            Logout
-          </button>
-        </div>
-      </>
-    );
-  };
-
   return (
     <>
       <h4>{newUser ? "Create a New Account" : "Login"}</h4>
-      {isLoggedIn ? logoutForm() : loginForm()}
+      {loginForm()}
     </>
   );
 };
