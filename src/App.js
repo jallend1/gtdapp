@@ -17,7 +17,6 @@ function App() {
         <Header />
         {isLoading ? <h3>Loading...</h3> : (isLoggedIn ? <Main /> : <Login />)}
         <Footer />
-        <Profile />
     </div>
   )
 }

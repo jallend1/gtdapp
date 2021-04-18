@@ -9,6 +9,7 @@ import NewProject from "./Projects/NewProject";
 import About from "./About";
 import Error from "./Error";
 import Login from "./Auth/Login";
+import Profile from './Profile';
 
 const Main = () => {
     return (
@@ -40,6 +41,9 @@ const Main = () => {
         </Route>
         <Route path="/signup" render={(props) => <Login {...props} />} />
         <Route path="/login" render={(props) => <Login {...props} />} />
+        <Route path="/profile">
+          <Profile />
+        </Route>
         <Route exact path="/">
           <NextActions /> 
         </Route>

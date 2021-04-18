@@ -8,11 +8,11 @@ const Profile = () => {
     
     return (
         <div className="container">
-            <h2>Profile Page</h2>    
+            <h2>Your Profile</h2>    
             <img src={photoURL} alt="User display" className="profile-logo"/>
             <div>
-                <p>{displayName}</p>
-                <p>{email}</p>
+                <p>Name: {displayName}</p>
+                <p>Email: {email}</p>
             </div>
         </div>
     )
