@@ -168,6 +168,10 @@ h6 {
   margin: auto;
 }
 
+.profile-logo {
+  border-radius: 50%;
+}
+
 footer {
   position: fixed;
   width: 100%;
