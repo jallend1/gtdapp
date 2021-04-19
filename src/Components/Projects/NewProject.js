@@ -2,11 +2,13 @@ import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { ProjectContext } from "../../Contexts/ProjectContext";
+import { AuthContext } from '../../Contexts/AuthContext';
 import AddActionForm from "./AddActionForm";
 import RenderAction from "./RenderAction";
 
 const NewProject = () => {
   const { projects } = useContext(ProjectContext);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
 
   const [projectTitle, setProjectTitle] = useState("");
@@ -25,6 +27,7 @@ const NewProject = () => {
       starred: false,
       id: newProjectRef.id,
       createdAt: Date.now(),
+      userId: user.uid
     });
     setProjectID(newProject.id);
   }
@@ -50,7 +53,7 @@ const NewProject = () => {
   };
 
   useEffect(retrieveProject, [projects, projectID]);
-
+  
   return (
     <div className="new-project">
       <header>
