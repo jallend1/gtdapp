@@ -37,7 +37,7 @@ class ProjectContextProvider extends React.Component {
       step: currentProject.nextActions.length,
     };
     const updatedActions = [...currentProject.nextActions, newAction];
-    db.collection("projects").doc(projectId).update({
+    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectId).update({
       nextActions: updatedActions,
     });
   };
@@ -57,7 +57,7 @@ class ProjectContextProvider extends React.Component {
     );
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
-    db.collection("projects").doc(targetProjectId).update({
+    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(targetProjectId).update({
       nextActions: nextActions,
     });
   };
@@ -77,13 +77,13 @@ class ProjectContextProvider extends React.Component {
       );
       // Removes targeted action
       project.nextActions.splice(action, 1);
-      db.collection("projects")
+      db.collection("projects").doc(this.context.user.uid).collection('projects')
         .doc(id)
         .update({ nextActions: project.nextActions });
     }
   };
   fetchProjects = () => {
-    return db.collection("projects").onSnapshot((snapShot) => {
+    return db.collection("projects").doc(this.context.user.uid).collection('projects').onSnapshot((snapShot) => {
       const fetchedProjects = [];
       snapShot.forEach((project) => {
         fetchedProjects.push(project.data());
@@ -98,7 +98,7 @@ class ProjectContextProvider extends React.Component {
       (project) => project.id === projectID
     );
     const archived = !project.archived;
-    db.collection("projects").doc(projectID).update({ archived: archived });
+    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectID).update({ archived: archived });
   };
 
   toggleStar = (e) => {
@@ -107,7 +107,7 @@ class ProjectContextProvider extends React.Component {
       (project) => project.id === projectID
     );
     const starred = !project.starred;
-    db.collection("projects").doc(projectID).update({ starred: starred });
+    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectID).update({ starred: starred });
   };
   
   render() {

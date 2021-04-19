@@ -18,9 +18,9 @@ const NewProject = () => {
 
   async function createTitle() {
     setTitle(true);
-    const newProject = db.collection("projects").doc();
+    const newProject = db.collection("projects").doc(user.uid).collection('projects').doc();
     const newProjectRef = await newProject.get();
-    await db.collection("projects").doc(newProjectRef.id).set({
+    await db.collection("projects").doc(user.uid).collection('projects').doc(newProjectRef.id).set({
       title: projectTitle,
       nextActions: [],
       archived: false,
