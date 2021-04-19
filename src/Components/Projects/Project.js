@@ -2,6 +2,7 @@ import RenderAction from "./RenderAction";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
+import { AuthContext } from '../../Contexts/AuthContext';
 import AddActionForm from "./AddActionForm";
 import { db } from "../../firebaseConfig";
 
@@ -9,6 +10,7 @@ import ProjectHeader from "./ProjectHeader";
 
 const Project = (props) => {
   const { projects, toggleArchive } = useContext(ProjectContext);
+  const { user } = useContext(AuthContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
   // If projects are loaded, but none match ID, throw an error
@@ -53,7 +55,7 @@ const Project = (props) => {
         return action;
       });
       //Sends new action order to Firebase
-      db.collection("projects").doc(project.id).update({
+      db.collection("projects").doc(user.uid).collection('projects').doc(project.id).update({
         nextActions: newActionOrder,
       });
       e.dataTransfer.clearData();
