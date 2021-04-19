@@ -25,21 +25,26 @@ class ProjectContextProvider extends React.Component {
 
   addAction = (e, projectId) => {
     e.preventDefault();
-    const incomingAction = e.target[0].value; // Extracts value from incoming input field
-    const projects = this.state.projects.slice();
-    const currentProject = projects.find((project) => project.id === projectId);
-    currentProject.nextActions.forEach(
-      (action, index) => (action.step = index)
-    );
-    const newAction = {
-      action: incomingAction,
-      isComplete: false,
-      step: currentProject.nextActions.length,
-    };
-    const updatedActions = [...currentProject.nextActions, newAction];
-    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectId).update({
-      nextActions: updatedActions,
-    });
+    const incomingAction = e.target[0].value.trim(); // Extracts value from incoming input field
+    if(incomingAction.length === 0){
+      return;
+    }
+    else{
+      const projects = this.state.projects.slice();
+      const currentProject = projects.find((project) => project.id === projectId);
+      currentProject.nextActions.forEach(
+        (action, index) => (action.step = index)
+      );
+      const newAction = {
+        action: incomingAction,
+        isComplete: false,
+        step: currentProject.nextActions.length,
+      };
+      const updatedActions = [...currentProject.nextActions, newAction];
+      db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectId).update({
+        nextActions: updatedActions,
+      });
+    }
   };
   completeAction = (e) => {
     const projectsCopy = this.state.projects.slice();
