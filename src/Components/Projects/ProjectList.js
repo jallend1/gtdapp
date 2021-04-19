@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import Project from "./Project";
+import NoProjects from './NoProjects';
 
 const ProjectList = (props) => {
   const { projects } = useContext(ProjectContext);
@@ -18,6 +19,7 @@ const ProjectList = (props) => {
       return <Project id={project.id} projects={projects} key={project.id} />;
     });
   };
+  
   return (
     <div className="container">
         <header id="projectList" className="space-around">
@@ -28,7 +30,7 @@ const ProjectList = (props) => {
             </h2>
           </Link>
         </header>
-        <main>{projects && renderProjects()}</main>
+        <main>{projects.length === 0 ? <NoProjects /> : renderProjects()}</main>
     </div>
   );
 };

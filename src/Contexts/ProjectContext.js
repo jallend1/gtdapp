@@ -69,7 +69,7 @@ class ProjectContextProvider extends React.Component {
     // Retrieves associated project and individual action
     const project = updatedProjects.find((project) => project.id === id);
     if (entireProject) {
-      db.collection("projects").doc(id).delete();
+      db.collection("projects").doc(this.context.user.uid).collection('projects').doc(id).delete();
     } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
