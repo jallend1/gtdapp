@@ -3,14 +3,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = (props) => {
-  const { signIn, googleSignIn } = useContext(
-    AuthContext
-  );
+  const { signIn, googleSignIn } = useContext(AuthContext);
   let newUser;
-  if(props.match){
+  if (props.match) {
     props.match.path === "/login" ? (newUser = false) : (newUser = true);
-  }
-  else{
+  } else {
     newUser = false;
   }
 

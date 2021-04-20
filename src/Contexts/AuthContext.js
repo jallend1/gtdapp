@@ -55,7 +55,7 @@ class AuthContextProvider extends React.Component {
           signOut: this.signOut,
           signIn: this.signIn,
           user: this.state.user,
-          isLoading: this.state.isLoading
+          isLoading: this.state.isLoading,
         }}
       >
         {this.props.children}

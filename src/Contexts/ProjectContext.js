@@ -8,16 +8,16 @@ class ProjectContextProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: []
+      projects: [],
     };
   }
 
   componentDidMount() {
-    // Store project snapshot listener 
+    // Store project snapshot listener
     this.projectListener = this.fetchProjects();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     // Detaches project snapshot listener after authentication change
     this.projectListener && this.projectListener();
     this.projectListener = undefined;
@@ -26,12 +26,13 @@ class ProjectContextProvider extends React.Component {
   addAction = (e, projectId) => {
     e.preventDefault();
     const incomingAction = e.target[0].value.trim(); // Extracts value from incoming input field
-    if(incomingAction.length === 0){
+    if (incomingAction.length === 0) {
       return;
-    }
-    else{
+    } else {
       const projects = this.state.projects.slice();
-      const currentProject = projects.find((project) => project.id === projectId);
+      const currentProject = projects.find(
+        (project) => project.id === projectId
+      );
       currentProject.nextActions.forEach(
         (action, index) => (action.step = index)
       );
@@ -41,9 +42,13 @@ class ProjectContextProvider extends React.Component {
         step: currentProject.nextActions.length,
       };
       const updatedActions = [...currentProject.nextActions, newAction];
-      db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectId).update({
-        nextActions: updatedActions,
-      });
+      db.collection("projects")
+        .doc(this.context.user.uid)
+        .collection("projects")
+        .doc(projectId)
+        .update({
+          nextActions: updatedActions,
+        });
     }
   };
   completeAction = (e) => {
@@ -62,9 +67,13 @@ class ProjectContextProvider extends React.Component {
     );
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
-    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(targetProjectId).update({
-      nextActions: nextActions,
-    });
+    db.collection("projects")
+      .doc(this.context.user.uid)
+      .collection("projects")
+      .doc(targetProjectId)
+      .update({
+        nextActions: nextActions,
+      });
   };
 
   deleteAction = (e, entireProject = false) => {
@@ -74,7 +83,11 @@ class ProjectContextProvider extends React.Component {
     // Retrieves associated project and individual action
     const project = updatedProjects.find((project) => project.id === id);
     if (entireProject) {
-      db.collection("projects").doc(this.context.user.uid).collection('projects').doc(id).delete();
+      db.collection("projects")
+        .doc(this.context.user.uid)
+        .collection("projects")
+        .doc(id)
+        .delete();
     } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
@@ -82,19 +95,25 @@ class ProjectContextProvider extends React.Component {
       );
       // Removes targeted action
       project.nextActions.splice(action, 1);
-      db.collection("projects").doc(this.context.user.uid).collection('projects')
+      db.collection("projects")
+        .doc(this.context.user.uid)
+        .collection("projects")
         .doc(id)
         .update({ nextActions: project.nextActions });
     }
   };
   fetchProjects = () => {
-    return db.collection("projects").doc(this.context.user.uid).collection('projects').onSnapshot((snapShot) => {
-      const fetchedProjects = [];
-      snapShot.forEach((project) => {
-        fetchedProjects.push(project.data());
+    return db
+      .collection("projects")
+      .doc(this.context.user.uid)
+      .collection("projects")
+      .onSnapshot((snapShot) => {
+        const fetchedProjects = [];
+        snapShot.forEach((project) => {
+          fetchedProjects.push(project.data());
+        });
+        this.setState({ projects: fetchedProjects });
       });
-      this.setState({ projects: fetchedProjects });
-    });
   };
 
   toggleArchive = (e) => {
@@ -103,7 +122,11 @@ class ProjectContextProvider extends React.Component {
       (project) => project.id === projectID
     );
     const archived = !project.archived;
-    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectID).update({ archived: archived });
+    db.collection("projects")
+      .doc(this.context.user.uid)
+      .collection("projects")
+      .doc(projectID)
+      .update({ archived: archived });
   };
 
   toggleStar = (e) => {
@@ -112,9 +135,13 @@ class ProjectContextProvider extends React.Component {
       (project) => project.id === projectID
     );
     const starred = !project.starred;
-    db.collection("projects").doc(this.context.user.uid).collection('projects').doc(projectID).update({ starred: starred });
+    db.collection("projects")
+      .doc(this.context.user.uid)
+      .collection("projects")
+      .doc(projectID)
+      .update({ starred: starred });
   };
-  
+
   render() {
     return (
       <ProjectContext.Provider

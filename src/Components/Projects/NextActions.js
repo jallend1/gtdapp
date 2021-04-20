@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 
 import RenderAction from "./RenderAction";
-import NoProjects from './NoProjects';
+import NoProjects from "./NoProjects";
 
 const NextActions = () => {
   const { projects } = useContext(ProjectContext);

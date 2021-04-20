@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { ProjectContext } from "../../Contexts/ProjectContext";
-import { AuthContext } from '../../Contexts/AuthContext';
+import { AuthContext } from "../../Contexts/AuthContext";
 import AddActionForm from "./AddActionForm";
 import RenderAction from "./RenderAction";
 
@@ -18,17 +18,26 @@ const NewProject = () => {
 
   async function createTitle() {
     setTitle(true);
-    const newProject = db.collection("projects").doc(user.uid).collection('projects').doc();
+    const newProject = db
+      .collection("projects")
+      .doc(user.uid)
+      .collection("projects")
+      .doc();
     const newProjectRef = await newProject.get();
-    await db.collection("projects").doc(user.uid).collection('projects').doc(newProjectRef.id).set({
-      title: projectTitle,
-      nextActions: [],
-      archived: false,
-      starred: false,
-      id: newProjectRef.id,
-      createdAt: Date.now(),
-      userId: user.uid
-    });
+    await db
+      .collection("projects")
+      .doc(user.uid)
+      .collection("projects")
+      .doc(newProjectRef.id)
+      .set({
+        title: projectTitle,
+        nextActions: [],
+        archived: false,
+        starred: false,
+        id: newProjectRef.id,
+        createdAt: Date.now(),
+        userId: user.uid,
+      });
     setProjectID(newProject.id);
   }
 
@@ -53,7 +62,7 @@ const NewProject = () => {
   };
 
   useEffect(retrieveProject, [projects, projectID]);
-  
+
   return (
     <div className="new-project">
       <header>

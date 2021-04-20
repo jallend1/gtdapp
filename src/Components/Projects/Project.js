@@ -2,7 +2,7 @@ import RenderAction from "./RenderAction";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
-import { AuthContext } from '../../Contexts/AuthContext';
+import { AuthContext } from "../../Contexts/AuthContext";
 import AddActionForm from "./AddActionForm";
 import { db } from "../../firebaseConfig";
 
@@ -55,9 +55,13 @@ const Project = (props) => {
         return action;
       });
       //Sends new action order to Firebase
-      db.collection("projects").doc(user.uid).collection('projects').doc(project.id).update({
-        nextActions: newActionOrder,
-      });
+      db.collection("projects")
+        .doc(user.uid)
+        .collection("projects")
+        .doc(project.id)
+        .update({
+          nextActions: newActionOrder,
+        });
       e.dataTransfer.clearData();
     };
 
