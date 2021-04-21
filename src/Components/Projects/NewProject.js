@@ -73,6 +73,9 @@ const NewProject = () => {
           {title ? (
             <h3 id={projectID}>{projectTitle}</h3>
           ) : (
+            <form onSubmit={createTitle}> 
+
+            
             <input
               type="text"
               name="title"
@@ -83,7 +86,9 @@ const NewProject = () => {
                 setProjectTitle(e.target.value);
               }}
               onBlur={createTitle}
+              
             />
+            </form>
           )}
         </div>
         <ol>{projectTitle ? renderActions() : "No actions added yet"}</ol>
