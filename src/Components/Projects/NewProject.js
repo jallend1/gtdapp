@@ -73,27 +73,24 @@ const NewProject = () => {
           {title ? (
             <h3 id={projectID}>{projectTitle}</h3>
           ) : (
-            <form onSubmit={createTitle}> 
-
-            
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Name your project"
-              value={projectTitle}
-              onChange={(e) => {
-                setProjectTitle(e.target.value);
-              }}
-              onBlur={createTitle}
-              
-            />
+            <form onSubmit={createTitle}>           
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Name your project"
+                value={projectTitle}
+                onChange={(e) => {
+                  setProjectTitle(e.target.value);
+                }}
+                onBlur={createTitle}    
+              />
             </form>
           )}
         </div>
         <ol>{projectTitle ? renderActions() : "No actions added yet"}</ol>
         {projectTitle ? <AddActionForm projectId={projectID} /> : null}
-        <button className="btn-large" onClick={() => history.push("/")}>
+        <button type="button" className="btn-large" onClick={() => history.push("/")}>
           Create New Project
         </button>
       </section>

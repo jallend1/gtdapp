@@ -10,17 +10,21 @@ const AddActionForm = ({ projectId }) => {
     setNextAction(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    const task = e.target.nextAction.value;
+    // If the next action input is blank when submitted, navigates away from current page back home
+    if(task.trim().length === 0){
+      history.push('/');
+    }
+    else {
+      addAction(e, projectId);
+      setNextAction("");
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => {
-        if(e.target.nextAction.value.trim().length === 0){
-          history.push('/');
-        }
-        else {
-          addAction(e, projectId);
-          setNextAction("");
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="nextAction1">Add a next action:</label>
       <input
