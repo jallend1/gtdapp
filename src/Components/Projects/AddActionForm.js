@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom';
 import { ProjectContext } from "../../Contexts/ProjectContext";
 const AddActionForm = ({ projectId }) => {
+  const history = useHistory();
   const [nextAction, setNextAction] = useState("");
   const { addAction } = useContext(ProjectContext);
 
@@ -11,8 +13,13 @@ const AddActionForm = ({ projectId }) => {
   return (
     <form
       onSubmit={(e) => {
-        addAction(e, projectId);
-        setNextAction("");
+        if(e.target.nextAction.value.trim().length === 0){
+          history.push('/');
+        }
+        else {
+          addAction(e, projectId);
+          setNextAction("");
+        }
       }}
     >
       <label htmlFor="nextAction1">Add a next action:</label>

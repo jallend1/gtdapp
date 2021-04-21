@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { Redirect } from 'react-router-dom';
 import { db } from "../firebaseConfig";
 import { AuthContext } from "./AuthContext";
 
@@ -11,7 +12,7 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
-
+  
   componentDidMount() {
     // Store project snapshot listener
     this.projectListener = this.fetchProjects();
@@ -27,7 +28,7 @@ class ProjectContextProvider extends React.Component {
     e.preventDefault();
     const incomingAction = e.target[0].value.trim(); // Extracts value from incoming input field
     if (incomingAction.length === 0) {
-      return;
+      return <Redirect to="/" />;
     } else {
       const projects = this.state.projects.slice();
       const currentProject = projects.find(
