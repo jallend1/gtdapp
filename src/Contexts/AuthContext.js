@@ -28,7 +28,7 @@ class AuthContextProvider extends React.Component {
 
   googleSignIn = () => {
     const provider = new fb.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).catch(err => console.log(err));
+    auth.signInWithPopup(provider).catch((err) => console.log(err));
   };
 
   signOut = (e) => {
@@ -41,8 +41,12 @@ class AuthContextProvider extends React.Component {
     const email = e.target.user.value;
     const password = e.target.pass.value;
     isNewUser
-      ? auth.createUserWithEmailAndPassword(email, password).catch(err => console.log(err.message))
-      : auth.signInWithEmailAndPassword(email, password).catch(err => console.log(err.message));
+      ? auth
+          .createUserWithEmailAndPassword(email, password)
+          .catch((err) => console.log(err.message))
+      : auth
+          .signInWithEmailAndPassword(email, password)
+          .catch((err) => console.log(err.message));
     e.target.reset();
   };
 

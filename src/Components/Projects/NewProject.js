@@ -73,7 +73,7 @@ const NewProject = () => {
           {title ? (
             <h3 id={projectID}>{projectTitle}</h3>
           ) : (
-            <form onSubmit={createTitle}>           
+            <form onSubmit={createTitle}>
               <input
                 type="text"
                 name="title"
@@ -83,14 +83,18 @@ const NewProject = () => {
                 onChange={(e) => {
                   setProjectTitle(e.target.value);
                 }}
-                onBlur={createTitle}    
+                onBlur={createTitle}
               />
             </form>
           )}
         </div>
         <ol>{projectTitle ? renderActions() : "No actions added yet"}</ol>
         {projectTitle ? <AddActionForm projectId={projectID} /> : null}
-        <button type="button" className="btn-large" onClick={() => history.push("/")}>
+        <button
+          type="button"
+          className="btn-large"
+          onClick={() => history.push("/")}
+        >
           Create New Project
         </button>
       </section>

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 const AddActionForm = ({ projectId }) => {
   const history = useHistory();
@@ -13,19 +13,16 @@ const AddActionForm = ({ projectId }) => {
   const handleSubmit = (e) => {
     const task = e.target.nextAction.value;
     // If the next action input is blank when submitted, navigates away from current page back home
-    if(task.trim().length === 0){
-      history.push('/');
-    }
-    else {
+    if (task.trim().length === 0) {
+      history.push("/");
+    } else {
       addAction(e, projectId);
       setNextAction("");
     }
-  }
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
       <label htmlFor="nextAction1">Add a next action:</label>
       <input
         type="text"

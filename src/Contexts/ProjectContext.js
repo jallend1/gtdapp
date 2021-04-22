@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { AuthContext } from "./AuthContext";
 
@@ -12,7 +12,7 @@ class ProjectContextProvider extends React.Component {
       projects: [],
     };
   }
-  
+
   componentDidMount() {
     // Store project snapshot listener
     this.projectListener = this.fetchProjects();
