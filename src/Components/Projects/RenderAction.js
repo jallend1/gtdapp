@@ -7,10 +7,12 @@ const RenderAction = ({
   action,
   project,
   isNextActionPage,
+  starred,
   handleDragOver,
   handleDragStart,
   handleDrop,
 }) => {
+  console.log(action)
   const { completeAction, deleteAction } = useContext(ProjectContext);
   const [showDetails, setShowDetails] = useState(false);
 
@@ -45,6 +47,10 @@ const RenderAction = ({
           className={action.isComplete ? "action-complete" : null}
         >
           {action.action}
+          {/* If the project is starred AND the starred variable exists, render a star 
+            (Prevents it from starring each individual action on its own Project page)
+           */}
+          {starred ? <div className="material-icons">star</div> : null}
           <div className="subtitle" onClick={handleShowDetails}>
             {/* Only displays detail expansion on next actions page and not if on individual project page */}
             {isNextActionPage ? (showDetails ? "See Less" : "See More") : null}

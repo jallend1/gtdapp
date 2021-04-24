@@ -13,6 +13,7 @@ const NextActions = () => {
     const newActionList = [];
     projects.forEach((project) => {
       // Extracts all the incomplete items from the project
+      console.log(project)
       const actionList = project.nextActions.filter(
         (action) => action.isComplete === false
       );
@@ -24,6 +25,7 @@ const NextActions = () => {
           key: project.id + actionList[0].step,
           isNextActionPage: true,
           created: project.createdAt,
+          starred: project.starred
         };
         newActionList.push(nextAction);
       } else {
@@ -44,6 +46,7 @@ const NextActions = () => {
           project={nextAction.project}
           key={nextAction.key}
           isNextActionPage={nextAction.isNextActionPage}
+          starred={nextAction.starred}
         />
       );
     });
