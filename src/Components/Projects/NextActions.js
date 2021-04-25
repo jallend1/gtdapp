@@ -32,9 +32,13 @@ const NextActions = () => {
         return null;
       }
     });
+    // Sorts by date as indicated by user preference
     sortDate
       ? newActionList.sort((a, b) => (a.created < b.created ? -1 : 1))
       : newActionList.sort((a, b) => (a.created > b.created ? -1 : 1));
+    // Puts next actions from starred projects at top of feed
+    newActionList.sort((a, b) => a.starred === b.starred ? 0 : (a.starred && !b.starred ? -1 : 1))
+    
     setNextActionList(newActionList);
   };
 
