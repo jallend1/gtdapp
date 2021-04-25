@@ -6,6 +6,7 @@ import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Login from "./Components/Auth/Login";
+import Message from './Components/Message';
 import Footer from "./Components/Footer";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <NavBar />
       <Header />
       {isLoading ? <h3>Loading...</h3> : isLoggedIn ? <Main /> : <Login />}
+      <Message />
       <Footer />
     </div>
   );
