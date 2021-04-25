@@ -1,8 +1,13 @@
-const Message = ({message}) => {
+import { useContext } from 'react';
+import {ProjectContext }from '../Contexts/ProjectContext';
+
+const Message = () => {
+    const {message} = useContext(ProjectContext)
+    console.log(message)
     return (
         <>
             <div className="message">
-                {message ? message : 'No message to share'}
+                {message}
             </div>
         </>
     )

@@ -13,7 +13,6 @@ const NextActions = () => {
     const newActionList = [];
     projects.forEach((project) => {
       // Extracts all the incomplete items from the project
-      console.log(project)
       const actionList = project.nextActions.filter(
         (action) => action.isComplete === false
       );

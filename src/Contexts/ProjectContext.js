@@ -10,6 +10,7 @@ class ProjectContextProvider extends React.Component {
     super(props);
     this.state = {
       projects: [],
+      message: 'No message to share'
     };
   }
 
@@ -143,6 +144,10 @@ class ProjectContextProvider extends React.Component {
       .update({ starred: starred });
   };
 
+  updateMessage = newMessage => {
+    this.setState({message: newMessage})
+  }
+
   render() {
     return (
       <ProjectContext.Provider
@@ -153,6 +158,8 @@ class ProjectContextProvider extends React.Component {
           deleteAction: this.deleteAction,
           toggleArchive: this.toggleArchive,
           toggleStar: this.toggleStar,
+          message: this.state.message,
+          updateMessage: this.updateMessage
         }}
       >
         {this.props.children}

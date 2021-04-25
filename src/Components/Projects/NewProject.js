@@ -7,7 +7,7 @@ import AddActionForm from "./AddActionForm";
 import RenderAction from "./RenderAction";
 
 const NewProject = () => {
-  const { projects } = useContext(ProjectContext);
+  const { projects, updateMessage } = useContext(ProjectContext);
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
@@ -93,7 +93,10 @@ const NewProject = () => {
         <button
           type="button"
           className="btn-large"
-          onClick={() => history.push("/")}
+          onClick={() => {
+            updateMessage('Project created!')
+            history.push("/")
+            }}
         >
           Create New Project
         </button>

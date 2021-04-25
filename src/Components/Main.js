@@ -12,6 +12,7 @@ import About from "./About";
 import Error from "./Error";
 import Login from "./Auth/Login";
 import Profile from "./Profile";
+import Message from './Message';
 
 const Main = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -64,6 +65,7 @@ const Main = () => {
             <Error />
           </Route>
         </Switch>
+      <Message />
       </div>
     </ProjectContextProvider>
   );

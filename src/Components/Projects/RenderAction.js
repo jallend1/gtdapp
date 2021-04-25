@@ -12,7 +12,6 @@ const RenderAction = ({
   handleDragStart,
   handleDrop,
 }) => {
-  console.log(action)
   const { completeAction, deleteAction } = useContext(ProjectContext);
   const [showDetails, setShowDetails] = useState(false);
 
