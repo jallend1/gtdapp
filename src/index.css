@@ -176,10 +176,11 @@ h6 {
   position: fixed;
   bottom: 50px;
   right: 100px;
+  animation: fadeOut ease 5s;
+  /* animation-fill-mode: forwards; */
 }
 
 .message-fade {
-  animation: fadeOut ease 5s;
 }
 
 .message-none {

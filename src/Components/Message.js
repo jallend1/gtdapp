@@ -3,7 +3,8 @@ import {ProjectContext }from '../Contexts/ProjectContext';
 
 const Message = () => {
     const {messageDetails, updateMessage} = useContext(ProjectContext)
-    // useEffect(() => console.log(messageDetails), [messageDetails])
+    // useEffect(() => setTimeout(updateMessage({type: 'none'}), 1500), [messageDetails])
+    
     return (
         <div className={`message message-${messageDetails.type}`}>
             {messageDetails.message}
