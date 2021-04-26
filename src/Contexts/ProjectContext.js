@@ -90,6 +90,7 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .delete();
+        this.updateMessage('Project has been deleted');
     } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
@@ -102,6 +103,7 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .update({ nextActions: project.nextActions });
+      this.updateMessage('Action has been deleted');
     }
   };
   fetchProjects = () => {
