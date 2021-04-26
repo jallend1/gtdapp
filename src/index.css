@@ -176,11 +176,24 @@ h6 {
   position: fixed;
   bottom: 50px;
   right: 100px;
-  opacity: 0;
 }
 
 .message-fade {
   animation: fadeOut ease 5s;
+}
+
+.message-none {
+  display: none;
+}
+
+.message-delete {
+  background-color: red;
+  color: white;
+}
+
+.message-create {
+  background-color: green;
+  color: white;
 }
 
 @keyframes fadeOut {

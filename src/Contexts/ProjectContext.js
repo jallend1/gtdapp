@@ -10,7 +10,7 @@ class ProjectContextProvider extends React.Component {
     super(props);
     this.state = {
       projects: [],
-      messageDetails: {type: null, message: 'No message to share'}
+      messageDetails: {type: 'none', message: 'No message to share'}
     };
   }
 
@@ -90,7 +90,7 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .delete();
-        this.updateMessage({type: 'deleteProject', message: 'Project has been deleted'});
+        this.updateMessage({type: 'delete', message: 'Project has been deleted'});
     } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
@@ -103,7 +103,7 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .update({ nextActions: project.nextActions });
-      this.updateMessage({type: 'deleteAction', message: 'Action has been deleted'});
+      this.updateMessage({type: 'delete', message: 'Action has been deleted'});
     }
   };
   fetchProjects = () => {
