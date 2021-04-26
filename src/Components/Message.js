@@ -1,13 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import {ProjectContext }from '../Contexts/ProjectContext';
 
 const Message = () => {
-    const {message} = useContext(ProjectContext)
-    console.log(message)
+    const {messageDetails} = useContext(ProjectContext)
+    console.log(messageDetails)
+    // useEffect(() => console.log(messageDetails), [messageDetails])
+
     return (
         <>
-            <div className="message">
-                {message}
+            <div className="message message-fade">
+                {messageDetails.message}
             </div>
         </>
     )
