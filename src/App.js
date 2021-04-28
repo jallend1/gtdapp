@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Header />
-      {isLoading ? <h3>Loading...</h3> : isLoggedIn ? <Main /> : <Login />}   
+      {isLoading ? <h3>Loading...</h3> : isLoggedIn ? <Main /> : <Login />}
       <Footer />
     </div>
   );

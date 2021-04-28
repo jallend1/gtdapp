@@ -10,7 +10,7 @@ class ProjectContextProvider extends React.Component {
     super(props);
     this.state = {
       projects: [],
-      messageDetails: {type: 'none', message: 'No message to share'}
+      messageDetails: { type: "none", message: "No message to share" },
     };
   }
 
@@ -90,7 +90,10 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .delete();
-        this.updateMessage({type: 'delete', message: 'Project has been deleted'});
+      this.updateMessage({
+        type: "delete",
+        message: "Project has been deleted",
+      });
     } else {
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
@@ -103,7 +106,10 @@ class ProjectContextProvider extends React.Component {
         .collection("projects")
         .doc(id)
         .update({ nextActions: project.nextActions });
-      this.updateMessage({type: 'delete', message: 'Action has been deleted'});
+      this.updateMessage({
+        type: "delete",
+        message: "Action has been deleted",
+      });
     }
   };
   fetchProjects = () => {
@@ -146,9 +152,9 @@ class ProjectContextProvider extends React.Component {
       .update({ starred: starred });
   };
 
-  updateMessage = newMessage => {
-    this.setState({messageDetails: newMessage})
-  }
+  updateMessage = (newMessage) => {
+    this.setState({ messageDetails: newMessage });
+  };
 
   render() {
     return (
@@ -161,7 +167,7 @@ class ProjectContextProvider extends React.Component {
           toggleArchive: this.toggleArchive,
           toggleStar: this.toggleStar,
           messageDetails: this.state.messageDetails,
-          updateMessage: this.updateMessage
+          updateMessage: this.updateMessage,
         }}
       >
         {this.props.children}

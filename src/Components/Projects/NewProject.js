@@ -94,9 +94,12 @@ const NewProject = () => {
           type="button"
           className="btn-large"
           onClick={() => {
-            updateMessage({type: 'create', message: `${projectTitle} created!`})
-            history.push("/")
-            }}
+            updateMessage({
+              type: "create",
+              message: `${projectTitle} created!`,
+            });
+            history.push("/");
+          }}
         >
           Create New Project
         </button>

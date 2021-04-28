@@ -15,13 +15,12 @@ const AddActionForm = ({ projectId }) => {
     // If the next action input is blank when submitted AND is on the NEW project page (History does not exist on individual project page), navigates away from current page back home
     if (task.trim().length === 0 && history.location.pathName) {
       history.push("/");
-    } 
+    }
     // Otherwise, if the new task is blank on an existing project page, just ignores it
-    else if(task.trim().length === 0){
+    else if (task.trim().length === 0) {
       e.preventDefault();
       return;
-    }
-    else {
+    } else {
       addAction(e, projectId);
       setNextAction("");
     }

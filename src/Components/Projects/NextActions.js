@@ -24,7 +24,7 @@ const NextActions = () => {
           key: project.id + actionList[0].step,
           isNextActionPage: true,
           created: project.createdAt,
-          starred: project.starred
+          starred: project.starred,
         };
         newActionList.push(nextAction);
       } else {
@@ -36,8 +36,10 @@ const NextActions = () => {
       ? newActionList.sort((a, b) => (a.created < b.created ? -1 : 1))
       : newActionList.sort((a, b) => (a.created > b.created ? -1 : 1));
     // Puts next actions from starred projects at top of feed
-    newActionList.sort((a, b) => a.starred === b.starred ? 0 : (a.starred && !b.starred ? -1 : 1))
-    
+    newActionList.sort((a, b) =>
+      a.starred === b.starred ? 0 : a.starred && !b.starred ? -1 : 1
+    );
+
     setNextActionList(newActionList);
   };
 
