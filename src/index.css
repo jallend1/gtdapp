@@ -173,14 +173,20 @@ h6 {
 }
 
 .message {
+  display: block;
   position: fixed;
   bottom: 50px;
   right: 100px;
-  animation: fadeOut ease 5s;
-  /* animation-fill-mode: forwards; */
+  opacity: 1;
+  transition: opacity 3s;
+}
+
+.message-hide {
+  display: none;
 }
 
 .message-fade {
+  opacity: 0;
 }
 
 .message-none {
