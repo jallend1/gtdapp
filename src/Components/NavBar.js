@@ -41,28 +41,28 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="blue">
-        <div className="nav-content">
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/projects">All Projects</NavLink>
-            </li>
-            <li>
-              <NavLink to="/active">Active Projects</NavLink>
-            </li>
-            <li>
-              <NavLink to="/archive">Archive</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <ul className="right">{isLoggedIn ? userDetails() : noUser()}</ul>
+      <nav>
+        <div className="blue nav-wrapper">
+          <div className="nav-content">
+            <ul className="left">
+              <li>
+                <NavLink exact to="/" activeStyle={{fontWeight: "bold", color: "black"}}>Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/projects" activeStyle={{fontWeight: "bold", color: "black"}}>All Projects</NavLink>
+              </li>
+              <li>
+                <NavLink to="/active" activeStyle={{fontWeight: "bold", color: "black"}}>Active Projects</NavLink>
+              </li>
+              <li>
+                <NavLink to="/archive" activeStyle={{fontWeight: "bold", color: "black"}}>Archive</NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" activeStyle={{fontWeight: "bold", color: "black"}}>About</NavLink>
+              </li>
+            </ul>
+            <ul className="right">{isLoggedIn ? userDetails() : noUser()}</ul>
+          </div>
         </div>
       </nav>
     </>
