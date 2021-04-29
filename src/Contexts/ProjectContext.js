@@ -10,7 +10,7 @@ class ProjectContextProvider extends React.Component {
     super(props);
     this.state = {
       projects: [],
-      messageDetails: { type: "none", message: "No message to share" },
+      messageDetails: { type: "none", message: "" },
     };
   }
 
@@ -154,6 +154,11 @@ class ProjectContextProvider extends React.Component {
 
   updateMessage = (newMessage) => {
     this.setState({ messageDetails: newMessage });
+    setTimeout(() => {
+      this.setState({
+        messageDetails: { type: "none", message: "" }
+      })
+    }, 5000)
   };
 
   render() {
