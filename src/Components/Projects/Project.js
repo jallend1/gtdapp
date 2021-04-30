@@ -33,25 +33,23 @@ const Project = (props) => {
     };
 
     const handleDrop = (e) => {
-      const movedElement = document.getElementById('movedElement');
-      movedElement.classList.remove('action-drag');
+      removeStyle();
       const unmovedActionStep = parseInt(e.target.dataset.step);
       const movedTaskStep = parseInt(e.dataTransfer.getData("step"));
       const nextActions = project.nextActions.slice();
+      // Finds the moved action in the array
       const targetAction = nextActions.find(
         (action) => parseInt(action.step) === movedTaskStep
       );
-      console.log(targetAction)
       // Makes a deep copy of that object
       const newAction = JSON.parse(JSON.stringify(targetAction));
       // Adds a status field to distinguish it from the original one we need to delete
-      console.log(newAction)
-      // newAction.classList.remove('action-drag')
       newAction.wasJustMoved = true;
-      // Inserts the new action into the array before the item it was dropped on
+      // If the item being moved comes from further down the list, drops it above of the unmoved action
       if(unmovedActionStep < movedTaskStep){
         nextActions.splice(unmovedActionStep, 0, newAction);
       }
+      //Otherwise, drops it BELOW
       else{
         nextActions.splice(unmovedActionStep + 1, 0, newAction);
       }
@@ -78,6 +76,11 @@ const Project = (props) => {
       e.dataTransfer.clearData();
     };
 
+    const removeStyle = () => {
+      const movedElement = document.getElementById('movedElement');
+      movedElement.classList.remove('action-drag');
+      movedElement.id = null;
+    }
     const renderProjects = () => {
       return project.nextActions.map((action, index) => (
         <RenderAction
