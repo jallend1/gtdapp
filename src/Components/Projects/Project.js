@@ -31,21 +31,27 @@ const Project = (props) => {
     };
 
     const handleDrop = (e) => {
-      const movedTask = parseInt(e.dataTransfer.getData("step"));
+      const unmovedActionStep = parseInt(e.target.dataset.step);
+      const movedTaskStep = parseInt(e.dataTransfer.getData("step"));
       const nextActions = project.nextActions.slice();
       const targetAction = nextActions.find(
-        (action) => parseInt(action.step) === movedTask
+        (action) => parseInt(action.step) === movedTaskStep
       );
       // Makes a deep copy of that object
       const newAction = JSON.parse(JSON.stringify(targetAction));
       // Adds a status field to distinguish it from the original one we need to delete
       newAction.wasJustMoved = true;
       // Inserts the new action into the array before the item it was dropped on
-      nextActions.splice(e.target.dataset.step, 0, newAction);
+      if(unmovedActionStep < movedTaskStep){
+        nextActions.splice(unmovedActionStep, 0, newAction);
+      }
+      else{
+        nextActions.splice(unmovedActionStep + 1, 0, newAction);
+      }
       // Retrieves the index of the original one we need to remove and does so
       const toDelete = nextActions.findIndex(
         (action) =>
-          !action.wasJustMoved === true && parseInt(action.step) === movedTask
+          !action.wasJustMoved === true && parseInt(action.step) === movedTaskStep
       );
       nextActions.splice(toDelete, 1);
       // Maps over updated array to reorder the array to match the new order and reset attributes for further movement
