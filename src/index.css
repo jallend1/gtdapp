@@ -118,6 +118,11 @@ h6 {
   display: flex;
 }
 
+.action-drag {
+  background: green;
+  opacity: 0.25;
+}
+
 .trash {
   padding-right: 0.25em;
   color: red;
