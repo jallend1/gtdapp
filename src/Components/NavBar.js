@@ -1,9 +1,58 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext";
+import {
+  HomeOutlined,
+  SubjectOutlined,
+  ArchiveOutlined,
+  InfoOutlined,
+} from "@material-ui/icons";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+} from "@material-ui/core";
 
 const NavBar = () => {
   const { isLoggedIn, signOut, user } = useContext(AuthContext);
+  const useStyles = makeStyles((theme) => {
+    return {
+      navbar: {
+        display: "flex",
+      },
+    };
+  });
+
+  const classes = useStyles();
+
+  const menuItems = [
+    {
+      text: "Home",
+      icon: <HomeOutlined color="secondary" />,
+      path: "/",
+    },
+    {
+      text: "Projects",
+      icon: <SubjectOutlined color="secondary" />,
+      path: "/projects",
+    },
+    {
+      text: "Active",
+      path: "/active",
+    },
+    {
+      text: "Archive",
+      icon: <ArchiveOutlined color="secondary" />,
+      path: "/archive",
+    },
+    {
+      text: "About",
+      icon: <InfoOutlined color="secondary" />,
+      path: "/about",
+    },
+  ];
 
   const noUser = () => {
     return (
@@ -42,28 +91,17 @@ const NavBar = () => {
   return (
     <>
       <nav>
-        <div className="blue nav-wrapper">
-          <div className="nav-content">
-            <ul className="left">
-              <li>
-                <NavLink exact to="/" activeStyle={{fontWeight: "bold", color: "black"}}>Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/projects" activeStyle={{fontWeight: "bold", color: "black"}}>All Projects</NavLink>
-              </li>
-              <li>
-                <NavLink to="/active" activeStyle={{fontWeight: "bold", color: "black"}}>Active Projects</NavLink>
-              </li>
-              <li>
-                <NavLink to="/archive" activeStyle={{fontWeight: "bold", color: "black"}}>Archive</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about" activeStyle={{fontWeight: "bold", color: "black"}}>About</NavLink>
-              </li>
-            </ul>
-            <ul className="right">{isLoggedIn ? userDetails() : noUser()}</ul>
-          </div>
-        </div>
+        <List className={classes.navbar}>
+          {menuItems.map((item) => (
+            <ListItem button>
+              <NavLink exact to={item.path}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </NavLink>
+            </ListItem>
+          ))}
+        </List>
+        <ul>{isLoggedIn ? userDetails() : noUser()}</ul>
       </nav>
     </>
   );
