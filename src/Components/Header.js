@@ -13,6 +13,7 @@ import {
 
 const Header = () => {
   const { user } = useContext(AuthContext);
+  const drawerWidth = 240;
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +21,10 @@ const Header = () => {
     },
     title: {
       flexGrow: 1
+    },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth
     }
   }));
 
@@ -27,11 +32,8 @@ const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start">
-            <Menu />
-          </IconButton>
           <Typography variant="h4" className={classes.title}>
             GTDApp
           </Typography>
