@@ -156,9 +156,9 @@ class ProjectContextProvider extends React.Component {
     this.setState({ messageDetails: newMessage });
     setTimeout(() => {
       this.setState({
-        messageDetails: { type: "none", message: "" }
-      })
-    }, 3000)
+        messageDetails: { type: "none", message: "" },
+      });
+    }, 3000);
   };
 
   render() {

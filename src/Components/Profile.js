@@ -13,7 +13,9 @@ const Profile = () => {
         <p>Name: {displayName}</p>
         <p>Email: {email}</p>
       </div>
-      <button className="btn" onClick={signOut}>Log Out</button>
+      <button className="btn" onClick={signOut}>
+        Log Out
+      </button>
     </div>
   );
 };
