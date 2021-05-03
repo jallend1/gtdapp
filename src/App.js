@@ -12,8 +12,9 @@ function App() {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
   return (
     <div className="App">
-      <NavBar />
+      
       <Header />
+      <NavBar />
       {isLoading ? <h3>Loading...</h3> : isLoggedIn ? <Main /> : <Login />}
       <Footer />
     </div>

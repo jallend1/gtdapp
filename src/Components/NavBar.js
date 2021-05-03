@@ -93,7 +93,7 @@ const NavBar = () => {
       <nav>
         <List className={classes.navbar}>
           {menuItems.map((item) => (
-            <ListItem button>
+            <ListItem button key={item.text}>
               <NavLink exact to={item.path}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
