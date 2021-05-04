@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { AuthContext } from '../Contexts/AuthContext';
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/AuthContext";
 import {
   AppBar,
   Avatar,
@@ -8,8 +8,8 @@ import {
   Menu,
   Toolbar,
   Typography,
-  makeStyles
-} from '@material-ui/core';
+  makeStyles,
+} from "@material-ui/core";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
@@ -17,15 +17,15 @@ const Header = () => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     title: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth
-    }
+      marginLeft: drawerWidth,
+    },
   }));
 
   const classes = useStyles();
