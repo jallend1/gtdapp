@@ -4,8 +4,6 @@ import {
   AppBar,
   Avatar,
   Button,
-  IconButton,
-  Menu,
   Toolbar,
   Typography,
   makeStyles,
@@ -16,9 +14,6 @@ const Header = () => {
   const drawerWidth = 240;
 
   const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
     title: {
       flexGrow: 1,
     },
@@ -31,22 +26,20 @@ const Header = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h4" className={classes.title}>
-            GTDApp
-          </Typography>
-          {user ? (
-            <div>
-              <Avatar src={user.photoURL} />
-            </div>
-          ) : (
-            <Button color="secondary">Login</Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static" className={classes.appBar}>
+      <Toolbar>
+        <Typography variant="h4" className={classes.title}>
+          GTDApp
+        </Typography>
+        {user ? (
+          <div>
+            <Avatar src={user.photoURL} />
+          </div>
+        ) : (
+          <Button color="secondary">Login</Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 

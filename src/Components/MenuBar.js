@@ -21,6 +21,9 @@ const MenuBar = () => {
     drawer: {
       width: drawerWidth,
     },
+    drawerPaper: {
+      width: drawerWidth,
+    },
   }));
 
   const menuItems = [
@@ -53,7 +56,12 @@ const MenuBar = () => {
   const classes = useStyles();
 
   return (
-    <Drawer variant="permanent" anchor="left" className={classes.drawer}>
+    <Drawer
+      variant="permanent"
+      anchor="left"
+      className={classes.drawer}
+      classes={{ paper: classes.drawerPaper }}
+    >
       <List>
         {menuItems.map((item) => (
           <NavLink to={item.path} key={item.text}>
