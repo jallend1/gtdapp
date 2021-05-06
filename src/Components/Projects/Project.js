@@ -113,28 +113,17 @@ const Project = (props) => {
           <CardHeader title={project.title} subheader="subheading here!" />
           <CardContent>
             <List>{renderActions()}</List>
-              <AddActionForm projectId={project.id} />
+            <AddActionForm projectId={project.id} />
           </CardContent>
           <CardActions>
             <IconButton onClick={(e) => toggleArchive(e, project.id)}>
               {project.archived ? <UnarchiveOutlined /> : <ArchiveOutlined />}
             </IconButton>
           </CardActions>
-          <div className="project" key={project.id}>
-            <div className="project-body">
-              {/* <ol>{renderProjects()}</ol> */}
-            </div>
-            <div className="project-footer">
-              <span
-                className="material-icons"
-                data-id={project.id}
-                onClick={toggleArchive}
-              >
-                {project.archived ? 'unarchive' : 'archive'}
-              </span>
-              <p>Created at: {jsDate}</p>
-              <p>Posted by userID: {project.userId}</p>
-            </div>
+
+          <div className="project-footer">
+            <p>Created at: {jsDate}</p>
+            <p>Posted by userID: {project.userId}</p>
           </div>
         </Card>
       </div>

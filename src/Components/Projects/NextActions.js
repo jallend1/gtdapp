@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
+import { List } from '@material-ui/core'
 
 import RenderAction from "./RenderAction";
 import NoProjects from "./NoProjects";
@@ -70,7 +71,7 @@ const NextActions = () => {
         <i className="material-icons left">swap_vert</i>
         Sort by <span>{sortDate ? "newest" : "oldest"} </span>
       </button>
-      <ul>{projects.length === 0 ? <NoProjects /> : renderProjects()}</ul>
+      <ul>{projects.length === 0 ? <NoProjects /> : (<List> {renderProjects()} </List>)}</ul>
     </div>
   );
 };
