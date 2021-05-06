@@ -9,9 +9,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-const Header = () => {
+const Header = ({drawerWidth}) => {
   const { user } = useContext(AuthContext);
-  const drawerWidth = 240;
 
   const useStyles = makeStyles((theme) => ({
     title: {
@@ -31,13 +30,7 @@ const Header = () => {
         <Typography variant="h4" className={classes.title}>
           GTDApp
         </Typography>
-        {user ? (
-          <div>
-            <Avatar src={user.photoURL} />
-          </div>
-        ) : (
-          <Button color="secondary">Login</Button>
-        )}
+        {user ? <Avatar src={user.photoURL} /> : <Button color="secondary">Login</Button>}
       </Toolbar>
     </AppBar>
   );

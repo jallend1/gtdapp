@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./Contexts/AuthContext";
 import "./index.css";
 import App from "./App";
+import '@fontsource/roboto';
 
 ReactDOM.render(
   <React.StrictMode>

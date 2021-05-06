@@ -3,7 +3,8 @@ import MenuBar from "./MenuBar";
 
 import { makeStyles } from "@material-ui/core";
 const Layout = ({ children }) => {
-  const drawerWidth = 240;
+  const drawerWidth = 200;
+  
   const useStyles = makeStyles((theme) => {
     return {
       root: {
@@ -12,8 +13,7 @@ const Layout = ({ children }) => {
       page: {
         flexGrow: 1,
         marginLeft: drawerWidth,
-      },
-      toolbar: theme.mixins.toolbar,
+      }
     };
   });
   const classes = useStyles();
@@ -21,8 +21,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className={classes.root}>
-        <Header />
-        <MenuBar />
+        <Header drawerWidth={drawerWidth} />
+        <MenuBar drawerWidth={drawerWidth} />
       </div>
       <div className={classes.page}>{children}</div>
     </>

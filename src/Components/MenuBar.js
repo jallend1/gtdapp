@@ -14,9 +14,8 @@ import {
 } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 
-const MenuBar = () => {
-  // TODO: drawerWidth is stubbornly refusing to change
-  const drawerWidth = 240;
+const MenuBar = ({drawerWidth}) => {
+
   const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
