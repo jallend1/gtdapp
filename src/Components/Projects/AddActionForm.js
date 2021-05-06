@@ -1,3 +1,4 @@
+import { TextField } from "@material-ui/core";
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { ProjectContext } from "../../Contexts/ProjectContext";
@@ -28,15 +29,7 @@ const AddActionForm = ({ projectId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="nextAction1">Add a next action:</label>
-      <input
-        type="text"
-        name="nextAction"
-        id="nextAction"
-        placeholder="The very next action"
-        onChange={handleChange}
-        value={nextAction}
-      ></input>
+      <TextField id="nextAction" label="Add the next action" onChange={handleChange} value={nextAction} />
     </form>
   );
 };

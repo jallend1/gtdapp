@@ -21,7 +21,7 @@ const RenderAction = ({
   };
 
   return (
-    <li
+    <div
       data-id={project.id}
       data-step={action.step}
       draggable="true"
@@ -62,7 +62,7 @@ const RenderAction = ({
         ) : null
       ) : null}
       {/* If no project info is passed, it means it's on the project page itself, so no details to display on action*/}
-    </li>
+    </div>
   );
 };
 

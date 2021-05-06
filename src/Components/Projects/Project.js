@@ -1,12 +1,22 @@
-import RenderAction from "./RenderAction";
-import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { ProjectContext } from "../../Contexts/ProjectContext";
-import { AuthContext } from "../../Contexts/AuthContext";
-import AddActionForm from "./AddActionForm";
-import { db } from "../../firebaseConfig";
+import RenderAction from './RenderAction';
+import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectContext } from '../../Contexts/ProjectContext';
+import { AuthContext } from '../../Contexts/AuthContext';
+import AddActionForm from './AddActionForm';
+import { db } from '../../firebaseConfig';
 
-import ProjectHeader from "./ProjectHeader";
+import ProjectHeader from './ProjectHeader';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  List,
+  ListItem
+} from '@material-ui/core';
+import { ArchiveOutlined, UnarchiveOutlined } from '@material-ui/icons';
 
 const Project = (props) => {
   const { projects, toggleArchive } = useContext(ProjectContext);
@@ -27,15 +37,15 @@ const Project = (props) => {
     };
 
     const handleDragStart = (e) => {
-      e.target.id = 'movedElement'
-      e.target.classList.add('action-drag')
-      e.dataTransfer.setData("step", e.target.dataset.step);
+      e.target.id = 'movedElement';
+      e.target.classList.add('action-drag');
+      e.dataTransfer.setData('step', e.target.dataset.step);
     };
 
     const handleDrop = (e) => {
       removeStyle();
       const unmovedActionStep = parseInt(e.target.dataset.step);
-      const movedTaskStep = parseInt(e.dataTransfer.getData("step"));
+      const movedTaskStep = parseInt(e.dataTransfer.getData('step'));
       const nextActions = project.nextActions.slice();
       // Finds the moved action in the array
       const targetAction = nextActions.find(
@@ -46,17 +56,18 @@ const Project = (props) => {
       // Adds a status field to distinguish it from the original one we need to delete
       newAction.wasJustMoved = true;
       // If the item being moved comes from further down the list, drops it above of the unmoved action
-      if(unmovedActionStep < movedTaskStep){
+      if (unmovedActionStep < movedTaskStep) {
         nextActions.splice(unmovedActionStep, 0, newAction);
       }
       //Otherwise, drops it BELOW
-      else{
+      else {
         nextActions.splice(unmovedActionStep + 1, 0, newAction);
       }
       // Retrieves the index of the original one we need to remove and does so
       const toDelete = nextActions.findIndex(
         (action) =>
-          !action.wasJustMoved === true && parseInt(action.step) === movedTaskStep
+          !action.wasJustMoved === true &&
+          parseInt(action.step) === movedTaskStep
       );
       nextActions.splice(toDelete, 1);
       // Maps over updated array to reorder the array to match the new order and reset attributes for further movement
@@ -66,12 +77,12 @@ const Project = (props) => {
         return action;
       });
       //Sends new action order to Firebase
-      db.collection("projects")
+      db.collection('projects')
         .doc(user.uid)
-        .collection("projects")
+        .collection('projects')
         .doc(project.id)
         .update({
-          nextActions: newActionOrder,
+          nextActions: newActionOrder
         });
       e.dataTransfer.clearData();
     };
@@ -80,41 +91,52 @@ const Project = (props) => {
       const movedElement = document.getElementById('movedElement');
       movedElement.classList.remove('action-drag');
       movedElement.id = null;
-    }
-    const renderProjects = () => {
+    };
+    const renderActions = () => {
       return project.nextActions.map((action, index) => (
-        <RenderAction
-          action={action}
-          key={index}
-          project={project}
-          isNextActionPage={false}
-          handleDragOver={handleDragOver}
-          handleDragStart={handleDragStart}
-          handleDrop={handleDrop}
-        />
+        <ListItem key={index}>
+          <RenderAction
+            action={action}
+            project={project}
+            isNextActionPage={false}
+            handleDragOver={handleDragOver}
+            handleDragStart={handleDragStart}
+            handleDrop={handleDrop}
+          />
+        </ListItem>
       ));
     };
 
     return (
       <div className="container">
-        <div className="project" key={project.id}>
-          <ProjectHeader project={project} match={props.match} />
-          <div className="project-body">
-            <ol>{renderProjects()}</ol>
-            <AddActionForm projectId={project.id} />
+        <Card>
+          <CardHeader title={project.title} subheader="subheading here!" />
+          <CardContent>
+            <List>{renderActions()}</List>
+              <AddActionForm projectId={project.id} />
+          </CardContent>
+          <CardActions>
+            <IconButton onClick={(e) => toggleArchive(e, project.id)}>
+              {project.archived ? <UnarchiveOutlined /> : <ArchiveOutlined />}
+            </IconButton>
+          </CardActions>
+          <div className="project" key={project.id}>
+            <div className="project-body">
+              {/* <ol>{renderProjects()}</ol> */}
+            </div>
+            <div className="project-footer">
+              <span
+                className="material-icons"
+                data-id={project.id}
+                onClick={toggleArchive}
+              >
+                {project.archived ? 'unarchive' : 'archive'}
+              </span>
+              <p>Created at: {jsDate}</p>
+              <p>Posted by userID: {project.userId}</p>
+            </div>
           </div>
-          <div className="project-footer">
-            <span
-              className="material-icons"
-              data-id={project.id}
-              onClick={toggleArchive}
-            >
-              {project.archived ? "unarchive" : "archive"}
-            </span>
-            <p>Created at: {jsDate}</p>
-            <p>Posted by userID: {project.userId}</p>
-          </div>
-        </div>
+        </Card>
       </div>
     );
   }

@@ -126,8 +126,9 @@ class ProjectContextProvider extends React.Component {
       });
   };
 
-  toggleArchive = (e) => {
-    const projectID = e.target.dataset.id;
+  toggleArchive = (e, incomingID) => {
+    // TODO: Maybe remove the event parameter? Ensure all instances of toggle archive can pass in project ID
+    const projectID = e.target.dataset.id || incomingID;
     const project = this.state.projects.find(
       (project) => project.id === projectID
     );
