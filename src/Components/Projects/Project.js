@@ -12,6 +12,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Checkbox,
   IconButton,
   List,
   ListItem
@@ -19,7 +20,10 @@ import {
 import { ArchiveOutlined, UnarchiveOutlined } from '@material-ui/icons';
 
 const Project = (props) => {
-  const { projects, toggleArchive } = useContext(ProjectContext);
+  const { projects, toggleArchive, completeAction, deleteAction } = useContext(
+    ProjectContext
+  );
+
   const { user } = useContext(AuthContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
   const id = useParams().id || props.id;
@@ -106,13 +110,29 @@ const Project = (props) => {
         </ListItem>
       ));
     };
+    project.nextActions.forEach((action) => console.log(action));
 
     return (
       <div className="container">
         <Card>
-          <CardHeader title={project.title} subheader={`Created at: ${jsDate}`} />
+          <CardHeader
+            title={project.title}
+            subheader={`Created at: ${jsDate}`}
+          />
           <CardContent>
-            <List>{renderActions()}</List>
+            {/* <List>{renderActions()}</List> */}
+            <List>
+              {project.nextActions.map((action, index) => (
+                <ListItem>
+                  <Checkbox
+                    checked={action.isComplete}
+                    inputProps={{ 'data-step': index, 'data-id': project.id }}
+                    onClick={completeAction}
+                  />
+                  {action.action}
+                </ListItem>
+              ))}
+            </List>
             <AddActionForm projectId={project.id} />
           </CardContent>
           <CardActions>
