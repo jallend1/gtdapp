@@ -110,7 +110,7 @@ const Project = (props) => {
     return (
       <div className="container">
         <Card>
-          <CardHeader title={project.title} subheader="subheading here!" />
+          <CardHeader title={project.title} subheader={`Created at: ${jsDate}`} />
           <CardContent>
             <List>{renderActions()}</List>
             <AddActionForm projectId={project.id} />
@@ -120,11 +120,6 @@ const Project = (props) => {
               {project.archived ? <UnarchiveOutlined /> : <ArchiveOutlined />}
             </IconButton>
           </CardActions>
-
-          <div className="project-footer">
-            <p>Created at: {jsDate}</p>
-            <p>Posted by userID: {project.userId}</p>
-          </div>
         </Card>
       </div>
     );
