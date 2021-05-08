@@ -98,6 +98,7 @@ class ProjectContextProvider extends React.Component {
     });
   }
 
+  // TODO: Eliminate deleteAction convert it to exclusively deleteProject
   deleteAction = (e, entireProject = false,) => {
     // Extracts ID and action step number from target div
     console.log(e)

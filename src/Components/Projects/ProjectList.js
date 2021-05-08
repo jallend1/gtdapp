@@ -3,9 +3,16 @@ import { useContext } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
 import Project from "./Project";
 import NoProjects from "./NoProjects";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 
 const ProjectList = (props) => {
   const { projects } = useContext(ProjectContext);
+  const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1
+    }
+  }))
+  const classes = useStyles();
   const renderProjects = () => {
     let projectsToShow;
     if (props.match.path === "/archive") {
@@ -15,15 +22,22 @@ const ProjectList = (props) => {
     } else {
       projectsToShow = projects.slice();
     }
-    return projectsToShow.map((project) => {
-      return <Project id={project.id} projects={projects} key={project.id} />;
-    });
+    return (
+      <Grid container spacing={3} >
+        {projectsToShow.map((project) => (
+            <Grid item sm={12} md={6} lg={4} key={project.id}>
+              <Project id={project.id} projects={projects} />
+            </Grid>
+        )
+        )}
+      </Grid>
+    );
   };
 
   return (
-    <div className="container">
+    <div className={classes.root}>
       <header id="projectList" className="space-around">
-        <h2>Project List</h2>
+        <Typography variant="h2">Project List</Typography>
         <Link to="/projects/new">
           <h2>
             <span className="material-icons">add_task</span> Add New Project

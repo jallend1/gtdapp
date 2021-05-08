@@ -40,7 +40,6 @@ const Project = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
-      maxWidth: 360,
       backgroundColor: '#EEE'
     }
   }));
