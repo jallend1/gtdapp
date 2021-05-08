@@ -6,7 +6,6 @@ import { AuthContext } from '../../Contexts/AuthContext';
 import AddActionForm from './AddActionForm';
 import { db } from '../../firebaseConfig';
 
-import ProjectHeader from './ProjectHeader';
 import {
   Card,
   CardActions,
@@ -15,14 +14,32 @@ import {
   Checkbox,
   IconButton,
   List,
-  ListItem
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+  makeStyles
 } from '@material-ui/core';
-import { ArchiveOutlined, UnarchiveOutlined } from '@material-ui/icons';
+import {
+  ArchiveOutlined,
+  DeleteForeverOutlined,
+  UnarchiveOutlined
+} from '@material-ui/icons';
 
 const Project = (props) => {
-  const { projects, toggleArchive, completeAction, deleteAction } = useContext(
+  const { projects, toggleArchive, completeAction, removeAction } = useContext(
     ProjectContext
   );
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: '#EEE'
+    }
+  }));
+
+  const classes = useStyles();
 
   const { user } = useContext(AuthContext);
   // If id property comes back from Params, uses that, otherwise takes the id passed in
@@ -96,40 +113,50 @@ const Project = (props) => {
       movedElement.classList.remove('action-drag');
       movedElement.id = null;
     };
-    const renderActions = () => {
-      return project.nextActions.map((action, index) => (
-        <ListItem key={index}>
-          <RenderAction
-            action={action}
-            project={project}
-            isNextActionPage={false}
-            handleDragOver={handleDragOver}
-            handleDragStart={handleDragStart}
-            handleDrop={handleDrop}
-          />
-        </ListItem>
-      ));
-    };
-    project.nextActions.forEach((action) => console.log(action));
+    // const renderActions = () => {
+    //   return project.nextActions.map((action, index) => (
+    //     <ListItem key={index}>
+    //       <RenderAction
+    //         action={action}
+    //         project={project}
+    //         isNextActionPage={false}
+    //         handleDragOver={handleDragOver}
+    //         handleDragStart={handleDragStart}
+    //         handleDrop={handleDrop}
+    //       />
+    //     </ListItem>
+    //   ));
+    // };
 
     return (
       <div className="container">
-        <Card>
+        <Card className={classes.root}>
           <CardHeader
             title={project.title}
             subheader={`Created at: ${jsDate}`}
           />
           <CardContent>
-            {/* <List>{renderActions()}</List> */}
             <List>
               {project.nextActions.map((action, index) => (
-                <ListItem>
-                  <Checkbox
-                    checked={action.isComplete}
-                    inputProps={{ 'data-step': index, 'data-id': project.id }}
-                    onClick={completeAction}
-                  />
-                  {action.action}
+                <ListItem key={index + project.id}>
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={action.isComplete}
+                      inputProps={{ 'data-step': index, 'data-id': project.id }}
+                      onClick={completeAction}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={action.action} />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={(e) => removeAction(index, project.id)}
+                    >
+                      <DeleteForeverOutlined />
+                    </IconButton>
+                  </ListItemSecondaryAction>
                 </ListItem>
               ))}
             </List>

@@ -78,8 +78,30 @@ class ProjectContextProvider extends React.Component {
       });
   };
 
-  deleteAction = (e, entireProject = false) => {
+  removeAction = (actionIndex, projectID) => {
+    const updatedProjects = this.state.projects.slice();
+    // Retrieves associated project and individual action
+    const project = updatedProjects.find((project) => project.id === projectID);
+    const action = project.nextActions.findIndex(
+      (action) => action.step === parseInt(actionIndex)
+    );
+    // Removes targeted action
+    project.nextActions.splice(action, 1);
+    db.collection("projects")
+      .doc(this.context.user.uid)
+      .collection("projects")
+      .doc(projectID)
+      .update({ nextActions: project.nextActions });
+    this.updateMessage({
+      type: "delete",
+      message: "Action has been deleted",
+    });
+  }
+
+  deleteAction = (e, entireProject = false,) => {
     // Extracts ID and action step number from target div
+    console.log(e)
+    console.log(e.target)
     const { id } = e.target.dataset;
     const updatedProjects = this.state.projects.slice();
     // Retrieves associated project and individual action
@@ -95,6 +117,7 @@ class ProjectContextProvider extends React.Component {
         message: "Project has been deleted",
       });
     } else {
+      console.log(e)
       const { step } = e.target.dataset;
       const action = project.nextActions.findIndex(
         (action) => action.step === parseInt(step)
@@ -170,6 +193,7 @@ class ProjectContextProvider extends React.Component {
           addAction: this.addAction,
           completeAction: this.completeAction,
           deleteAction: this.deleteAction,
+          removeAction: this.removeAction,
           toggleArchive: this.toggleArchive,
           toggleStar: this.toggleStar,
           messageDetails: this.state.messageDetails,
