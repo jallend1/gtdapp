@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { ProjectContext } from "../../Contexts/ProjectContext";
-import { List } from '@material-ui/core'
+import { Button, List, Typography } from '@material-ui/core'
+import { SwapVert } from '@material-ui/icons';
 
 import RenderAction from "./RenderAction";
 import NoProjects from "./NoProjects";
@@ -40,7 +41,6 @@ const NextActions = () => {
     newActionList.sort((a, b) =>
       a.starred === b.starred ? 0 : a.starred && !b.starred ? -1 : 1
     );
-
     setNextActionList(newActionList);
   };
 
@@ -66,11 +66,10 @@ const NextActions = () => {
 
   return (
     <div>
-      <h2>Next Actions</h2>
-      <button className="btn-small" onClick={toggleSort}>
-        <i className="material-icons left">swap_vert</i>
-        Sort by <span>{sortDate ? "newest" : "oldest"} </span>
-      </button>
+      <Typography variant="h2">Next Actions</Typography>
+      <Button variant="contained" color="secondary" onClick={toggleSort} startIcon={<SwapVert />}>
+        Sort by {sortDate ? 'newest' : 'oldest'}
+      </Button>
       <ul>{projects.length === 0 ? <NoProjects /> : (<List> {renderProjects()} </List>)}</ul>
     </div>
   );
