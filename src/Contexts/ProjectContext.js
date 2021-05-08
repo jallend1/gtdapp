@@ -163,11 +163,10 @@ class ProjectContextProvider extends React.Component {
       .update({ archived: archived });
   };
 
-  toggleStar = (e) => {
-    const projectID = e.target.dataset.id;
+  toggleStar = (projectID) => {
     const project = this.state.projects.find(
       (project) => project.id === projectID
-    );
+      );
     const starred = !project.starred;
     db.collection("projects")
       .doc(this.context.user.uid)

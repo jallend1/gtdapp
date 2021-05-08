@@ -23,13 +23,19 @@ import {
 import {
   ArchiveOutlined,
   DeleteForeverOutlined,
+  Star,
+  StarBorderOutlined,
   UnarchiveOutlined
 } from '@material-ui/icons';
 
 const Project = (props) => {
-  const { projects, toggleArchive, completeAction, removeAction } = useContext(
-    ProjectContext
-  );
+  const {
+    projects,
+    toggleArchive,
+    completeAction,
+    removeAction,
+    toggleStar
+  } = useContext(ProjectContext);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -133,6 +139,14 @@ const Project = (props) => {
         <Card className={classes.root}>
           <CardHeader
             title={project.title}
+            action={
+              <IconButton
+                aria-label="star"
+                onClick={() => toggleStar(project.id)}
+              >
+                {project.starred ? <Star /> : <StarBorderOutlined />}
+              </IconButton>
+            }
             subheader={`Created at: ${jsDate}`}
           />
           <CardContent>
