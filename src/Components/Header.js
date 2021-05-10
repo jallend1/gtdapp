@@ -37,7 +37,9 @@ const Header = ({ drawerWidth }) => {
             <Avatar src={user.photoURL} />
           </Button>
         ) : (
-          <Button color="secondary">Login</Button>
+          <Button color="secondary" onClick={() => history.push('/login')}>
+            Login
+          </Button>
         )}
       </Toolbar>
     </AppBar>
