@@ -1,5 +1,6 @@
-import { useContext } from "react";
-import { AuthContext } from "../Contexts/AuthContext";
+import { Typography, Button } from '@material-ui/core';
+import { useContext } from 'react';
+import { AuthContext } from '../Contexts/AuthContext';
 
 const Profile = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -7,15 +8,15 @@ const Profile = () => {
 
   return (
     <div className="container">
-      <h2>Your Profile</h2>
+      <Typography variant="h2">Your Profile</Typography>
       <img src={photoURL} alt="User display" className="profile-logo" />
       <div>
-        <p>Name: {displayName}</p>
-        <p>Email: {email}</p>
+        <Typography variant="h6">Name: {displayName}</Typography>
+        <Typography variant="h6">Email: {email}</Typography>
       </div>
-      <button className="btn" onClick={signOut}>
+      <Button color="secondary" variant="contained" onClick={signOut}>
         Log Out
-      </button>
+      </Button>
     </div>
   );
 };

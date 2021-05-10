@@ -1,5 +1,5 @@
 import { useContext } from "react";
-
+import { Button, TextField } from '@material-ui/core';
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = (props) => {
@@ -14,13 +14,16 @@ const Login = (props) => {
   const loginForm = () => {
     return (
       <div className="sign-up">
-        <button onClick={googleSignIn} className="btn">
+        <Button onClick={googleSignIn} variant="contained" color="secondary">
           Sign in with Google
-        </button>
+        </Button>
         <form id="signup" onSubmit={(e) => signIn(e, newUser)}>
-          <input type="email" id="user" placeholder="user" />
-          <input type="password" id="pass" placeholder="password" />
-          <input type="submit" />
+          <TextField type="email" id="user" label="User" />
+          {/* <input type="email" id="user" placeholder="user" /> */}
+          <TextField type="password" id="pass" label="Password" />
+          {/* <input type="password" id="pass" placeholder="password" /> */}
+          <Button type="submit" variant="contained" color="primary">Submit</Button>
+          {/* <input type="submit" /> */}
         </form>
       </div>
     );
