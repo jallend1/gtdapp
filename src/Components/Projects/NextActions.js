@@ -1,10 +1,10 @@
-import { useContext, useState, useEffect } from "react";
-import { ProjectContext } from "../../Contexts/ProjectContext";
-import { Button, List, Typography } from '@material-ui/core'
+import { useContext, useState, useEffect } from 'react';
+import { ProjectContext } from '../../Contexts/ProjectContext';
+import { Button, List, Typography } from '@material-ui/core';
 import { SwapVert } from '@material-ui/icons';
 
-import RenderAction from "./RenderAction";
-import NoProjects from "./NoProjects";
+import RenderAction from './RenderAction';
+import NoProjects from './NoProjects';
 
 const NextActions = () => {
   const { projects } = useContext(ProjectContext);
@@ -26,7 +26,7 @@ const NextActions = () => {
           key: project.id + actionList[0].step,
           isNextActionPage: true,
           created: project.createdAt,
-          starred: project.starred,
+          starred: project.starred
         };
         newActionList.push(nextAction);
       } else {
@@ -67,10 +67,21 @@ const NextActions = () => {
   return (
     <div>
       <Typography variant="h2">Next Actions</Typography>
-      <Button variant="contained" color="secondary" onClick={toggleSort} startIcon={<SwapVert />}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={toggleSort}
+        startIcon={<SwapVert />}
+      >
         Sort by {sortDate ? 'newest' : 'oldest'}
       </Button>
-      <ul>{projects.length === 0 ? <NoProjects /> : (<List> {renderProjects()} </List>)}</ul>
+      <ul>
+        {projects.length === 0 ? (
+          <NoProjects />
+        ) : (
+          <List> {renderProjects()} </List>
+        )}
+      </ul>
     </div>
   );
 };
