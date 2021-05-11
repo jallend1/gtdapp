@@ -1,41 +1,27 @@
-import RenderAction from './RenderAction';
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { ProjectContext } from '../../Contexts/ProjectContext';
 import { AuthContext } from '../../Contexts/AuthContext';
-import AddActionForm from './AddActionForm';
+
+import ActionList from './ActionList';
 import { db } from '../../firebaseConfig';
 
 import {
   Card,
   CardActions,
-  CardContent,
   CardHeader,
-  Checkbox,
   IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
   makeStyles
 } from '@material-ui/core';
 import {
   ArchiveOutlined,
-  DeleteForeverOutlined,
   Star,
   StarBorderOutlined,
   UnarchiveOutlined
 } from '@material-ui/icons';
 
 const Project = (props) => {
-  const {
-    projects,
-    toggleArchive,
-    completeAction,
-    removeAction,
-    toggleStar
-  } = useContext(ProjectContext);
+  const { projects, toggleArchive, toggleStar } = useContext(ProjectContext);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -118,20 +104,6 @@ const Project = (props) => {
       movedElement.classList.remove('action-drag');
       movedElement.id = null;
     };
-    // const renderActions = () => {
-    //   return project.nextActions.map((action, index) => (
-    //     <ListItem key={index}>
-    //       <RenderAction
-    //         action={action}
-    //         project={project}
-    //         isNextActionPage={false}
-    //         handleDragOver={handleDragOver}
-    //         handleDragStart={handleDragStart}
-    //         handleDrop={handleDrop}
-    //       />
-    //     </ListItem>
-    //   ));
-    // };
 
     return (
       <div className="container">
@@ -148,33 +120,7 @@ const Project = (props) => {
             }
             subheader={`Created at: ${jsDate}`}
           />
-          <CardContent>
-            <List>
-              {project.nextActions.map((action, index) => (
-                <ListItem key={index + project.id}>
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      checked={action.isComplete}
-                      inputProps={{ 'data-step': index, 'data-id': project.id }}
-                      onClick={completeAction}
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={action.action} />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={(e) => removeAction(index, project.id)}
-                    >
-                      <DeleteForeverOutlined />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-            <AddActionForm projectId={project.id} />
-          </CardContent>
+          <ActionList project={project} />
           <CardActions>
             <IconButton onClick={(e) => toggleArchive(e, project.id)}>
               {project.archived ? <UnarchiveOutlined /> : <ArchiveOutlined />}
