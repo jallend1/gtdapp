@@ -3,14 +3,17 @@ import { useContext } from 'react';
 import { ProjectContext } from '../../Contexts/ProjectContext';
 import { AuthContext } from '../../Contexts/AuthContext';
 
+import AddActionForm from './AddActionForm';
 import ActionList from './ActionList';
 import { db } from '../../firebaseConfig';
 
 import {
   Card,
   CardActions,
+  CardContent,
   CardHeader,
   IconButton,
+  List,
   makeStyles
 } from '@material-ui/core';
 import {
@@ -120,7 +123,14 @@ const Project = (props) => {
             }
             subheader={`Created at: ${jsDate}`}
           />
-          <ActionList project={project} />
+          <CardContent>
+            <List>
+              {project.nextActions.map((action, index) => (
+                <ActionList projectID={project.id} action={action} index={index} />
+              ))}
+              </List>
+              <AddActionForm projectId={project.id} />
+              </CardContent>
           <CardActions>
             <IconButton onClick={(e) => toggleArchive(e, project.id)}>
               {project.archived ? <UnarchiveOutlined /> : <ArchiveOutlined />}

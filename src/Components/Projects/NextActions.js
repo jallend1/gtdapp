@@ -3,7 +3,7 @@ import { ProjectContext } from '../../Contexts/ProjectContext';
 import { Button, List, Typography } from '@material-ui/core';
 import { SwapVert } from '@material-ui/icons';
 
-import RenderAction from './RenderAction';
+import ActionList from './ActionList';
 import NoProjects from './NoProjects';
 
 const NextActions = () => {
@@ -18,16 +18,9 @@ const NextActions = () => {
       const actionList = project.nextActions.filter(
         (action) => action.isComplete === false
       );
-      let nextAction;
       if (actionList[0]) {
-        nextAction = {
-          action: actionList[0],
-          project: project,
-          key: project.id + actionList[0].step,
-          isNextActionPage: true,
-          created: project.createdAt,
-          starred: project.starred
-        };
+        let nextAction = actionList[0]
+        nextAction.id = project.id
         newActionList.push(nextAction);
       } else {
         return null;
@@ -45,15 +38,9 @@ const NextActions = () => {
   };
 
   const renderProjects = () => {
-    return nextActionList.map((nextAction) => {
+    return nextActionList.map((action, index) => {
       return (
-        <RenderAction
-          action={nextAction.action}
-          project={nextAction.project}
-          key={nextAction.key}
-          isNextActionPage={nextAction.isNextActionPage}
-          starred={nextAction.starred}
-        />
+        <ActionList projectID={action.id} action={action} index={index} key={action.id} />
       );
     });
   };

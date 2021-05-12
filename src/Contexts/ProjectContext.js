@@ -54,6 +54,7 @@ class ProjectContextProvider extends React.Component {
     }
   };
   completeAction = (e) => {
+    console.log(e.target)
     const projectsCopy = this.state.projects.slice();
     // Extracts step number and project ID from DIV
     const actionStep = parseInt(e.target.dataset.step);
@@ -64,9 +65,11 @@ class ProjectContextProvider extends React.Component {
     );
     // Takes nextActions and locates the one to change
     const nextActions = targetProject.nextActions;
-    const targetAction = targetProject.nextActions.find(
-      (action) => action.step === actionStep
-    );
+    // TODO: Any instance where I would need to call FIND where the step and index number are different??
+    // const targetAction = targetProject.nextActions.find(
+    //   (action) => action.step === actionStep
+    // );
+    const targetAction=targetProject.nextActions[actionStep]
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
     db.collection("projects")

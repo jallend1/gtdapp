@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 import {
-  CardContent,
-  List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -12,20 +10,16 @@ import {
 import { DeleteForeverOutlined } from '@material-ui/icons';
 import { ProjectContext } from '../../Contexts/ProjectContext';
 
-import AddActionForm from './AddActionForm';
-
-const ActionList = ({ project }) => {
+const ActionList = ({ projectID, index, action }) => {
   const { completeAction, removeAction } = useContext(ProjectContext);
   return (
-    <CardContent>
-      <List>
-        {project.nextActions.map((action, index) => (
-          <ListItem key={index + project.id}>
+          <>
+          <ListItem key={index + projectID}>
             <ListItemIcon>
               <Checkbox
                 edge="start"
                 checked={action.isComplete}
-                inputProps={{ 'data-step': index, 'data-id': project.id }}
+                inputProps={{ 'data-step': index, 'data-id': projectID }}
                 onClick={completeAction}
               />
             </ListItemIcon>
@@ -34,17 +28,16 @@ const ActionList = ({ project }) => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={() => removeAction(index, project.id)}
+                onClick={() => removeAction(index, projectID)}
               >
                 <DeleteForeverOutlined />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
-        ))}
-      </List>
-      <AddActionForm projectId={project.id} />
-    </CardContent>
-  );
+      
+      </>
+  )
+  
 };
 
 export default ActionList;
