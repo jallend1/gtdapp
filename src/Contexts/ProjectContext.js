@@ -53,15 +53,16 @@ class ProjectContextProvider extends React.Component {
         });
     }
   };
-  completeAction = (e) => {
+  completeAction = (e, index, projectID) => {
     console.log(e.target)
     const projectsCopy = this.state.projects.slice();
     // Extracts step number and project ID from DIV
-    const actionStep = parseInt(e.target.dataset.step);
+    // const actionStep = parseInt(e.target.dataset.step);
+    const actionStep = index;
     const targetProjectId = e.target.dataset.id;
     // Locates specified Project
     const targetProject = projectsCopy.find(
-      (project) => project.id === targetProjectId
+      (project) => project.id === projectID
     );
     // Takes nextActions and locates the one to change
     const nextActions = targetProject.nextActions;

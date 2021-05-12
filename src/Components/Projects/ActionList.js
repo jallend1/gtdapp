@@ -20,7 +20,7 @@ const ActionList = ({ projectID, index, action }) => {
                 edge="start"
                 checked={action.isComplete}
                 inputProps={{ 'data-step': index, 'data-id': projectID }}
-                onClick={completeAction}
+                onClick={(e) => completeAction(e, index, projectID)}
               />
             </ListItemIcon>
             <ListItemText primary={action.action} />

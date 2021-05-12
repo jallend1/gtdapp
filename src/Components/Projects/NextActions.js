@@ -15,12 +15,14 @@ const NextActions = () => {
     const newActionList = [];
     projects.forEach((project) => {
       // Extracts all the incomplete items from the project
+      // TODO: Return the index as part of the element as it currently just toggles the first item in the list off and on
       const actionList = project.nextActions.filter(
-        (action) => action.isComplete === false
+        (action, index) => action.isComplete === false
       );
       if (actionList[0]) {
         let nextAction = actionList[0]
         nextAction.id = project.id
+        nextAction.index = index;
         newActionList.push(nextAction);
       } else {
         return null;
@@ -38,6 +40,7 @@ const NextActions = () => {
   };
 
   const renderProjects = () => {
+    // TODO: Pass prop indicating need for secondary text?
     return nextActionList.map((action, index) => {
       return (
         <ActionList projectID={action.id} action={action} index={index} key={action.id} />
