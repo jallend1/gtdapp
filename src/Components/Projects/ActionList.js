@@ -10,17 +10,18 @@ import {
 import { DeleteForeverOutlined } from '@material-ui/icons';
 import { ProjectContext } from '../../Contexts/ProjectContext';
 
-const ActionList = ({ projectID, index, action }) => {
+const ActionList = ({ projectID, action }) => {
+  console.log(action)
   const { completeAction, removeAction } = useContext(ProjectContext);
   return (
           <>
-          <ListItem key={index + projectID}>
+          <ListItem key={action.step + projectID}>
             <ListItemIcon>
               <Checkbox
                 edge="start"
                 checked={action.isComplete}
-                inputProps={{ 'data-step': index, 'data-id': projectID }}
-                onClick={(e) => completeAction(e, index, projectID)}
+                inputProps={{ 'data-step': action.step, 'data-id': projectID }}
+                onClick={(e) => completeAction(e, action.step, projectID)}
               />
             </ListItemIcon>
             <ListItemText primary={action.action} />
@@ -28,7 +29,7 @@ const ActionList = ({ projectID, index, action }) => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={() => removeAction(index, projectID)}
+                onClick={() => removeAction(action.step, projectID)}
               >
                 <DeleteForeverOutlined />
               </IconButton>

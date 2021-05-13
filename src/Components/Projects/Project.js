@@ -125,8 +125,8 @@ const Project = (props) => {
           />
           <CardContent>
             <List>
-              {project.nextActions.map((action, index) => (
-                <ActionList projectID={project.id} action={action} index={index} />
+              {project.nextActions.map((action) => (
+                <ActionList projectID={project.id} action={action} />
               ))}
               </List>
               <AddActionForm projectId={project.id} />

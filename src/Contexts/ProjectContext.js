@@ -67,10 +67,10 @@ class ProjectContextProvider extends React.Component {
     // Takes nextActions and locates the one to change
     const nextActions = targetProject.nextActions;
     // TODO: Any instance where I would need to call FIND where the step and index number are different??
-    // const targetAction = targetProject.nextActions.find(
-    //   (action) => action.step === actionStep
-    // );
-    const targetAction=targetProject.nextActions[actionStep]
+    const targetAction = targetProject.nextActions.find(
+      (action) => action.step === actionStep
+    );
+    // const targetAction=targetProject.nextActions[actionStep]
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
     db.collection("projects")
@@ -82,20 +82,25 @@ class ProjectContextProvider extends React.Component {
       });
   };
 
-  removeAction = (actionIndex, projectID) => {
+  removeAction = (actionStep, projectID) => {
     const updatedProjects = this.state.projects.slice();
     // Retrieves associated project and individual action
     const project = updatedProjects.find((project) => project.id === projectID);
     const action = project.nextActions.findIndex(
-      (action) => action.step === parseInt(actionIndex)
+      (action) => action.step === parseInt(actionStep)
     );
     // Removes targeted action
     project.nextActions.splice(action, 1);
+    // Iterates through actions realign their step number to their index
+    const newActions = project.nextActions.map((action, index) => {
+      action.step = index
+      return action;
+    })
     db.collection("projects")
       .doc(this.context.user.uid)
       .collection("projects")
       .doc(projectID)
-      .update({ nextActions: project.nextActions });
+      .update({ nextActions: newActions });
     this.updateMessage({
       type: "delete",
       message: "Action has been deleted",
