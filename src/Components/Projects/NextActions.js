@@ -22,6 +22,8 @@ const NextActions = () => {
       if (actionList[0]) {
         let nextAction = actionList[0]
         nextAction.id = project.id
+        nextAction.created = project.createdAt
+        nextAction.starred = project.starred
         newActionList.push(nextAction);
       } else {
         return null;
@@ -40,7 +42,7 @@ const NextActions = () => {
 
   const renderProjects = () => {
     // TODO: Pass prop indicating need for secondary text?
-    return nextActionList.map((action, index) => {
+    return nextActionList.map((action) => {
       return (
         <ActionList projectID={action.id} action={action} key={action.id} />
       );
