@@ -18,11 +18,11 @@ const NextActions = () => {
       const actionList = project.nextActions.filter(
         (action) => action.isComplete === false
       );
+      // If there's a first item in that array, pass it along
       if (actionList[0]) {
         let nextAction = actionList[0]
         nextAction.id = project.id
         newActionList.push(nextAction);
-        console.log(nextAction)
       } else {
         return null;
       }

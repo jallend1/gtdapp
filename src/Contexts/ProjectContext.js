@@ -53,30 +53,23 @@ class ProjectContextProvider extends React.Component {
         });
     }
   };
-  completeAction = (e, index, projectID) => {
-    console.log(e.target)
+  completeAction = (step, projectID) => {
     const projectsCopy = this.state.projects.slice();
-    // Extracts step number and project ID from DIV
-    // const actionStep = parseInt(e.target.dataset.step);
-    const actionStep = index;
-    const targetProjectId = e.target.dataset.id;
     // Locates specified Project
     const targetProject = projectsCopy.find(
       (project) => project.id === projectID
     );
     // Takes nextActions and locates the one to change
     const nextActions = targetProject.nextActions;
-    // TODO: Any instance where I would need to call FIND where the step and index number are different??
     const targetAction = targetProject.nextActions.find(
-      (action) => action.step === actionStep
+      (action) => action.step === step
     );
-    // const targetAction=targetProject.nextActions[actionStep]
     // Flips it to complete and updates Firebase
     targetAction.isComplete = !targetAction.isComplete;
     db.collection("projects")
       .doc(this.context.user.uid)
       .collection("projects")
-      .doc(targetProjectId)
+      .doc(projectID)
       .update({
         nextActions: nextActions,
       });
@@ -110,8 +103,6 @@ class ProjectContextProvider extends React.Component {
   // TODO: Eliminate deleteAction convert it to exclusively deleteProject
   deleteAction = (e, entireProject = false,) => {
     // Extracts ID and action step number from target div
-    console.log(e)
-    console.log(e.target)
     const { id } = e.target.dataset;
     const updatedProjects = this.state.projects.slice();
     // Retrieves associated project and individual action
